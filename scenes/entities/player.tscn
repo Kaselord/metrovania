@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://cno20wi12dln"]
 
-[ext_resource type="Texture2D" uid="uid://b0iudi5ntug6l" path="res://textures/temporary/player.png" id="1_d5op3"]
 [ext_resource type="Script" path="res://scripts/entities/player.gd" id="1_wjnyu"]
+[ext_resource type="Texture2D" uid="uid://bhyomon57xhkb" path="res://textures/entities/player/aggy.png" id="2_a0c7w"]
 [ext_resource type="FontFile" uid="uid://buhockuvonca8" path="res://resources/fonts/cheesefont.ttf" id="3_pv6nv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dgldw"]
@@ -12,11 +12,14 @@ font = ExtResource("3_pv6nv")
 font_size = 8
 
 [node name="player" type="CharacterBody2D"]
+editor_description = "the name's Aggy Saintsworn"
 script = ExtResource("1_wjnyu")
 
-[node name="sprite" type="Sprite2D" parent="."]
-position = Vector2(0, -16)
-texture = ExtResource("1_d5op3")
+[node name="visuals" type="Node2D" parent="."]
+
+[node name="sprite" type="Sprite2D" parent="visuals"]
+position = Vector2(0, -22)
+texture = ExtResource("2_a0c7w")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -16)

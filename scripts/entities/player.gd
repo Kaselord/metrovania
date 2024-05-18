@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 var walking_velocity : float = 0.0
 var input_dir : Vector2 = Vector2(0, 0)
-var base_walk_speed : float = 90.0
+var base_walk_speed : float = 80.0
 var base_accel : float = 0.35
 var gravity : float = 500.0
 var jump_power : float = 200.0
@@ -11,6 +11,7 @@ var jump_buffer : int = 0
 var coyote_buffer : int = 0
 var jump_has_been_released : bool = false
 var midair_speed_boost : float = 1.0
+var trail_particle_spawn_cooldown : int = 5
 
 
 func _ready():
@@ -43,6 +44,13 @@ func _physics_process(delta):
 	if coyote_buffer > 0:
 		coyote_buffer -= 1
 	
+	if trail_particle_spawn_cooldown > 0:
+		trail_particle_spawn_cooldown -= 1
+	else:
+		trail_particle_spawn_cooldown = 4
+		if abs(velocity.x) + abs(velocity.y) > 2:
+			spawn_trail_particle()
+	
 	var debug_output = ""
 	debug_output = debug_output + "SPD_X: " + str(int(velocity.x)) + "\n"
 	debug_output = debug_output + "SPD_Y: " + str(int(velocity.y)) + "\n"
@@ -62,6 +70,10 @@ func _process(_delta):
 	if Input.is_action_just_released("jump"):
 		if velocity.y < 0 && !jump_has_been_released:
 			velocity.y *= 0.5
+	
+	if Globals.active:
+		if abs(velocity.x) > 0:
+			$visuals.scale.x = sign(velocity.x)
 
 
 func execute_jump():
@@ -69,3 +81,21 @@ func execute_jump():
 	jump_has_been_released = false
 	jump_buffer = 0
 	coyote_buffer = 0
+
+
+func spawn_trail_particle():
+	var particle = Preloads.texture_particle.instantiate()
+	particle.init["scale"] = Vector2(1.0, 1.0)
+	particle.init["position"] = $visuals/sprite.global_position
+	particle.init["modulate"] = Color(0.8, 0.8, 1, 0.8)
+	particle.final["scale"] = Vector2(1.0, 1.0)
+	particle.final["position"] = $visuals/sprite.global_position
+	particle.final["modulate"] = Color(0.0, 0.0, 1.0, 0.05)
+	particle.texture = $visuals/sprite.texture
+	particle.frame_amount = $visuals/sprite.hframes
+	particle.frame_index = $visuals/sprite.frame
+	particle.sprite_scale = $visuals.scale
+	particle.lifetime = 20
+	particle.snap_weight = 0.1
+	if Globals.level_reference != null:
+		Globals.level_reference.get_node("particles_back").call_deferred("add_child", particle)

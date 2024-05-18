@@ -45,4 +45,8 @@ default_color = Color(1, 0, 0, 1)
 
 [node name="travel_points" type="Node2D" parent="."]
 
+[node name="particles_back" type="Node2D" parent="."]
+
 [node name="entities" type="Node2D" parent="."]
+
+[node name="particles_front" type="Node2D" parent="."]

@@ -4,10 +4,11 @@ extends Node2D
 @export var top_left : Vector2i = Vector2i(0, 0)
 @export var bottom_right : Vector2i = Vector2i(320, 180)
 @export var music : String
-@export var bg_colour : Color = Color(0, 0, 0, 1)
+@export var bg_colour : Color = Color(0.5, 0.5, 0.5, 1)
 
 
 func _ready():
+	Globals.level_reference = self
 	if !Engine.is_editor_hint():
 		$editor.call_deferred("free")
 		if music != "" && scene_file_path != "res://prefabs/rooms/000_beginning.tscn":

@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://dpnojh1gtug6k"]
+
+[ext_resource type="Script" path="res://scripts/autoloads/preloads.gd" id="1_3ddgk"]
+[ext_resource type="PackedScene" uid="uid://cii5wxp3b1h8y" path="res://scenes/particles/texture_particle.tscn" id="2_yr3ek"]
+
+[node name="Preloads" type="Node"]
+script = ExtResource("1_3ddgk")
+texture_particle = ExtResource("2_yr3ek")

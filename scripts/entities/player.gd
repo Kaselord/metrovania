@@ -4,16 +4,23 @@ var walking_velocity : float = 0.0
 var input_dir : Vector2 = Vector2(0, 0)
 var base_walk_speed : float = 90.0
 var base_accel : float = 0.35
-var gravity : float = 400.0
-var jump_power : float = 220.0
+var gravity : float = 500.0
+var jump_power : float = 200.0
 var is_floored : bool = false
 var jump_buffer : int = 0
 var jump_has_been_released : bool = false
+var midair_speed_boost : float = 1.0
+
 
 func _physics_process(delta):
+	if is_floored:
+		midair_speed_boost = lerp(midair_speed_boost, 1.0, 0.25)
+	else:
+		midair_speed_boost = 1.2
 	walking_velocity = lerp(walking_velocity, input_dir.x * base_walk_speed, base_accel)
 	
-	velocity.x = walking_velocity
+	velocity.x = walking_velocity * midair_speed_boost
+	print(velocity.x)
 	velocity.y = clamp(velocity.y + gravity * delta, -1000, gravity)
 	
 	move_and_slide()
@@ -23,6 +30,7 @@ func _physics_process(delta):
 		jump_buffer -= 1
 		if is_floored:
 			execute_jump()
+
 
 func _process(_delta):
 	input_dir = sign(Input.get_vector("left", "right", "up", "down"))
@@ -35,6 +43,7 @@ func _process(_delta):
 	if Input.is_action_just_released("jump"):
 		if velocity.y < 0 && !jump_has_been_released:
 			velocity.y *= 0.5
+
 
 func execute_jump():
 	velocity.y = -jump_power

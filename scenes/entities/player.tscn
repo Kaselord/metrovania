@@ -1,16 +1,38 @@
-[gd_scene load_steps=4 format=3 uid="uid://cno20wi12dln"]
+[gd_scene load_steps=6 format=3 uid="uid://cno20wi12dln"]
 
 [ext_resource type="Texture2D" uid="uid://b0iudi5ntug6l" path="res://textures/temporary/player.png" id="1_d5op3"]
 [ext_resource type="Script" path="res://scripts/entities/player.gd" id="1_wjnyu"]
+[ext_resource type="FontFile" uid="uid://buhockuvonca8" path="res://resources/fonts/cheesefont.ttf" id="3_pv6nv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dgldw"]
 size = Vector2(16, 32)
+
+[sub_resource type="LabelSettings" id="LabelSettings_hohei"]
+font = ExtResource("3_pv6nv")
+font_size = 8
 
 [node name="player" type="CharacterBody2D"]
 script = ExtResource("1_wjnyu")
 
 [node name="sprite" type="Sprite2D" parent="."]
+position = Vector2(0, -16)
 texture = ExtResource("1_d5op3")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -16)
 shape = SubResource("RectangleShape2D_dgldw")
+
+[node name="debug" type="Label" parent="."]
+offset_left = -50.0
+offset_top = -106.0
+offset_right = 50.0
+offset_bottom = -6.0
+pivot_offset = Vector2(50, 50)
+text = "SPD_X : 100
+SPD_Y : 100
+POS_X : 2000
+POS_Y : 2000"
+label_settings = SubResource("LabelSettings_hohei")
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true

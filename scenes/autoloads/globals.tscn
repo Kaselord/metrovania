@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://blvd4w7sb5pqw"]
+
+[ext_resource type="Script" path="res://scripts/autoloads/globals.gd" id="1_mdyng"]
+
+[node name="Globals" type="Node"]
+script = ExtResource("1_mdyng")
+
+[connection signal="level_switch" from="." to="." method="_on_level_switch"]

@@ -13,6 +13,11 @@ var jump_has_been_released : bool = false
 var midair_speed_boost : float = 1.0
 
 
+func _ready():
+	add_to_group("player")
+	Globals.player_reference = self
+
+
 func _physics_process(delta):
 	if is_floored:
 		midair_speed_boost = lerp(midair_speed_boost, 1.0, 0.25)
@@ -21,9 +26,11 @@ func _physics_process(delta):
 	walking_velocity = lerp(walking_velocity, input_dir.x * base_walk_speed, base_accel)
 	
 	velocity.x = walking_velocity * midair_speed_boost
-	velocity.y = clamp(velocity.y + gravity * delta, -1000, gravity)
+	velocity.y = clamp(velocity.y + gravity * delta, -jump_power * 2, gravity)
 	
-	move_and_slide()
+	if Globals.active:
+		move_and_slide()
+	
 	is_floored = is_on_floor()
 	if is_floored:
 		coyote_buffer = 8

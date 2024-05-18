@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://cx4m5lxlathc"]
+
+[ext_resource type="Script" path="res://scripts/autoloads/interface.gd" id="1_nwj3h"]
+
+[node name="interface" type="CanvasLayer"]
+script = ExtResource("1_nwj3h")
+
+[node name="transition_rect" type="Polygon2D" parent="."]
+color = Color(0.137255, 0.129412, 0.2, 1)
+polygon = PackedVector2Array(0, 0, 320, 0, 320, 180, 0, 180)

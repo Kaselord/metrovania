@@ -1,5 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://df25grdvss11u"]
+[gd_scene load_steps=5 format=3 uid="uid://df25grdvss11u"]
 
+[ext_resource type="Script" path="res://scripts/level_base.gd" id="1_ip5t6"]
 [ext_resource type="Texture2D" uid="uid://prslkgmu5vej" path="res://icon.svg" id="1_ykyvf"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_wdv4v"]
@@ -14,9 +15,34 @@ physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_wdv4v")
 
 [node name="level_base" type="Node2D"]
+script = ExtResource("1_ip5t6")
 
 [node name="tiles" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_x4uq7")
 format = 2
+
+[node name="editor" type="Node2D" parent="."]
+
+[node name="border_left" type="Line2D" parent="editor"]
+points = PackedVector2Array(0, 0, 0, 180)
+width = 8.0
+default_color = Color(1, 0, 0, 1)
+
+[node name="border_right" type="Line2D" parent="editor"]
+points = PackedVector2Array(320, 180, 320, 0)
+width = 8.0
+default_color = Color(1, 0, 0, 1)
+
+[node name="border_up" type="Line2D" parent="editor"]
+points = PackedVector2Array(0, 0, 320, 0)
+width = 8.0
+default_color = Color(1, 0, 0, 1)
+
+[node name="border_down" type="Line2D" parent="editor"]
+points = PackedVector2Array(320, 180, 0, 180)
+width = 8.0
+default_color = Color(1, 0, 0, 1)
+
+[node name="travel_points" type="Node2D" parent="."]
 
 [node name="entities" type="Node2D" parent="."]

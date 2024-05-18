@@ -23,6 +23,7 @@ position = Vector2(0, -16)
 shape = SubResource("RectangleShape2D_dgldw")
 
 [node name="debug" type="Label" parent="."]
+visible = false
 offset_left = -50.0
 offset_top = -106.0
 offset_right = 50.0

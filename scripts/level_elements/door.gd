@@ -2,8 +2,7 @@
 extends Area2D
 
 @export_enum("left", "right", "up", "down", "none") var direction = "left"
-@export var id : int = 0
-@export var send_to_id : int = 0
+@export var send_to_travel_point : String
 @export var new_room_path : String
 @export var collider_size : Vector2 = Vector2(16, 16)
 var spawn_protection : int = 15
@@ -15,7 +14,6 @@ var direction_table = {
 	"down" : [1, "y"],
 	"none" : [0, "z"]
 }
-var deactivated : bool = false
 
 
 func _ready():
@@ -24,7 +22,7 @@ func _ready():
 
 
 func _physics_process(_delta):
-	if player_is_here && !Engine.is_editor_hint() && !deactivated:
+	if player_is_here && !Engine.is_editor_hint() && Globals.active:
 		# get the axis that this door is facing
 		var axis : String = direction_table[direction][1]
 		# get the player input
@@ -50,7 +48,7 @@ func update_collider():
 
 
 func request_level_change():
-	deactivated = true
+	Globals.level_switch_data = [send_to_travel_point, new_room_path]
 	Globals.emit_signal("level_switch")
 
 

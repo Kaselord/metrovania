@@ -6,6 +6,7 @@ signal level_switch
 var time_until_switch : int = 0
 var time_until_active : int = 0
 var is_switching_level : bool = false
+var level_switch_data = ["", "res://scenes/levels/000_entrance.tscn"]
 
 
 func _physics_process(_delta):
@@ -15,9 +16,9 @@ func _physics_process(_delta):
 		else:
 			if is_switching_level:
 				is_switching_level = false
-				# load in the new level
+				# load the new level
 				get_tree().current_scene.unload_current_level()
-				get_tree().current_scene.load_level("res://scenes/levels/000_entrance.tscn")
+				get_tree().current_scene.load_level(level_switch_data)
 			if time_until_active > 0:
 				time_until_active -= 1
 			else:
@@ -53,4 +54,5 @@ func _on_level_switch():
 		active = false
 		Interface.transition_value = -25
 		time_until_switch = 25
+		time_until_active = 25
 		is_switching_level = true

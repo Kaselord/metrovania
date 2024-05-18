@@ -4,12 +4,13 @@ extends Node2D
 # 'Globals.set_player_value("value")' or 'Globals.get_player_value("value")' instead
 var temporary_player_reference : Node = null
 @export var player_packed_scene : PackedScene
+var level_switch_data = ["travel_point_name", "res://scenes/levels/000_entrance.tscn"]
 
 
 func _ready():
 	add_to_group("gameplay")
 	unload_current_level()
-	load_level("res://scenes/levels/000_entrance.tscn")
+	load_level(level_switch_data)
 
 
 func _process(_delta):
@@ -22,7 +23,7 @@ func _process(_delta):
 			# if found, add player to it
 			if entity_parent_node != null:
 				temporary_player_reference.reparent(entity_parent_node)
-				temporary_player_reference.position = Vector2(160, 90)
+				temporary_player_reference.position = find_travel_point_position(active_level)
 				$camera.to_follow = temporary_player_reference.get_path()
 				$camera.position = temporary_player_reference.position
 				$camera.limit_left = active_level.top_left.x
@@ -53,11 +54,21 @@ func unload_current_level():
 		child.call_deferred("free")
 
 
-func load_level(level_path : String):
-	var new_level = load(level_path).instantiate()
+func load_level(data = ["travel_point_name", "res://scenes/levels/000_entrance.tscn"]):
+	var new_level = load(data[1]).instantiate()
 	$active_level.call_deferred("add_child", new_level)
+	level_switch_data = data
 
 
 func instantiate_new_player():
 	var new_player = player_packed_scene.instantiate()
 	temporary_player_reference = new_player
+
+
+func find_travel_point_position(active_level : Node = null):
+	var travel_point_pos : Vector2 = Vector2(160, 90)
+	if active_level != null:
+		for point in active_level.get_node("travel_points").get_children():
+			if point.name == level_switch_data[0]:
+				travel_point_pos = point.position
+	return travel_point_pos

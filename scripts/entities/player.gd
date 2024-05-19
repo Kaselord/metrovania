@@ -81,11 +81,18 @@ func _process(_delta):
 	if Globals.active:
 		if abs(velocity.x) > 0:
 			$visuals.scale.x = sign(velocity.x)
-		
-		if abs(velocity.x) > base_walk_speed * 0.05:
-			$anim.play("walk")
+		if is_floored:
+			# walking
+			if abs(velocity.x) > base_walk_speed * 0.05:
+				$anim.play("walk")
+			else: # idling
+				$anim.play("idle")
 		else:
-			$anim.play("idle")
+			# falling 
+			if velocity.y > 0:
+				$anim.play("fall")
+			else: # jumping
+				$anim.play("jump")
 	else:
 		$anim.stop()
 

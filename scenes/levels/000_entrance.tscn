@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://rnu52mrm50fn"]
+[gd_scene load_steps=14 format=3 uid="uid://rnu52mrm50fn"]
 
 [ext_resource type="PackedScene" uid="uid://df25grdvss11u" path="res://scenes/level_base.tscn" id="1_gw17f"]
 [ext_resource type="Texture2D" uid="uid://btxkk7k4i6mux" path="res://textures/decoration/cloud.png" id="2_lla0l"]
@@ -7,6 +7,8 @@
 [ext_resource type="Texture2D" uid="uid://deexexmhomaiv" path="res://textures/decoration/tablet.png" id="4_0dy3e"]
 [ext_resource type="FontFile" uid="uid://buhockuvonca8" path="res://resources/fonts/cheesefont.ttf" id="4_2r6j1"]
 [ext_resource type="Texture2D" uid="uid://brf1cdsu36gqu" path="res://textures/decoration/wall.png" id="4_rlrip"]
+[ext_resource type="PackedScene" uid="uid://be2647s2n0y4u" path="res://scenes/level_elements/temporary_checkpoint.tscn" id="8_ytg5f"]
+[ext_resource type="PackedScene" uid="uid://6bfdrlmoe75y" path="res://scenes/components/hurtbox.tscn" id="9_ah1g3"]
 
 [sub_resource type="Gradient" id="Gradient_pjcyo"]
 colors = PackedColorArray(0.442466, 0.207732, 0.619021, 1, 0.0745098, 0.113725, 0.313726, 1)
@@ -20,6 +22,9 @@ fill_to = Vector2(0, 0.953602)
 font = ExtResource("4_2r6j1")
 font_size = 8
 font_color = Color(0.364706, 0.482353, 0.364706, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pb8h2"]
+size = Vector2(80, 16)
 
 [node name="000_entrance" instance=ExtResource("1_gw17f")]
 bottom_right = Vector2i(1280, 180)
@@ -123,3 +128,19 @@ collider_size = Vector2(8, 48)
 [node name="start" parent="travel_points" index="1" instance=ExtResource("2_uutr8")]
 position = Vector2(40, 144)
 direction = "none"
+
+[node name="hole_safety" parent="travel_points" index="2" instance=ExtResource("8_ytg5f")]
+position = Vector2(451, 96)
+
+[node name="hole_safety2" parent="travel_points" index="3" instance=ExtResource("8_ytg5f")]
+position = Vector2(612, 128)
+
+[node name="hurtbox" parent="interactive" index="0" instance=ExtResource("9_ah1g3")]
+position = Vector2(496, 224)
+damage = 1
+void_out = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="interactive/hurtbox" index="0"]
+position = Vector2(40, 8)
+shape = SubResource("RectangleShape2D_pb8h2")
+debug_color = Color(0.988235, 0, 0.313726, 0.419608)

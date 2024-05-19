@@ -5,6 +5,7 @@ extends Area2D
 var current_damager : Area2D
 var immunity : int = 0
 @export var max_immunity : int = 12
+@export var is_player_hitbox : bool = false
 signal hit
 
 
@@ -21,6 +22,8 @@ func _physics_process(_delta):
 				trigger_internal_hit()
 		else:
 			trigger_internal_hit()
+		if is_player_hitbox && current_damager.void_out:
+			Globals.emit_signal("level_switch")
 
 
 func trigger_internal_hit():

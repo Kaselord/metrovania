@@ -1,4 +1,4 @@
-extends CharacterBody2D
+extends Entity
 
 var walking_velocity : float = 0.0
 var input_dir : Vector2 = Vector2(0, 0)
@@ -17,6 +17,7 @@ var trail_particle_spawn_cooldown : int = 5
 func _ready():
 	add_to_group("player")
 	Globals.player_reference = self
+	super()
 
 
 func _physics_process(delta):

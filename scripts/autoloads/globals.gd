@@ -2,7 +2,7 @@ extends Node
 
 var active : bool = true
 var player_reference : Node = null
-var level_reference : Node2D = null
+var level_reference : Node = null
 signal level_switch
 var time_until_switch : int = 0
 var time_until_active : int = 0
@@ -24,6 +24,8 @@ func _physics_process(_delta):
 				time_until_active -= 1
 			else:
 				active = true
+	
+	update_game_interface()
 
 
 func set_player_value(id : String, new_value : Variant):
@@ -35,6 +37,8 @@ func set_player_value(id : String, new_value : Variant):
 				player_reference.velocity = new_value
 			"input_dir":
 				player_reference.input_dir = new_value
+			"hp":
+				player_reference.hp = new_value
 
 
 func get_player_value(id : String):
@@ -47,13 +51,27 @@ func get_player_value(id : String):
 				value = player_reference.velocity
 			"input_dir":
 				value = player_reference.input_dir
+			"hp":
+				value = player_reference.hp
 	return value
 
 
 func _on_level_switch():
 	if get_tree().current_scene.is_in_group("gameplay"):
 		active = false
+		# start the 50 frame screen transition
 		Interface.transition_value = -25
+		# 25 frames until the new level is loaded
 		time_until_switch = 25
+		# additional 25 frames until things start moving
 		time_until_active = 25
 		is_switching_level = true
+
+
+func update_game_interface():
+	var gameplay_scene = get_tree().current_scene
+	if gameplay_scene != null && gameplay_scene.is_in_group("gameplay"):
+		# player health bar
+		var healthbar_text = gameplay_scene.get_node("interface/healthbar/amount")
+		if get_player_value("hp") != null:
+			healthbar_text.text = str(clamp(get_player_value("hp"), 0, 99))

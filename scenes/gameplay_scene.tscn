@@ -1,8 +1,16 @@
-[gd_scene load_steps=4 format=3 uid="uid://cot0i7vjoju27"]
+[gd_scene load_steps=7 format=3 uid="uid://cot0i7vjoju27"]
 
 [ext_resource type="PackedScene" uid="uid://cno20wi12dln" path="res://scenes/entities/player.tscn" id="1_7d14y"]
 [ext_resource type="Script" path="res://scripts/gameplay_scene.gd" id="1_tc3iw"]
 [ext_resource type="Script" path="res://scripts/camera.gd" id="3_veka5"]
+[ext_resource type="Texture2D" uid="uid://d3da2c6gwe434" path="res://textures/interface/health_circle.png" id="4_7kaim"]
+[ext_resource type="FontFile" uid="uid://buhockuvonca8" path="res://resources/fonts/cheesefont.ttf" id="5_f76wf"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_8ws8m"]
+font = ExtResource("5_f76wf")
+font_size = 8
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
 
 [node name="gameplay_scene" type="Node2D"]
 script = ExtResource("1_tc3iw")
@@ -12,3 +20,22 @@ player_packed_scene = ExtResource("1_7d14y")
 
 [node name="camera" type="Camera2D" parent="."]
 script = ExtResource("3_veka5")
+
+[node name="interface" type="CanvasLayer" parent="."]
+
+[node name="healthbar" type="Node2D" parent="interface"]
+position = Vector2(16, 16)
+
+[node name="circle" type="Sprite2D" parent="interface/healthbar"]
+texture = ExtResource("4_7kaim")
+
+[node name="amount" type="Label" parent="interface/healthbar"]
+offset_left = -9.0
+offset_top = 2.0
+offset_right = 9.0
+offset_bottom = 10.0
+pivot_offset = Vector2(9, 4)
+text = "95"
+label_settings = SubResource("LabelSettings_8ws8m")
+horizontal_alignment = 1
+vertical_alignment = 1

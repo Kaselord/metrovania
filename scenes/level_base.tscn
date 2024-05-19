@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://df25grdvss11u"]
+[gd_scene load_steps=11 format=3 uid="uid://df25grdvss11u"]
 
 [ext_resource type="Script" path="res://scripts/level_base.gd" id="1_ip5t6"]
 [ext_resource type="Texture2D" uid="uid://prslkgmu5vej" path="res://icon.svg" id="1_ykyvf"]
 [ext_resource type="Texture2D" uid="uid://dkyv5wk0strtx" path="res://textures/tiles/rotten_bricks.png" id="3_j0kqp"]
 [ext_resource type="Texture2D" uid="uid://dljkdftq0tnvm" path="res://textures/tiles/bg_bricksdark.png" id="4_rv53r"]
+[ext_resource type="Texture2D" uid="uid://dr1tflj1gxoqd" path="res://textures/tiles/train_parts.png" id="5_e7yq5"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_wdv4v"]
 texture = ExtResource("1_ykyvf")
@@ -530,7 +531,58 @@ texture = ExtResource("4_rv53r")
 2:2/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 2:2/0/physics_layer_0/angular_velocity = 0.0
 
-[sub_resource type="TileSet" id="TileSet_x4uq7"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_8ohgk"]
+texture = ExtResource("5_e7yq5")
+0:0/0 = 0
+0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/0/physics_layer_0/angular_velocity = 0.0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:0/0 = 0
+1:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+1:0/0/physics_layer_0/angular_velocity = 0.0
+1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+2:0/0 = 0
+2:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+2:0/0/physics_layer_0/angular_velocity = 0.0
+2:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+0:1/0 = 0
+0:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:1/0/physics_layer_0/angular_velocity = 0.0
+0:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:1/0 = 0
+1:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+1:1/0/physics_layer_0/angular_velocity = 0.0
+1:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+2:1/0 = 0
+2:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+2:1/0/physics_layer_0/angular_velocity = 0.0
+2:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+0:2/0 = 0
+0:2/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:2/0/physics_layer_0/angular_velocity = 0.0
+0:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:2/0 = 0
+1:2/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+1:2/0/physics_layer_0/angular_velocity = 0.0
+1:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+2:2/0 = 0
+2:2/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+2:2/0/physics_layer_0/angular_velocity = 0.0
+2:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+3:0/0 = 0
+3:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+3:0/0/physics_layer_0/angular_velocity = 0.0
+3:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+3:1/0 = 0
+3:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+3:1/0/physics_layer_0/angular_velocity = 0.0
+3:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+3:2/0 = 0
+3:2/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+3:2/0/physics_layer_0/angular_velocity = 0.0
+3:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+
+[sub_resource type="TileSet" id="TileSet_hysfe"]
 physics_layer_0/collision_layer = 1
 terrain_set_0/mode = 0
 terrain_set_0/terrain_0/name = "rotten_bricks"
@@ -538,6 +590,7 @@ terrain_set_0/terrain_0/color = Color(0.721569, 0, 0.180392, 1)
 sources/0 = SubResource("TileSetAtlasSource_wdv4v")
 sources/1 = SubResource("TileSetAtlasSource_7amrb")
 sources/2 = SubResource("TileSetAtlasSource_1bas5")
+sources/3 = SubResource("TileSetAtlasSource_8ohgk")
 
 [node name="level_base" type="Node2D"]
 script = ExtResource("1_ip5t6")
@@ -560,7 +613,7 @@ motion_scale = Vector2(0.55, 0.55)
 motion_scale = Vector2(0.9, 0.9)
 
 [node name="tiles" type="TileMap" parent="."]
-tile_set = SubResource("TileSet_x4uq7")
+tile_set = SubResource("TileSet_hysfe")
 format = 2
 layer_0/z_index = -1
 layer_1/tile_data = PackedInt32Array()

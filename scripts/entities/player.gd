@@ -21,6 +21,9 @@ func _ready():
 
 
 func _physics_process(delta):
+	if Input.is_action_pressed("test"):
+		position = lerp(position, get_global_mouse_position(), 0.1)
+	
 	if is_floored:
 		midair_speed_boost = lerp(midair_speed_boost, 1.0, 0.25)
 	else:

@@ -3,6 +3,7 @@
 [ext_resource type="Script" path="res://scripts/autoloads/interface.gd" id="1_nwj3h"]
 
 [node name="interface" type="CanvasLayer"]
+layer = 2
 script = ExtResource("1_nwj3h")
 
 [node name="transition_rect" type="Polygon2D" parent="."]

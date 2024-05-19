@@ -1,4 +1,5 @@
 extends Area2D
+class_name Hurtbox
 
 @export var damage : int = 0
 @export var ignore_in_detection = []

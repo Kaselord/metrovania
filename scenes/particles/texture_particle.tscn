@@ -1,10 +1,10 @@
 [gd_scene load_steps=3 format=3 uid="uid://cii5wxp3b1h8y"]
 
 [ext_resource type="Script" path="res://scripts/particles/texture_particle.gd" id="1_0dd30"]
-[ext_resource type="Texture2D" uid="uid://b0iudi5ntug6l" path="res://textures/temporary/player.png" id="2_6y475"]
+[ext_resource type="Texture2D" uid="uid://dkyv5wk0strtx" path="res://textures/tiles/rotten_bricks.png" id="2_3d15k"]
 
 [node name="texture_particle" type="Node2D"]
 script = ExtResource("1_0dd30")
-texture = ExtResource("2_6y475")
+texture = ExtResource("2_3d15k")
 
 [node name="sprite" type="Sprite2D" parent="."]

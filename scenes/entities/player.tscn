@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://cno20wi12dln"]
+[gd_scene load_steps=9 format=3 uid="uid://cno20wi12dln"]
 
 [ext_resource type="Script" path="res://scripts/entities/player.gd" id="1_wjnyu"]
 [ext_resource type="Texture2D" uid="uid://bhyomon57xhkb" path="res://textures/entities/player/aggy.png" id="2_a0c7w"]
@@ -11,6 +11,47 @@ size = Vector2(16, 32)
 font = ExtResource("3_pv6nv")
 font_size = 8
 
+[sub_resource type="Animation" id="Animation_bhsxq"]
+resource_name = "idle"
+length = 0.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("visuals/sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_hk6pt"]
+resource_name = "walk"
+length = 0.571436
+loop_mode = 1
+step = 0.0714286
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("visuals/sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.142857, 0.285714, 0.428571),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [1, 2, 3, 4]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_v5fev"]
+_data = {
+"idle": SubResource("Animation_bhsxq"),
+"walk": SubResource("Animation_hk6pt")
+}
+
 [node name="player" type="CharacterBody2D"]
 editor_description = "the name's Aggy Saintsworn"
 script = ExtResource("1_wjnyu")
@@ -20,6 +61,8 @@ script = ExtResource("1_wjnyu")
 [node name="sprite" type="Sprite2D" parent="visuals"]
 position = Vector2(0, -22)
 texture = ExtResource("2_a0c7w")
+hframes = 5
+frame = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -16)
@@ -40,3 +83,8 @@ label_settings = SubResource("LabelSettings_hohei")
 horizontal_alignment = 1
 vertical_alignment = 1
 metadata/_edit_use_anchors_ = true
+
+[node name="anim" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_v5fev")
+}

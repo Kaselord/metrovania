@@ -12,6 +12,13 @@ var coyote_buffer : int = 0
 var jump_has_been_released : bool = false
 var midair_speed_boost : float = 1.0
 var trail_particle_spawn_cooldown : int = 5
+var look_dir : Vector2 = Vector2(1, 0)
+var is_dashing : int = 0
+var gravity_power : float = 1.0
+var trail_color : Color = Color(0.0, 0.0, 1.0, 0.05)
+var dash_power_x : float = 0.0
+var is_allowed_to_dash : bool = true
+@export var dash_sparkle_texture : Texture
 
 
 func _ready():
@@ -30,14 +37,15 @@ func _physics_process(delta):
 		midair_speed_boost = 1.2
 	walking_velocity = lerp(walking_velocity, input_dir.x * base_walk_speed, base_accel)
 	
-	velocity.x = walking_velocity * midair_speed_boost
-	velocity.y = clamp(velocity.y + gravity * delta, -jump_power * 2, gravity)
+	velocity.x = (walking_velocity * midair_speed_boost) * gravity_power + dash_power_x
+	velocity.y = clamp(velocity.y + gravity * delta * gravity_power, -jump_power * 2, gravity)
 	
 	if Globals.active:
 		move_and_slide()
 	
 	is_floored = is_on_floor()
 	if is_floored:
+		is_allowed_to_dash = true
 		coyote_buffer = 8
 	
 	if jump_buffer > 0:
@@ -51,22 +59,29 @@ func _physics_process(delta):
 	if trail_particle_spawn_cooldown > 0:
 		trail_particle_spawn_cooldown -= 1
 	else:
-		trail_particle_spawn_cooldown = 4
+		if is_dashing <= 0:
+			trail_particle_spawn_cooldown = 4
+		else:
+			trail_particle_spawn_cooldown = 2
 		if abs(velocity.x) + abs(velocity.y) > 2:
-			spawn_trail_particle()
+			spawn_trail_particle(trail_color)
 	
-	var debug_output = ""
-	debug_output = debug_output + "SPD_X: " + str(int(velocity.x)) + "\n"
-	debug_output = debug_output + "SPD_Y: " + str(int(velocity.y)) + "\n"
-	debug_output = debug_output + "POS_X: " + str(int(position.x)) + "\n"
-	debug_output = debug_output + "POS_Y: " + str(int(position.y))
-	$debug.text = debug_output
+	if is_dashing > 0:
+		gravity_power = 0
+		is_dashing -= 1
+		trail_color = Color(1, 0, 0, 0.05)
+	else:
+		gravity_power = 1.0
+		trail_color = Color(0, 0, 1, 0.05)
+		dash_power_x = 0.0
 
 
 func _process(_delta):
 	input_dir = Input.get_vector("left", "right", "up", "down")
 	input_dir.x = sign(snapped(input_dir.x, 1.0))
 	input_dir.y = sign(snapped(input_dir.y, 1.0))
+	if input_dir != Vector2(0, 0) && is_dashing <= 0:
+		look_dir = input_dir
 	
 	if Input.is_action_just_pressed("jump"):
 		if is_floored or coyote_buffer > 0:
@@ -77,6 +92,17 @@ func _process(_delta):
 	if Input.is_action_just_released("jump"):
 		if velocity.y < 0 && !jump_has_been_released:
 			velocity.y *= 0.5
+	
+	if Input.is_action_just_pressed("dash") && is_dashing <= 0 && is_allowed_to_dash:
+		if !is_floored:
+			is_allowed_to_dash = false
+		spawn_dash_particles()
+		is_dashing = 16
+		var dash_speed_vector = look_dir.normalized() * base_walk_speed * 5
+		velocity = Vector2(dash_speed_vector)
+		dash_power_x = dash_speed_vector.x
+		trail_color = Color(1, 0, 0, 0.05)
+		gravity_power = 0
 	
 	if Globals.active:
 		if abs(velocity.x) > 0:
@@ -102,6 +128,8 @@ func execute_jump():
 	jump_has_been_released = false
 	jump_buffer = 0
 	coyote_buffer = 0
+	if is_dashing > 0:
+		is_dashing = 10
 
 
 func spawn_trail_particle(final_color : Color = Color(0, 0, 1, 0.05)):
@@ -120,3 +148,22 @@ func spawn_trail_particle(final_color : Color = Color(0, 0, 1, 0.05)):
 	particle.snap_weight = 0.1
 	if Globals.level_reference != null:
 		Globals.level_reference.get_node("particles_back").call_deferred("add_child", particle)
+
+
+func spawn_dash_particles():
+	if Globals.level_reference != null:
+		for i in range(12.0):
+			var angle : float = (TAU / 12.0) * i
+			var vector : Vector2 = Vector2(sin(angle), cos(angle))
+			var particle = Preloads.texture_particle.instantiate()
+			particle.init["scale"] = Vector2(1.0, 1.0)
+			particle.init["position"] = $visuals/sprite.global_position + vector * 16
+			particle.init["modulate"] = Color(1, 1, 1, 1)
+			particle.init["rotation"] = randf_range(0.0, 180)
+			particle.final["scale"] = Vector2(0.5, 0.5)
+			particle.final["position"] = $visuals/sprite.global_position + vector * 24
+			particle.final["modulate"] = Color(1, 1, 1, 0)
+			particle.final["rotation"] = randf_range(0.0, 180)
+			particle.texture = dash_sparkle_texture
+			particle.lifetime = randi_range(16, 24)
+			Globals.level_reference.get_node("particles_back").call_deferred("add_child", particle)

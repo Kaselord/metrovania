@@ -4,12 +4,14 @@ class_name Particle
 @export var init = {
 	"scale" : Vector2(1, 1),
 	"position" : Vector2(0, 0),
-	"modulate" : Color(1, 1, 1, 1)
+	"modulate" : Color(1, 1, 1, 1),
+	"rotation" : float(0.0)
 }
 @export var final = {
 	"scale" : Vector2(0, 0),
 	"position" : Vector2(0, 0),
-	"modulate" : Color(1, 1, 1, 0)
+	"modulate" : Color(1, 1, 1, 0),
+	"rotation" : float(0.0)
 }
 var lifetime : int = 30
 var time : int = 0
@@ -32,3 +34,4 @@ func _physics_process(_delta):
 	scale = lerp(init["scale"], final["scale"], weight)
 	position = lerp(init["position"], final["position"], weight)
 	modulate = lerp(init["modulate"], final["modulate"], weight)
+	rotation_degrees = lerp(init["rotation"], final["rotation"], weight)

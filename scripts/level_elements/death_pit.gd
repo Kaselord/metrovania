@@ -7,6 +7,12 @@ var particle_cd : int = 4
 @export var particle_height : float = 100
 
 
+func _ready():
+	if !Engine.is_editor_hint():
+		super()
+		$collider.shape.size.x = width
+
+
 func _process(_delta):
 	if Engine.is_editor_hint():
 		$collider.shape.size.x = width

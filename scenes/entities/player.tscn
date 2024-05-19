@@ -1,12 +1,13 @@
-[gd_scene load_steps=13 format=3 uid="uid://cno20wi12dln"]
+[gd_scene load_steps=14 format=3 uid="uid://cno20wi12dln"]
 
 [ext_resource type="Script" path="res://scripts/entities/player.gd" id="1_wjnyu"]
 [ext_resource type="Texture2D" uid="uid://bhyomon57xhkb" path="res://textures/entities/player/aggy.png" id="2_a0c7w"]
+[ext_resource type="Texture2D" uid="uid://cwvi2mdo0jm16" path="res://textures/particles/dash_sparkle.png" id="2_xt3nf"]
 [ext_resource type="FontFile" uid="uid://buhockuvonca8" path="res://resources/fonts/cheesefont.ttf" id="3_pv6nv"]
 [ext_resource type="PackedScene" uid="uid://d4l174v4ofimd" path="res://scenes/components/hitbox.tscn" id="4_nyx63"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dgldw"]
-size = Vector2(16, 32)
+size = Vector2(16, 31)
 
 [sub_resource type="LabelSettings" id="LabelSettings_hohei"]
 font = ExtResource("3_pv6nv")
@@ -95,9 +96,11 @@ radius = 8.0
 [node name="player" type="CharacterBody2D"]
 editor_description = "the name's Aggy Saintsworn"
 script = ExtResource("1_wjnyu")
+dash_sparkle_texture = ExtResource("2_xt3nf")
 starting_hp = 46
 
 [node name="visuals" type="Node2D" parent="."]
+z_index = 1
 
 [node name="sprite" type="Sprite2D" parent="visuals"]
 position = Vector2(0, -22)
@@ -106,7 +109,7 @@ hframes = 7
 frame = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -16)
+position = Vector2(0, -15.5)
 shape = SubResource("RectangleShape2D_dgldw")
 
 [node name="debug" type="Label" parent="."]

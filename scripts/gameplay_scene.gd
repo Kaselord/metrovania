@@ -4,7 +4,7 @@ extends Node2D
 # 'Globals.set_player_value("value")' or 'Globals.get_player_value("value")' instead
 var temporary_player_reference : Node = null
 @export var player_packed_scene : PackedScene
-var level_switch_data = ["travel_point_name", "res://scenes/levels/000_entrance.tscn"]
+var level_switch_data = ["start", "res://scenes/levels/000_entrance.tscn"]
 
 
 func _ready():

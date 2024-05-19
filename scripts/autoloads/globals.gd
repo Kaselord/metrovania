@@ -2,7 +2,7 @@ extends Node
 
 var active : bool = true
 var player_reference : Node = null
-var level_reference : Node = null
+var level_reference : Node2D = null
 signal level_switch
 var time_until_switch : int = 0
 var time_until_active : int = 0

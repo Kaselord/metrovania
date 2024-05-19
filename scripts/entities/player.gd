@@ -60,7 +60,10 @@ func _physics_process(delta):
 
 
 func _process(_delta):
-	input_dir = sign(Input.get_vector("left", "right", "up", "down"))
+	input_dir = Input.get_vector("left", "right", "up", "down")
+	input_dir.x = sign(snapped(input_dir.x, 1.0))
+	input_dir.y = sign(snapped(input_dir.y, 1.0))
+	
 	if Input.is_action_just_pressed("jump"):
 		if is_floored or coyote_buffer > 0:
 			execute_jump()
@@ -90,14 +93,14 @@ func execute_jump():
 	coyote_buffer = 0
 
 
-func spawn_trail_particle():
+func spawn_trail_particle(final_color : Color = Color(0, 0, 1, 0.05)):
 	var particle = Preloads.texture_particle.instantiate()
 	particle.init["scale"] = Vector2(1.0, 1.0)
 	particle.init["position"] = $visuals/sprite.global_position
 	particle.init["modulate"] = Color(0.8, 0.8, 1, 0.8)
 	particle.final["scale"] = Vector2(1.0, 1.0)
 	particle.final["position"] = $visuals/sprite.global_position
-	particle.final["modulate"] = Color(0.0, 0.0, 1.0, 0.05)
+	particle.final["modulate"] = final_color
 	particle.texture = $visuals/sprite.texture
 	particle.frame_amount = $visuals/sprite.hframes
 	particle.frame_index = $visuals/sprite.frame

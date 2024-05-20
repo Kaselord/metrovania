@@ -12,7 +12,7 @@ var coyote_buffer : int = 0
 var jump_has_been_released : bool = false
 var midair_speed_boost : float = 1.0
 var trail_particle_spawn_cooldown : int = 5
-var look_dir : Vector2 = Vector2(1, 0)
+var look_dir : float = 1.0
 var is_dashing : int = 0
 var gravity_power : float = 1.0
 var trail_color : Color = Color(0.0, 0.0, 1.0, 0.05)
@@ -80,8 +80,8 @@ func _process(_delta):
 	input_dir = Input.get_vector("left", "right", "up", "down")
 	input_dir.x = sign(snapped(input_dir.x, 1.0))
 	input_dir.y = sign(snapped(input_dir.y, 1.0))
-	if input_dir != Vector2(0, 0) && is_dashing <= 0:
-		look_dir = input_dir
+	if input_dir.x != 0:
+		look_dir = input_dir.x
 	
 	if Input.is_action_just_pressed("jump"):
 		if is_floored or coyote_buffer > 0:
@@ -98,9 +98,8 @@ func _process(_delta):
 			is_allowed_to_dash = false
 		spawn_dash_particles()
 		is_dashing = 16
-		var dash_speed_vector = look_dir.normalized() * base_walk_speed * 5
-		velocity = Vector2(dash_speed_vector)
-		dash_power_x = dash_speed_vector.x
+		velocity.y = 0
+		dash_power_x = look_dir * base_walk_speed * 5
 		trail_color = Color(1, 0, 0, 0.05)
 		gravity_power = 0
 	

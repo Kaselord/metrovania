@@ -1,6 +1,12 @@
-[gd_scene load_steps=2 format=3 uid="uid://cx4m5lxlathc"]
+[gd_scene load_steps=5 format=3 uid="uid://cx4m5lxlathc"]
 
 [ext_resource type="Script" path="res://scripts/autoloads/interface.gd" id="1_nwj3h"]
+[ext_resource type="Texture2D" uid="uid://johwut2y3fn1" path="res://textures/interface/textbox.png" id="2_6kuo3"]
+[ext_resource type="FontFile" uid="uid://buhockuvonca8" path="res://resources/fonts/cheesefont.ttf" id="3_4uhn6"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_cc7fg"]
+font = ExtResource("3_4uhn6")
+font_size = 8
 
 [node name="interface" type="CanvasLayer"]
 layer = 2
@@ -9,3 +15,19 @@ script = ExtResource("1_nwj3h")
 [node name="transition_rect" type="Polygon2D" parent="."]
 color = Color(0.137255, 0.129412, 0.2, 1)
 polygon = PackedVector2Array(0, 0, 320, 0, 320, 180, 0, 180)
+
+[node name="text_box" type="Node2D" parent="."]
+
+[node name="background" type="Sprite2D" parent="text_box"]
+position = Vector2(160, 136)
+texture = ExtResource("2_6kuo3")
+
+[node name="text" type="Label" parent="text_box"]
+offset_left = 45.0
+offset_top = 110.0
+offset_right = 275.0
+offset_bottom = 161.0
+text = "Dracula:
+What is a man? A miserable little pile of secrets. But enough talk... Have at you!"
+label_settings = SubResource("LabelSettings_cc7fg")
+autowrap_mode = 2

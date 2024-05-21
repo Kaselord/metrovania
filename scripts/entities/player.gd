@@ -38,7 +38,8 @@ func _physics_process(delta):
 	walking_velocity = lerp(walking_velocity, input_dir.x * base_walk_speed, base_accel)
 	
 	velocity.x = (walking_velocity * midair_speed_boost) * gravity_power + dash_power_x
-	velocity.y = clamp(velocity.y + gravity * delta * gravity_power, -jump_power * 2, gravity)
+	if Globals.active:
+		velocity.y = clamp(velocity.y + gravity * delta * gravity_power, -jump_power * 2, gravity)
 	
 	if Globals.active:
 		move_and_slide()

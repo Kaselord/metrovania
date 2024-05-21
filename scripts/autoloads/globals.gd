@@ -9,9 +9,12 @@ var time_until_active : int = 0
 var is_switching_level : bool = false
 var level_switch_data = ["", "res://scenes/levels/000_entrance.tscn"]
 var ongoing_event : String = ""
+var time : float = 0.0
 
 
-func _physics_process(_delta):
+func _physics_process(delta):
+	time += delta
+	
 	if !active && get_tree().current_scene != null && get_tree().current_scene.is_in_group("gameplay"):
 		if time_until_switch > 0:
 			time_until_switch -= 1

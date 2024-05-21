@@ -628,27 +628,33 @@ z_index = 5
 points = PackedVector2Array(0, 0, 0, 180)
 width = 8.0
 default_color = Color(1, 0, 0, 1)
+metadata/_edit_lock_ = true
 
 [node name="border_right" type="Line2D" parent="editor"]
 points = PackedVector2Array(320, 180, 320, 0)
 width = 8.0
 default_color = Color(1, 0, 0, 1)
+metadata/_edit_lock_ = true
 
 [node name="border_up" type="Line2D" parent="editor"]
 points = PackedVector2Array(0, 0, 320, 0)
 width = 8.0
 default_color = Color(1, 0, 0, 1)
+metadata/_edit_lock_ = true
 
 [node name="border_down" type="Line2D" parent="editor"]
 points = PackedVector2Array(320, 180, 0, 180)
 width = 8.0
 default_color = Color(1, 0, 0, 1)
+metadata/_edit_lock_ = true
 
 [node name="travel_points" type="Node2D" parent="."]
 
 [node name="particles_back" type="Node2D" parent="."]
 
 [node name="interactive" type="Node2D" parent="."]
+
+[node name="other" type="Node2D" parent="."]
 
 [node name="entities" type="Node2D" parent="."]
 

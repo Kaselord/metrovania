@@ -72,6 +72,9 @@ func continue_active_text():
 		# Display "Name of speaker:" instantly
 		$text_box/display_dialogue.visible_characters = len(name_of_speaker) + 1
 		
+		if len(text_table[current_text_identifier][current_text_index]) > 2:
+			Globals.ongoing_event = text_table[current_text_identifier][current_text_index][2]
+		
 		current_text_index += 1
 	else:
 		abandon_text()

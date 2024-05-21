@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://33dyu1ukbh74"]
+[gd_scene load_steps=19 format=3 uid="uid://33dyu1ukbh74"]
 
 [ext_resource type="PackedScene" uid="uid://df25grdvss11u" path="res://scenes/level_base.tscn" id="1_7wlcg"]
 [ext_resource type="PackedScene" uid="uid://i33jmy7bq5vr" path="res://scenes/level_elements/door.tscn" id="2_s6uew"]
@@ -8,6 +8,8 @@
 [ext_resource type="Texture2D" uid="uid://dljkdftq0tnvm" path="res://textures/tiles/bg_bricksdark.png" id="6_qspiy"]
 [ext_resource type="Script" path="res://scripts/misc/start_train_ride.gd" id="7_wlslt"]
 [ext_resource type="PackedScene" uid="uid://bo01scwqs54nq" path="res://scenes/level_elements/trigger.tscn" id="8_xwspr"]
+[ext_resource type="Texture2D" uid="uid://b0iudi5ntug6l" path="res://textures/temporary/player.png" id="9_axhn3"]
+[ext_resource type="Script" path="res://scripts/misc/death_cutscene_train.gd" id="9_kcxoh"]
 
 [sub_resource type="Gradient" id="Gradient_pjcyo"]
 colors = PackedColorArray(0.442466, 0.207732, 0.619021, 1, 0.0745098, 0.113725, 0.313726, 1)
@@ -339,5 +341,10 @@ position = Vector2(1737, 128)
 params = ["death_train"]
 permanently_delete = true
 size = Vector2(48, 112)
+
+[node name="death_cutscene_train" type="Sprite2D" parent="other" index="0"]
+position = Vector2(1833, 50)
+texture = ExtResource("9_axhn3")
+script = ExtResource("9_kcxoh")
 
 [connection signal="body_entered" from="interactive/start_train_ride" to="interactive/start_train_ride" method="_on_body_entered"]

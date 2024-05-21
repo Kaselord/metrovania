@@ -334,7 +334,7 @@ position = Vector2(0, 80)
 shape = SubResource("RectangleShape2D_204y4")
 disabled = true
 
-[node name="trigger" parent="interactive" index="3" instance=ExtResource("8_xwspr")]
+[node name="death_steals_stuff" parent="interactive" index="3" instance=ExtResource("8_xwspr")]
 position = Vector2(1737, 128)
 params = ["death_train"]
 permanently_delete = true

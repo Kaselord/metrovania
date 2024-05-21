@@ -44,6 +44,7 @@ func start_text(text_identifier : String = "", pause_gameplay : bool = true):
 	if text_table.keys().has(text_identifier):
 		text_active = true
 		current_text_identifier = text_identifier
+		Globals.ongoing_event = text_identifier
 		if pause_gameplay:
 			Globals.active = false
 		current_text_index = 0

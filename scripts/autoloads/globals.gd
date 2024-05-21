@@ -8,6 +8,7 @@ var time_until_switch : int = 0
 var time_until_active : int = 0
 var is_switching_level : bool = false
 var level_switch_data = ["", "res://scenes/levels/000_entrance.tscn"]
+var ongoing_event : String = ""
 
 
 func _physics_process(_delta):

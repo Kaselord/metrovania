@@ -8,8 +8,8 @@ extends Node2D
 
 
 func _ready():
-	Globals.level_reference = self
 	if !Engine.is_editor_hint():
+		Globals.level_reference = self
 		$editor.call_deferred("free")
 		if music != "" && scene_file_path != "res://prefabs/rooms/000_beginning.tscn":
 			pass#MusicManager.new_music(music)

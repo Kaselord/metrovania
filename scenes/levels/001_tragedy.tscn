@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://33dyu1ukbh74"]
+[gd_scene load_steps=17 format=3 uid="uid://33dyu1ukbh74"]
 
 [ext_resource type="PackedScene" uid="uid://df25grdvss11u" path="res://scenes/level_base.tscn" id="1_7wlcg"]
 [ext_resource type="PackedScene" uid="uid://i33jmy7bq5vr" path="res://scenes/level_elements/door.tscn" id="2_s6uew"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://dkyv5wk0strtx" path="res://textures/tiles/rotten_bricks.png" id="4_n5et6"]
 [ext_resource type="Texture2D" uid="uid://dljkdftq0tnvm" path="res://textures/tiles/bg_bricksdark.png" id="6_qspiy"]
 [ext_resource type="Script" path="res://scripts/misc/start_train_ride.gd" id="7_wlslt"]
+[ext_resource type="PackedScene" uid="uid://bo01scwqs54nq" path="res://scenes/level_elements/trigger.tscn" id="8_xwspr"]
 
 [sub_resource type="Gradient" id="Gradient_pjcyo"]
 colors = PackedColorArray(0.442466, 0.207732, 0.619021, 1, 0.0745098, 0.113725, 0.313726, 1)
@@ -260,11 +261,11 @@ sources/1 = SubResource("TileSetAtlasSource_84mv4")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_n2aqj"]
 size = Vector2(20, 112)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_204y4"]
-size = Vector2(20, 160)
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_no1i0"]
 size = Vector2(16, 64)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_204y4"]
+size = Vector2(20, 160)
 
 [node name="001_tragedy" instance=ExtResource("1_7wlcg")]
 bottom_right = Vector2i(1920, 180)
@@ -318,7 +319,14 @@ leftmost_collider = NodePath("../train_border/CollisionShape2D")
 position = Vector2(0, -46)
 shape = SubResource("RectangleShape2D_n2aqj")
 
-[node name="train_border" type="StaticBody2D" parent="interactive" index="1"]
+[node name="StaticBody2D" type="StaticBody2D" parent="interactive" index="1"]
+position = Vector2(1800, 16)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="interactive/StaticBody2D" index="0"]
+position = Vector2(0, 32)
+shape = SubResource("RectangleShape2D_no1i0")
+
+[node name="train_border" type="StaticBody2D" parent="interactive" index="2"]
 position = Vector2(310, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="interactive/train_border" index="0"]
@@ -326,11 +334,10 @@ position = Vector2(0, 80)
 shape = SubResource("RectangleShape2D_204y4")
 disabled = true
 
-[node name="StaticBody2D" type="StaticBody2D" parent="interactive" index="2"]
-position = Vector2(1800, 16)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="interactive/StaticBody2D" index="0"]
-position = Vector2(0, 32)
-shape = SubResource("RectangleShape2D_no1i0")
+[node name="trigger" parent="interactive" index="3" instance=ExtResource("8_xwspr")]
+position = Vector2(1737, 128)
+params = ["death_train"]
+permanently_delete = true
+size = Vector2(48, 112)
 
 [connection signal="body_entered" from="interactive/start_train_ride" to="interactive/start_train_ride" method="_on_body_entered"]

@@ -17,12 +17,13 @@ color = Color(0.137255, 0.129412, 0.2, 1)
 polygon = PackedVector2Array(0, 0, 320, 0, 320, 180, 0, 180)
 
 [node name="text_box" type="Node2D" parent="."]
+modulate = Color(1, 1, 1, 0)
 
 [node name="background" type="Sprite2D" parent="text_box"]
 position = Vector2(160, 136)
 texture = ExtResource("2_6kuo3")
 
-[node name="text" type="Label" parent="text_box"]
+[node name="display_dialogue" type="Label" parent="text_box"]
 offset_left = 45.0
 offset_top = 110.0
 offset_right = 275.0

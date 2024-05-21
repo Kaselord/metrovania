@@ -22,7 +22,7 @@ func _physics_process(_delta):
 				get_tree().current_scene.load_level(level_switch_data)
 			if time_until_active > 0:
 				time_until_active -= 1
-			else:
+			elif !Interface.text_active:
 				active = true
 	
 	update_game_interface()

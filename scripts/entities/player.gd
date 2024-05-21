@@ -77,6 +77,29 @@ func _physics_process(delta):
 
 
 func _process(_delta):
+	if Globals.active:
+		get_input()
+	
+	if Globals.active:
+		if abs(velocity.x) > 0:
+			$visuals.scale.x = sign(velocity.x)
+		if is_floored:
+			# walking
+			if abs(velocity.x) > base_walk_speed * 0.05:
+				$anim.play("walk")
+			else: # idling
+				$anim.play("idle")
+		else:
+			# falling 
+			if velocity.y > 0:
+				$anim.play("fall")
+			else: # jumping
+				$anim.play("jump")
+	else:
+		$anim.stop()
+
+
+func get_input():
 	input_dir = Input.get_vector("left", "right", "up", "down")
 	input_dir.x = sign(snapped(input_dir.x, 1.0))
 	input_dir.y = sign(snapped(input_dir.y, 1.0))
@@ -102,24 +125,6 @@ func _process(_delta):
 		dash_power_x = look_dir * base_walk_speed * 5
 		trail_color = Color(1, 0, 0, 0.05)
 		gravity_power = 0
-	
-	if Globals.active:
-		if abs(velocity.x) > 0:
-			$visuals.scale.x = sign(velocity.x)
-		if is_floored:
-			# walking
-			if abs(velocity.x) > base_walk_speed * 0.05:
-				$anim.play("walk")
-			else: # idling
-				$anim.play("idle")
-		else:
-			# falling 
-			if velocity.y > 0:
-				$anim.play("fall")
-			else: # jumping
-				$anim.play("jump")
-	else:
-		$anim.stop()
 
 
 func execute_jump():

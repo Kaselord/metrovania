@@ -7,6 +7,8 @@ var do_things : bool = false
 var actual_pos : Vector2 = Vector2(0, 0)
 var max_particle_cd : int = 4
 var interpolation : float = 0.08
+var item_steal_cd : int = 0
+var item_steal_textures : Array = []
 
 
 func _ready():
@@ -42,8 +44,20 @@ func _physics_process(_delta):
 		
 		if Globals.ongoing_event == "powerup_stealing":
 			Globals.ongoing_event = ""
+			item_steal_textures = [
+				load("res://textures/powerups/double_jump.png"),
+				load("res://textures/powerups/dash.png")
+			]
 			if Globals.player_reference != null:
-				Globals.player_reference.spawn_dash_particles()
+				Globals.player_reference.get_node("anim").play("fall")
+		
+		if len(item_steal_textures) > 0:
+			if item_steal_cd > 0:
+				item_steal_cd -= 1
+			else:
+				item_steal_cd = 20
+				spawn_powerup_particle(item_steal_textures[0])
+				item_steal_textures.remove_at(0)
 
 
 func spawn_trail_particle():
@@ -59,3 +73,18 @@ func spawn_trail_particle():
 	particle.snap_weight = 0.05
 	if Globals.level_reference != null:
 		Globals.level_reference.get_node("particles_back").call_deferred("add_child", particle)
+
+
+func spawn_powerup_particle(texture_to_use : Texture):
+	if Globals.player_reference != null:
+		Globals.player_reference.spawn_dash_particles()
+		var particle = Preloads.texture_particle.instantiate()
+		particle.init["scale"] = Vector2(1, 1)
+		particle.init["position"] = Globals.player_reference.global_position - Vector2(0, 22)
+		particle.init["modulate"] = Color(1, 1, 1, 1)
+		particle.final["scale"] = Vector2(1, 1)
+		particle.final["position"] = global_position
+		particle.final["modulate"] = Color(1, 1, 1, 0)
+		particle.texture = texture_to_use
+		if Globals.level_reference != null:
+			Globals.level_reference.get_node("particles_back").call_deferred("add_child", particle)

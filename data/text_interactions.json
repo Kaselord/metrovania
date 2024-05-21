@@ -1,8 +1,4 @@
 {
-	"test": [
-		["none", "A shudder goes down your back... could it be? Is this... A TEST DIALOGUE?!??"],
-		["You", "I can't fucking believe it. A test dialogue? In what is supposed to be an *immersive* experience??"]
-	],
 	"death_train" : [
 		["Death", "Ah! There comes the vampire huntress."],
 		["You", "Death itself stands in my way? If you do not let me pass, I shall strike you down like all other monsters!"],

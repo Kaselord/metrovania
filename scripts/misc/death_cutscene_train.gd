@@ -9,6 +9,7 @@ var max_particle_cd : int = 4
 var interpolation : float = 0.08
 var item_steal_cd : int = 0
 var item_steal_textures : Array = []
+var end : bool = false
 
 
 func _ready():
@@ -38,6 +39,12 @@ func _physics_process(_delta):
 			max_particle_cd = 1
 			pos_target = pos_target - Vector2(0, 70)
 			alpha_target = 0.0
+			if !end:
+				end = true
+				Globals.level_switch_data = ["wake_up", "res://scenes/levels/002_the_other_side.tscn"]
+				Globals.emit_signal("level_switch")
+				if Globals.player_reference != null:
+					Globals.player_reference.velocity = Vector2(0, 0)
 		else:
 			max_particle_cd = 4
 			interpolation = 0.08

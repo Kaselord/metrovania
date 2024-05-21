@@ -1,8 +1,9 @@
-[gd_scene load_steps=14 format=3 uid="uid://cno20wi12dln"]
+[gd_scene load_steps=15 format=3 uid="uid://cno20wi12dln"]
 
 [ext_resource type="Script" path="res://scripts/entities/player.gd" id="1_wjnyu"]
 [ext_resource type="Texture2D" uid="uid://bhyomon57xhkb" path="res://textures/entities/player/aggy.png" id="2_a0c7w"]
 [ext_resource type="Texture2D" uid="uid://cwvi2mdo0jm16" path="res://textures/particles/dash_sparkle.png" id="2_xt3nf"]
+[ext_resource type="Texture2D" uid="uid://chhetuxwbm4ve" path="res://textures/particles/rect6.png" id="3_phb3f"]
 [ext_resource type="FontFile" uid="uid://buhockuvonca8" path="res://resources/fonts/cheesefont.ttf" id="3_pv6nv"]
 [ext_resource type="PackedScene" uid="uid://d4l174v4ofimd" path="res://scenes/components/hitbox.tscn" id="4_nyx63"]
 
@@ -97,10 +98,10 @@ radius = 8.0
 editor_description = "the name's Aggy Saintsworn"
 script = ExtResource("1_wjnyu")
 dash_sparkle_texture = ExtResource("2_xt3nf")
+circle_texture = ExtResource("3_phb3f")
 starting_hp = 46
 
 [node name="visuals" type="Node2D" parent="."]
-z_index = 1
 
 [node name="sprite" type="Sprite2D" parent="visuals"]
 position = Vector2(0, -22)

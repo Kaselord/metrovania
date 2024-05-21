@@ -19,6 +19,8 @@ var trail_color : Color = Color(0.0, 0.0, 1.0, 0.05)
 var dash_power_x : float = 0.0
 var is_allowed_to_dash : bool = true
 @export var dash_sparkle_texture : Texture
+@export var circle_texture : Texture
+var double_jump_remains : bool = true
 
 
 func _ready():
@@ -46,6 +48,7 @@ func _physics_process(delta):
 	
 	is_floored = is_on_floor()
 	if is_floored:
+		double_jump_remains = true
 		is_allowed_to_dash = true
 		coyote_buffer = 8
 	
@@ -110,6 +113,11 @@ func get_input():
 	if Input.is_action_just_pressed("jump"):
 		if is_floored or coyote_buffer > 0:
 			execute_jump()
+		elif double_jump_remains: # double jump!
+			double_jump_remains = false
+			spawn_double_jump_particles()
+			spawn_double_jump_particles(0.5)
+			execute_jump(1.2)
 		else:
 			jump_buffer = 6
 	
@@ -128,13 +136,14 @@ func get_input():
 		gravity_power = 0
 
 
-func execute_jump():
-	velocity.y = -jump_power
+func execute_jump(power_amplify : float = 1.0):
+	velocity.y = -jump_power * power_amplify
 	jump_has_been_released = false
 	jump_buffer = 0
 	coyote_buffer = 0
 	if is_dashing > 0:
 		is_dashing = 10
+	is_allowed_to_dash = true
 
 
 func spawn_trail_particle(final_color : Color = Color(0, 0, 1, 0.05)):
@@ -172,3 +181,25 @@ func spawn_dash_particles():
 			particle.texture = dash_sparkle_texture
 			particle.lifetime = randi_range(16, 24)
 			Globals.level_reference.get_node("particles_back").call_deferred("add_child", particle)
+
+
+func spawn_double_jump_particles(circle_size : float = 1.0):
+	if Globals.level_reference != null:
+		for i in range(24.0):
+			var angle : float = (TAU / 24.0) * i
+			var vector : Vector2 = Vector2(sin(angle) * 2, cos(angle) * 0.75)
+			var particle = Preloads.texture_particle.instantiate()
+			var color_weight = abs(vector.y + 0.6) / 1.2 # 1 is back, 0 is front
+			var particle_color = lerp(Color("45a6d7"), Color("92fff0"), color_weight)
+			particle.init["position"] = global_position - Vector2(0, 20) + vector * 6 * circle_size
+			particle.init["modulate"] = particle_color
+			particle.init["rotation"] = randf_range(0.0, 90)
+			particle.final["scale"] = Vector2(0, 0)
+			particle.final["position"] = global_position - Vector2(0, 10) + vector * 12 * circle_size
+			particle.final["modulate"] = Color(particle_color.r, particle_color.g, particle_color.b, 0.0)
+			particle.texture = circle_texture
+			particle.lifetime = int(28 * clamp(1.0/circle_size, 0.75, 1.25)) + randi_range(-1, 1)
+			if vector.y < 0:
+				Globals.level_reference.get_node("particles_back").call_deferred("add_child", particle)
+			else:
+				Globals.level_reference.get_node("particles_front").call_deferred("add_child", particle)

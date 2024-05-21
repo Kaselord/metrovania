@@ -27,7 +27,7 @@ func _physics_process(_delta):
 	
 	if text_active:
 		$text_box.modulate.a = clamp($text_box.modulate.a + 0.05, 0.0, 1.0)
-		if Input.is_action_just_pressed("jump"):
+		if Input.is_action_just_pressed("jump") or Input.is_action_just_pressed("dash"):
 			if $text_box/display_dialogue.visible_ratio > 0.99:
 				continue_active_text()
 			else:

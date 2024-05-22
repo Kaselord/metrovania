@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://df25grdvss11u"]
+[gd_scene load_steps=15 format=3 uid="uid://df25grdvss11u"]
 
 [ext_resource type="Script" path="res://scripts/level_base.gd" id="1_ip5t6"]
 [ext_resource type="Texture2D" uid="uid://prslkgmu5vej" path="res://icon.svg" id="1_ykyvf"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://dljkdftq0tnvm" path="res://textures/tiles/bg_bricksdark.png" id="4_rv53r"]
 [ext_resource type="Texture2D" uid="uid://dr1tflj1gxoqd" path="res://textures/tiles/train_parts.png" id="5_e7yq5"]
 [ext_resource type="Texture2D" uid="uid://bi35yu6ov1q37" path="res://textures/tiles/clean_bricks.png" id="6_a7ulw"]
+[ext_resource type="Texture2D" uid="uid://c0db3sy1lq1uf" path="res://textures/tiles/bg_bricks_light.png" id="7_mp7nu"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_wdv4v"]
 texture = ExtResource("1_ykyvf")
@@ -1060,6 +1061,45 @@ texture = ExtResource("6_a7ulw")
 8:4/0/terrains_peering_bit/left_side = 1
 8:4/0/terrains_peering_bit/top_side = 1
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_38qcb"]
+texture = ExtResource("7_mp7nu")
+0:0/0 = 0
+0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/0/physics_layer_0/angular_velocity = 0.0
+1:0/0 = 0
+1:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+1:0/0/physics_layer_0/angular_velocity = 0.0
+0:1/0 = 0
+0:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:1/0/physics_layer_0/angular_velocity = 0.0
+1:1/0 = 0
+1:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+1:1/0/physics_layer_0/angular_velocity = 0.0
+2:0/0 = 0
+2:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+2:0/0/physics_layer_0/angular_velocity = 0.0
+2:1/0 = 0
+2:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+2:1/0/physics_layer_0/angular_velocity = 0.0
+3:1/0 = 0
+3:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+3:1/0/physics_layer_0/angular_velocity = 0.0
+3:0/0 = 0
+3:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+3:0/0/physics_layer_0/angular_velocity = 0.0
+4:0/0 = 0
+4:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+4:0/0/physics_layer_0/angular_velocity = 0.0
+5:0/0 = 0
+5:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+5:0/0/physics_layer_0/angular_velocity = 0.0
+5:1/0 = 0
+5:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+5:1/0/physics_layer_0/angular_velocity = 0.0
+4:1/0 = 0
+4:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+4:1/0/physics_layer_0/angular_velocity = 0.0
+
 [sub_resource type="TileSet" id="TileSet_hysfe"]
 physics_layer_0/collision_layer = 1
 terrain_set_0/mode = 0
@@ -1072,6 +1112,7 @@ sources/1 = SubResource("TileSetAtlasSource_7amrb")
 sources/2 = SubResource("TileSetAtlasSource_1bas5")
 sources/3 = SubResource("TileSetAtlasSource_8ohgk")
 sources/4 = SubResource("TileSetAtlasSource_pdb1v")
+sources/5 = SubResource("TileSetAtlasSource_38qcb")
 
 [node name="level_base" type="Node2D"]
 script = ExtResource("1_ip5t6")

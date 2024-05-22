@@ -41,6 +41,8 @@ func _physics_process(_delta):
 			alpha_target = 0.0
 			if !end:
 				end = true
+				SaveManager.set_powerup("dash", false)
+				SaveManager.set_powerup("double_jump", false)
 				Globals.level_switch_data = ["wake_up", "res://scenes/levels/002_the_other_side.tscn"]
 				Globals.emit_signal("level_switch")
 				if Globals.player_reference != null:

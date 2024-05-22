@@ -113,7 +113,7 @@ func get_input():
 	if Input.is_action_just_pressed("jump"):
 		if is_floored or coyote_buffer > 0:
 			execute_jump()
-		elif double_jump_remains: # double jump!
+		elif double_jump_remains && SaveManager.get_powerup("double_jump"): # double jump!
 			double_jump_remains = false
 			spawn_double_jump_particles()
 			spawn_double_jump_particles(0.5)
@@ -125,7 +125,7 @@ func get_input():
 		if velocity.y < 0 && !jump_has_been_released:
 			velocity.y *= 0.5
 	
-	if Input.is_action_just_pressed("dash") && is_dashing <= 0 && is_allowed_to_dash:
+	if Input.is_action_just_pressed("dash") && is_dashing <= 0 && is_allowed_to_dash && SaveManager.get_powerup("dash"):
 		if !is_floored:
 			is_allowed_to_dash = false
 		spawn_dash_particles()

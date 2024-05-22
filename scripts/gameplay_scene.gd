@@ -4,7 +4,7 @@ extends Node2D
 # 'Globals.set_player_value("value")' or 'Globals.get_player_value("value")' instead
 var temporary_player_reference : Node = null
 @export var player_packed_scene : PackedScene
-var level_switch_data = ["start", "res://scenes/levels/000_entrance.tscn"]
+var level_switch_data = ["door_left", "res://scenes/levels/003_wandering_halls.tscn"]
 
 
 func _ready():
@@ -25,6 +25,7 @@ func _process(_delta):
 				temporary_player_reference.reparent(entity_parent_node)
 				temporary_player_reference.position = find_travel_point_position(active_level)
 				$camera.to_follow = temporary_player_reference.get_path()
+				$camera.snap = true
 				$camera.position = temporary_player_reference.position
 				$camera.limit_left = active_level.top_left.x
 				$camera.limit_top = active_level.top_left.y

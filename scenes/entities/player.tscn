@@ -144,3 +144,5 @@ is_player_hitbox = true
 position = Vector2(0, -17)
 shape = SubResource("CapsuleShape2D_mlfqt")
 debug_color = Color(0.788235, 0.0980392, 1, 0.419608)
+
+[connection signal="hit" from="hitbox" to="." method="_on_hitbox_hit"]

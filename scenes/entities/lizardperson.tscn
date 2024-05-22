@@ -1,0 +1,73 @@
+[gd_scene load_steps=9 format=3 uid="uid://dln0jrisxv1tc"]
+
+[ext_resource type="Script" path="res://scripts/entities/lizardperson.gd" id="1_plw4v"]
+[ext_resource type="Texture2D" uid="uid://c78kjqr6t5wel" path="res://textures/entities/lizardperson.png" id="2_57foc"]
+[ext_resource type="PackedScene" uid="uid://d4l174v4ofimd" path="res://scenes/components/hitbox.tscn" id="3_ntww7"]
+[ext_resource type="PackedScene" uid="uid://6bfdrlmoe75y" path="res://scenes/components/hurtbox.tscn" id="4_mtkeu"]
+
+[sub_resource type="Animation" id="Animation_sheqr"]
+resource_name = "walk"
+length = 0.6
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.3, 0.45),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 1]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_yobtu"]
+_data = {
+"walk": SubResource("Animation_sheqr")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ub0a1"]
+size = Vector2(16, 44)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_oylfu"]
+radius = 5.0
+height = 44.0
+
+[node name="lizardperson" type="CharacterBody2D"]
+editor_description = "Mark Salzberg"
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("1_plw4v")
+
+[node name="sprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_57foc")
+offset = Vector2(0, -32)
+hframes = 3
+
+[node name="anim" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_yobtu")
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -22)
+shape = SubResource("RectangleShape2D_ub0a1")
+
+[node name="hitbox" parent="." instance=ExtResource("3_ntww7")]
+entity = NodePath("..")
+ignore_tag = "evil"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox"]
+position = Vector2(0, -22)
+shape = SubResource("RectangleShape2D_ub0a1")
+
+[node name="hurtbox" parent="." instance=ExtResource("4_mtkeu")]
+damage = 1
+ignore_in_detection = ["evil"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hurtbox"]
+position = Vector2(0, -22)
+shape = SubResource("CapsuleShape2D_oylfu")
+debug_color = Color(0.858824, 0, 0.129412, 0.701961)

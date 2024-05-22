@@ -10,6 +10,7 @@ var is_switching_level : bool = false
 var level_switch_data = ["", "res://scenes/levels/000_entrance.tscn"]
 var ongoing_event : String = ""
 var time : float = 0.0
+var player_damage_happened : bool = false
 
 
 func _physics_process(delta):
@@ -78,4 +79,8 @@ func update_game_interface():
 		# player health bar
 		var healthbar_text = gameplay_scene.get_node("interface/healthbar/amount")
 		if get_player_value("hp") != null:
+			healthbar_text.label_settings.font_color = lerp(healthbar_text.label_settings.font_color, Color(1, 1, 1, 1), 0.1)
+			if player_damage_happened:
+				player_damage_happened = false
+				healthbar_text.label_settings.font_color = Color(1, 0, 0, 1)
 			healthbar_text.text = str(clamp(get_player_value("hp"), 0, 99))

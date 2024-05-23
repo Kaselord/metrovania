@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://cno20wi12dln"]
+[gd_scene load_steps=16 format=3 uid="uid://cno20wi12dln"]
 
 [ext_resource type="Script" path="res://scripts/entities/player.gd" id="1_wjnyu"]
 [ext_resource type="Texture2D" uid="uid://bhyomon57xhkb" path="res://textures/entities/player/aggy.png" id="2_a0c7w"]
@@ -8,7 +8,10 @@
 [ext_resource type="PackedScene" uid="uid://d4l174v4ofimd" path="res://scenes/components/hitbox.tscn" id="4_nyx63"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dgldw"]
-size = Vector2(16, 31)
+size = Vector2(16, 23)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_30d10"]
+radius = 8.0
 
 [sub_resource type="LabelSettings" id="LabelSettings_hohei"]
 font = ExtResource("3_pv6nv")
@@ -92,7 +95,8 @@ _data = {
 }
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_mlfqt"]
-radius = 8.0
+radius = 7.0
+height = 28.0
 
 [node name="player" type="CharacterBody2D"]
 editor_description = "the name's Aggy Saintsworn"
@@ -107,11 +111,15 @@ starting_hp = 46
 position = Vector2(0, -22)
 texture = ExtResource("2_a0c7w")
 hframes = 7
-frame = 1
+frame = 6
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -15.5)
+position = Vector2(0, -19.5)
 shape = SubResource("RectangleShape2D_dgldw")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+position = Vector2(0, -8)
+shape = SubResource("CircleShape2D_30d10")
 
 [node name="debug" type="Label" parent="."]
 visible = false
@@ -137,7 +145,7 @@ libraries = {
 [node name="hitbox" parent="." instance=ExtResource("4_nyx63")]
 entity = NodePath("..")
 ignore_tag = "player"
-max_immunity = 30
+max_immunity = 36
 is_player_hitbox = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox"]

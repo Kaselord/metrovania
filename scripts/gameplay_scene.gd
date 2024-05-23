@@ -24,6 +24,7 @@ func _process(_delta):
 			if entity_parent_node != null:
 				temporary_player_reference.reparent(entity_parent_node)
 				temporary_player_reference.position = find_travel_point_position(active_level)
+				temporary_player_reference.reset_movement()
 				$camera.to_follow = temporary_player_reference.get_path()
 				$camera.snap = true
 				$camera.position = temporary_player_reference.position

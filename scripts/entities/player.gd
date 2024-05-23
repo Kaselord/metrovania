@@ -21,7 +21,7 @@ var is_allowed_to_dash : bool = true
 @export var dash_sparkle_texture : Texture
 @export var circle_texture : Texture
 var double_jump_remains : bool = true
-var knockback_x : float = 0.0
+var hit_effect : float = 0.0
 
 
 func _ready():
@@ -40,7 +40,7 @@ func _physics_process(delta):
 		midair_speed_boost = 1.2
 	walking_velocity = lerp(walking_velocity, input_dir.x * base_walk_speed, base_accel)
 	
-	velocity.x = (walking_velocity * midair_speed_boost) * gravity_power + dash_power_x + knockback_x
+	velocity.x = (walking_velocity * midair_speed_boost) * gravity_power + dash_power_x
 	if Globals.active:
 		velocity.y = clamp(velocity.y + gravity * delta * gravity_power, -jump_power * 2, gravity)
 	
@@ -80,9 +80,15 @@ func _physics_process(delta):
 		trail_color = Color(0, 0, 1, 0.05)
 		dash_power_x = 0.0
 	
-	knockback_x = lerp(knockback_x, 0.0, 0.2)
-	if abs(knockback_x) < 2.5:
-		knockback_x = 0
+	hp = clamp(hp, 0, SaveManager.get_powerup("max_hp"))
+	if hit_effect > 0:
+		hit_effect -= 0.4
+	hit_effect = clamp(hit_effect, 0, 50.0)
+	var discoloration : float = (cos(hit_effect) + 1) * 0.5
+	$visuals.modulate.a = discoloration
+	$visuals.modulate.g = discoloration
+	$visuals.modulate.b = discoloration
+	$visuals.modulate.r = 1
 
 
 func _process(_delta):
@@ -210,8 +216,15 @@ func spawn_double_jump_particles(circle_size : float = 1.0):
 				Globals.level_reference.get_node("particles_front").call_deferred("add_child", particle)
 
 
+func reset_movement():
+	velocity = Vector2(0, 0)
+	is_dashing = 0
+
+
 func _on_hitbox_hit():
 	Globals.player_damage_happened = true
+	Globals.active = false
+	Globals.time_until_active = 5
+	hit_effect = 20.0
 	if is_dashing <= 0:
-		velocity.y = -jump_power * 0.4
-		knockback_x = -look_dir * base_walk_speed * 3
+		velocity.y = -jump_power * 0.5

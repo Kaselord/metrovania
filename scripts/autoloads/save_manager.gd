@@ -7,12 +7,15 @@ var temporary_savings : Dictionary = {
 var permanent_savings : Dictionary = {
 	"player_powerups" : {
 		"dash" : true,
-		"double_jump" : true
+		"double_jump" : true,
+		"current_hp" : 100,
+		"max_hp" : 100
 	}
+	
 }
 
 
-func set_powerup(tag : String, value : bool):
+func set_powerup(tag : String, value : Variant):
 	permanent_savings["player_powerups"][tag] = value
 
 

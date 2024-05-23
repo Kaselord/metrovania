@@ -36,10 +36,11 @@ radius = 5.0
 height = 44.0
 
 [node name="lizardperson" type="CharacterBody2D"]
-editor_description = "Mark Salzberg"
+editor_description = "Too dumb to build tall ceilings, so the neck devolved"
 collision_layer = 2
 collision_mask = 2
 script = ExtResource("1_plw4v")
+starting_hp = 3
 
 [node name="sprite" type="Sprite2D" parent="."]
 texture = ExtResource("2_57foc")

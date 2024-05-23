@@ -72,3 +72,5 @@ ignore_in_detection = ["evil"]
 position = Vector2(0, -22)
 shape = SubResource("CapsuleShape2D_oylfu")
 debug_color = Color(0.858824, 0, 0.129412, 0.701961)
+
+[connection signal="hit" from="hitbox" to="." method="_on_hitbox_hit"]

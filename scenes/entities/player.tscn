@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://cno20wi12dln"]
+[gd_scene load_steps=22 format=3 uid="uid://cno20wi12dln"]
 
 [ext_resource type="Script" path="res://scripts/entities/player.gd" id="1_wjnyu"]
 [ext_resource type="Texture2D" uid="uid://bhyomon57xhkb" path="res://textures/entities/player/aggy.png" id="2_a0c7w"]
@@ -6,6 +6,8 @@
 [ext_resource type="Texture2D" uid="uid://chhetuxwbm4ve" path="res://textures/particles/rect6.png" id="3_phb3f"]
 [ext_resource type="FontFile" uid="uid://buhockuvonca8" path="res://resources/fonts/cheesefont.ttf" id="3_pv6nv"]
 [ext_resource type="PackedScene" uid="uid://d4l174v4ofimd" path="res://scenes/components/hitbox.tscn" id="4_nyx63"]
+[ext_resource type="Texture2D" uid="uid://cjb607gabfujh" path="res://textures/entities/player/whip.png" id="7_sirx4"]
+[ext_resource type="PackedScene" uid="uid://6bfdrlmoe75y" path="res://scenes/components/hurtbox.tscn" id="8_tuvmm"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dgldw"]
 size = Vector2(16, 23)
@@ -86,17 +88,168 @@ tracks/0/keys = {
 "values": [1, 2, 3, 4]
 }
 
+[sub_resource type="Animation" id="Animation_um6yx"]
+resource_name = "whip"
+length = 0.5
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("visuals/sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.45, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [7, 8, 8, 7]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("visuals/whip:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.25, 0.35, 0.45),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 2, 1),
+"update": 0,
+"values": [Vector2(22, -24), Vector2(22, -24), Vector2(33, -24), Vector2(51.5, -24), Vector2(56, -24), Vector2(18, -24)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("visuals/whip:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("visuals/whip:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.25, 0.35, 0.45),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 2, 1),
+"update": 0,
+"values": [Vector2(0.105263, 1), Vector2(0.105263, 1), Vector2(0.394737, 1), Vector2(0.881579, 1), Vector2(1, 1), Vector2(0, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("hurtbox/CollisionShape2D:disabled")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.25, 0.4, 0.45),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [true, true, false, false, true]
+}
+
+[sub_resource type="Animation" id="Animation_2kp2n"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("visuals/sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [7]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("visuals/whip:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(56, -24)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("visuals/whip:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("visuals/whip:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.105263, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("hurtbox/CollisionShape2D:disabled")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_m3nnl"]
+resource_name = "dash"
+length = 0.1
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("visuals/sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [3]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_v5fev"]
 _data = {
+"RESET": SubResource("Animation_2kp2n"),
+"dash": SubResource("Animation_m3nnl"),
 "fall": SubResource("Animation_xkpxi"),
 "idle": SubResource("Animation_bhsxq"),
 "jump": SubResource("Animation_2d0uo"),
-"walk": SubResource("Animation_hk6pt")
+"walk": SubResource("Animation_hk6pt"),
+"whip": SubResource("Animation_um6yx")
 }
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_mlfqt"]
 radius = 7.0
 height = 28.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w2jnv"]
+size = Vector2(95, 7)
 
 [node name="player" type="CharacterBody2D"]
 editor_description = "the name's Aggy Saintsworn"
@@ -110,8 +263,19 @@ starting_hp = 46
 [node name="sprite" type="Sprite2D" parent="visuals"]
 position = Vector2(0, -22)
 texture = ExtResource("2_a0c7w")
-hframes = 7
-frame = 6
+hframes = 10
+frame = 7
+
+[node name="whip" type="Sprite2D" parent="visuals"]
+visible = false
+position = Vector2(56, -24)
+scale = Vector2(0.105263, 1)
+texture = ExtResource("7_sirx4")
+offset = Vector2(0, 0.5)
+region_rect = Rect2(0, 0, 76, 5)
+
+[node name="end_point" type="Node2D" parent="visuals/whip"]
+position = Vector2(38, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -19.5)
@@ -153,4 +317,16 @@ position = Vector2(0, -17)
 shape = SubResource("CapsuleShape2D_mlfqt")
 debug_color = Color(0.788235, 0.0980392, 1, 0.419608)
 
+[node name="hurtbox" parent="." instance=ExtResource("8_tuvmm")]
+position = Vector2(0, -24)
+damage = 1
+ignore_in_detection = ["player"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hurtbox"]
+position = Vector2(46.5, 0.5)
+shape = SubResource("RectangleShape2D_w2jnv")
+disabled = true
+debug_color = Color(0.952941, 0, 0.564706, 0.419608)
+
 [connection signal="hit" from="hitbox" to="." method="_on_hitbox_hit"]
+[connection signal="has_hit" from="hurtbox" to="." method="_on_hurtbox_has_hit"]

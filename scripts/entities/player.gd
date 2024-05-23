@@ -22,6 +22,7 @@ var is_allowed_to_dash : bool = true
 @export var circle_texture : Texture
 var double_jump_remains : bool = true
 var hit_effect : float = 0.0
+var is_attacking : int = 0
 
 
 func _ready():
@@ -76,9 +77,19 @@ func _physics_process(delta):
 		is_dashing -= 1
 		trail_color = Color(1, 0, 0, 0.05)
 	else:
-		gravity_power = 1.0
 		trail_color = Color(0, 0, 1, 0.05)
 		dash_power_x = 0.0
+	
+	if is_attacking > 0:
+		spawn_whip_particle(dash_sparkle_texture)
+		gravity_power = 0.5
+		is_attacking -= 1
+		is_allowed_to_dash = false
+		if is_floored:
+			gravity_power = 0.0
+	
+	if is_dashing <= 0 && is_attacking <= 0:
+		gravity_power = 1.0
 	
 	hp = clamp(hp, 0, SaveManager.get_powerup("max_hp"))
 	if hit_effect > 0:
@@ -98,24 +109,30 @@ func _process(_delta):
 	if Globals.active:
 		if abs(velocity.x) > 0:
 			$visuals.scale.x = sign(velocity.x)
-		if is_floored:
-			# walking
-			if abs(walking_velocity) > base_walk_speed * 0.05:
-				$anim.play("walk")
-			else: # idling
-				$anim.play("idle")
-		else:
-			# falling 
-			if velocity.y > 0:
-				$anim.play("fall")
-			else: # jumping
-				$anim.play("jump")
+		var normal_state : bool = is_dashing <= 0 && is_attacking <= 0
+		if normal_state:
+			$visuals/whip.hide()
+			if is_floored:
+				# walking
+				if abs(walking_velocity) > base_walk_speed * 0.05:
+					$anim.play("walk")
+				else: # idling
+					$anim.play("idle")
+			else:
+				# falling 
+				if velocity.y > 0:
+					$anim.play("fall")
+				else: # jumping
+					$anim.play("jump")
+		elif is_dashing > 0:
+			$anim.play("dash")
 	else:
 		$anim.stop()
 
 
 func get_input():
-	input_dir = Input.get_vector("left", "right", "up", "down")
+	if is_attacking <= 0:
+		input_dir = Input.get_vector("left", "right", "up", "down")
 	input_dir.x = sign(snapped(input_dir.x, 1.0))
 	input_dir.y = sign(snapped(input_dir.y, 1.0))
 	if input_dir.x != 0:
@@ -145,6 +162,12 @@ func get_input():
 		dash_power_x = look_dir * base_walk_speed * 5
 		trail_color = Color(1, 0, 0, 0.05)
 		gravity_power = 0
+	
+	if Input.is_action_just_pressed("attack") && is_dashing <= 0 && is_attacking <= 0:
+		is_attacking = 30
+		$hurtbox.scale.x = $visuals.scale.x
+		$anim.play("whip")
+		gravity_power = 0.5
 
 
 func execute_jump(power_amplify : float = 1.0):
@@ -175,18 +198,21 @@ func spawn_trail_particle(final_color : Color = Color(0, 0, 1, 0.05)):
 		Globals.level_reference.get_node("particles_back").call_deferred("add_child", particle)
 
 
-func spawn_dash_particles():
+func spawn_dash_particles(diameter : float = 1.0, is_whip_end : bool = false):
 	if Globals.level_reference != null:
 		for i in range(12.0):
 			var angle : float = (TAU / 12.0) * i
 			var vector : Vector2 = Vector2(sin(angle), cos(angle))
 			var particle = Preloads.texture_particle.instantiate()
+			var pos : Vector2 = $visuals/sprite.global_position
+			if is_whip_end:
+				pos = $visuals/whip/end_point.global_position
 			particle.init["scale"] = Vector2(1.0, 1.0)
-			particle.init["position"] = $visuals/sprite.global_position + vector * 16
+			particle.init["position"] = pos + vector * 16 * diameter
 			particle.init["modulate"] = Color(1, 1, 1, 1)
 			particle.init["rotation"] = randf_range(0.0, 180)
 			particle.final["scale"] = Vector2(0.5, 0.5)
-			particle.final["position"] = $visuals/sprite.global_position + vector * 24
+			particle.final["position"] = pos + vector * 24 * diameter
 			particle.final["modulate"] = Color(1, 1, 1, 0)
 			particle.final["rotation"] = randf_range(0.0, 180)
 			particle.texture = dash_sparkle_texture
@@ -216,6 +242,25 @@ func spawn_double_jump_particles(circle_size : float = 1.0):
 				Globals.level_reference.get_node("particles_front").call_deferred("add_child", particle)
 
 
+func spawn_whip_particle(texture : Texture):
+	if Globals.level_reference != null:
+		var particle = Preloads.texture_particle.instantiate()
+		particle.lifetime = 15
+		particle.texture = texture
+		particle.init["scale"] = Vector2(1, 1)
+		particle.init["rotation"] = randf_range(0, 360)
+		particle.init["modulate"] = Color(1, 1, 1, 1)
+		var random_vector_add : Vector2 = Vector2(randf_range(-4, 4), randf_range(-4, 4))
+		particle.init["position"] = $visuals/whip/end_point.global_position + random_vector_add
+		
+		particle.final["scale"] = Vector2(0.5, 0.5)
+		particle.final["rotation"] = randf_range(0, 360)
+		particle.final["modulate"] = Color(1, 1, 1, 0)
+		particle.final["position"] = $visuals/whip/end_point.global_position + random_vector_add
+		
+		Globals.level_reference.get_node("particles_front").call_deferred("add_child", particle)
+
+
 func reset_movement():
 	velocity = Vector2(0, 0)
 	is_dashing = 0
@@ -228,3 +273,7 @@ func _on_hitbox_hit():
 	hit_effect = 20.0
 	if is_dashing <= 0:
 		velocity.y = -jump_power * 0.5
+
+
+func _on_hurtbox_has_hit():
+	spawn_dash_particles(0.5, true)

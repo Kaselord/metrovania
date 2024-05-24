@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://b3012evdp0k0"]
+
+[ext_resource type="Script" path="res://scripts/components/fire_emitter.gd" id="1_rch8c"]
+[ext_resource type="Texture2D" uid="uid://duocnasfoo1x6" path="res://textures/particles/fire.png" id="2_c40wm"]
+
+[node name="fire_emitter" type="Node2D"]
+script = ExtResource("1_rch8c")
+fire_texture = ExtResource("2_c40wm")
+active = true

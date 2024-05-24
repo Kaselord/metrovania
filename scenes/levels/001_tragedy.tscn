@@ -348,7 +348,7 @@ position = Vector2(1833, 50)
 texture = ExtResource("9_axhn3")
 script = ExtResource("9_kcxoh")
 
-[node name="lizardperson" parent="." index="10" instance=ExtResource("11_l0s2t")]
+[node name="lizardperson" parent="entities" index="0" instance=ExtResource("11_l0s2t")]
 position = Vector2(1080, 128)
 from_x = 1080.0
 to_x = 1288.0

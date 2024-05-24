@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://dj0y3r1hogdsa"]
+
+[ext_resource type="Texture2D" uid="uid://ujcwv8wqiovq" path="res://textures/decoration/candles.png" id="1_3ldy0"]
+[ext_resource type="Script" path="res://scripts/level_elements/candle.gd" id="1_hacde"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_c3f6v"]
+size = Vector2(14, 12)
+
+[node name="candle" type="Area2D"]
+script = ExtResource("1_hacde")
+
+[node name="sprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_3ldy0")
+hframes = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_c3f6v")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://ctt5pylkvpul8"]
+[gd_scene load_steps=5 format=3 uid="uid://ctt5pylkvpul8"]
 
 [ext_resource type="PackedScene" uid="uid://df25grdvss11u" path="res://scenes/level_base.tscn" id="1_i1yg4"]
 [ext_resource type="PackedScene" uid="uid://i33jmy7bq5vr" path="res://scenes/level_elements/door.tscn" id="2_vupil"]
 [ext_resource type="PackedScene" uid="uid://dln0jrisxv1tc" path="res://scenes/entities/lizardperson.tscn" id="3_26xg5"]
+[ext_resource type="PackedScene" uid="uid://dj0y3r1hogdsa" path="res://scenes/level_elements/candle.tscn" id="3_twam3"]
 
 [node name="003_wandering_halls" instance=ExtResource("1_i1yg4")]
 bottom_right = Vector2i(720, 360)
@@ -29,6 +30,9 @@ position = Vector2(-4, 144)
 send_to_travel_point = "door_right"
 new_room_path = "res://scenes/levels/002_the_other_side.tscn"
 collider_size = Vector2(8, 48)
+
+[node name="candle" parent="interactive" index="0" instance=ExtResource("3_twam3")]
+position = Vector2(201, 118)
 
 [node name="lizardperson" parent="entities" index="0" instance=ExtResource("3_26xg5")]
 position = Vector2(282, 144)

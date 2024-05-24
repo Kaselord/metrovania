@@ -28,6 +28,7 @@ var is_attacking : int = 0
 func _ready():
 	add_to_group("player")
 	Globals.player_reference = self
+	$hurtbox.add_to_group("whip")
 	super()
 
 
@@ -166,6 +167,7 @@ func get_input():
 	if Input.is_action_just_pressed("attack") && is_dashing <= 0 && is_attacking <= 0:
 		is_attacking = 30
 		$hurtbox.scale.x = $visuals.scale.x
+		$anim.stop()
 		$anim.play("whip")
 		gravity_power = 0.5
 

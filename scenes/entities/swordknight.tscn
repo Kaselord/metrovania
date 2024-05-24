@@ -1,0 +1,64 @@
+[gd_scene load_steps=8 format=3 uid="uid://daa1ch37xpew2"]
+
+[ext_resource type="Texture2D" uid="uid://1wv57mrn4i7s" path="res://textures/entities/swordknight/head_knight.png" id="1_o6pgv"]
+[ext_resource type="Texture2D" uid="uid://o7xhphptp604" path="res://textures/entities/swordknight/leg_knight.png" id="1_wmjhe"]
+[ext_resource type="Texture2D" uid="uid://ccln5gcy5ghsb" path="res://textures/entities/swordknight/torso_knight.png" id="2_fnm40"]
+[ext_resource type="Texture2D" uid="uid://6ipnnwfuwumq" path="res://textures/entities/swordknight/arm.png" id="4_aj6pf"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1dfv6"]
+size = Vector2(52, 82)
+
+[sub_resource type="Animation" id="Animation_1rnt7"]
+resource_name = "walk"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_aaqvp"]
+_data = {
+"walk": SubResource("Animation_1rnt7")
+}
+
+[node name="swordknight" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 2
+
+[node name="visuals" type="Node2D" parent="."]
+
+[node name="leg" type="Sprite2D" parent="visuals"]
+position = Vector2(10, -40)
+texture = ExtResource("1_wmjhe")
+offset = Vector2(6, 16)
+
+[node name="leg2" type="Sprite2D" parent="visuals"]
+position = Vector2(-16, -40)
+texture = ExtResource("1_wmjhe")
+offset = Vector2(6, 16)
+
+[node name="arm" type="Sprite2D" parent="visuals"]
+position = Vector2(20, -64)
+rotation = 0.785398
+texture = ExtResource("4_aj6pf")
+offset = Vector2(16, -6)
+
+[node name="arm2" type="Sprite2D" parent="visuals"]
+position = Vector2(-20, -64)
+rotation = -0.785398
+texture = ExtResource("4_aj6pf")
+offset = Vector2(-16, -6)
+flip_h = true
+
+[node name="torso" type="Sprite2D" parent="visuals"]
+position = Vector2(-3, -59)
+texture = ExtResource("2_fnm40")
+flip_h = true
+
+[node name="head" type="Sprite2D" parent="visuals/torso"]
+position = Vector2(6, -24)
+texture = ExtResource("1_o6pgv")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -41)
+shape = SubResource("RectangleShape2D_1dfv6")
+
+[node name="anim" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_aaqvp")
+}

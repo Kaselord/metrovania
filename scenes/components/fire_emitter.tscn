@@ -6,4 +6,3 @@
 [node name="fire_emitter" type="Node2D"]
 script = ExtResource("1_rch8c")
 fire_texture = ExtResource("2_c40wm")
-active = true

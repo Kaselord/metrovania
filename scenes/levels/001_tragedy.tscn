@@ -353,4 +353,9 @@ position = Vector2(1080, 128)
 from_x = 1080.0
 to_x = 1288.0
 
+[node name="lizardperson2" parent="entities" index="1" instance=ExtResource("11_l0s2t")]
+position = Vector2(776, 128)
+from_x = 552.0
+to_x = 776.0
+
 [connection signal="body_entered" from="interactive/start_train_ride" to="interactive/start_train_ride" method="_on_body_entered"]

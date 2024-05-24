@@ -7,7 +7,7 @@ var speed : float = 50.0
 
 
 func _physics_process(delta):
-	if Globals.active:
+	if Globals.active && hp > 0:
 		$anim.play("walk")
 		velocity.x = walk_dir * speed
 		velocity.y = clamp(velocity.y + 200 * delta, -200, 200)
@@ -20,6 +20,14 @@ func _physics_process(delta):
 		move_and_slide()
 	else:
 		$anim.stop()
+		if hp <= 0:
+			$hurtbox/CollisionShape2D.disabled = true
+			$hitbox/CollisionShape2D.disabled = true
+			$sprite.scale.y = 1.0
+			$fire_emitter.active = true
+			modulate -= Color(0.01, 0.01, 0.01, 0.01)
+			if modulate.a <= 0:
+				call_deferred("free")
 
 
 func _on_hitbox_hit():

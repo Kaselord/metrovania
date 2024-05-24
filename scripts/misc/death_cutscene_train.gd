@@ -43,6 +43,7 @@ func _physics_process(_delta):
 				end = true
 				SaveManager.set_powerup("dash", false)
 				SaveManager.set_powerup("double_jump", false)
+				SaveManager.set_powerup("strength", false)
 				Globals.level_switch_data = ["wake_up", "res://scenes/levels/002_the_other_side.tscn"]
 				Globals.emit_signal("level_switch")
 				if Globals.player_reference != null:
@@ -55,7 +56,8 @@ func _physics_process(_delta):
 			Globals.ongoing_event = ""
 			item_steal_textures = [
 				load("res://textures/powerups/double_jump.png"),
-				load("res://textures/powerups/dash.png")
+				load("res://textures/powerups/dash.png"),
+				load("res://textures/powerups/strength.png")
 			]
 			if Globals.player_reference != null:
 				Globals.player_reference.get_node("anim").play("fall")

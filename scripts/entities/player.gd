@@ -20,6 +20,7 @@ var dash_power_x : float = 0.0
 var is_allowed_to_dash : bool = true
 @export var dash_sparkle_texture : Texture
 @export var circle_texture : Texture
+@export var fancy_sparkle_texture : Texture
 var double_jump_remains : bool = true
 var hit_effect : float = 0.0
 var is_attacking : int = 0
@@ -82,7 +83,11 @@ func _physics_process(delta):
 		dash_power_x = 0.0
 	
 	if is_attacking > 0:
-		spawn_whip_particle(dash_sparkle_texture)
+		if SaveManager.get_powerup("strength"):
+			spawn_whip_particle(fancy_sparkle_texture)
+		else:
+			spawn_whip_particle(dash_sparkle_texture)
+		
 		gravity_power = 0.5
 		is_attacking -= 1
 		is_allowed_to_dash = false
@@ -165,6 +170,10 @@ func get_input():
 		gravity_power = 0
 	
 	if Input.is_action_just_pressed("attack") && is_dashing <= 0 && is_attacking <= 0:
+		if SaveManager.get_powerup("strength"):
+			$hurtbox.damage = 3
+		else:
+			$hurtbox.damage = 1
 		is_attacking = 30
 		$hurtbox.scale.x = $visuals.scale.x
 		$anim.stop()
@@ -248,6 +257,7 @@ func spawn_whip_particle(texture : Texture):
 	if Globals.level_reference != null:
 		var particle = Preloads.texture_particle.instantiate()
 		particle.lifetime = 15
+		
 		particle.texture = texture
 		particle.init["scale"] = Vector2(1, 1)
 		particle.init["rotation"] = randf_range(0, 360)

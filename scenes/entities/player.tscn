@@ -1,10 +1,11 @@
-[gd_scene load_steps=22 format=3 uid="uid://cno20wi12dln"]
+[gd_scene load_steps=23 format=3 uid="uid://cno20wi12dln"]
 
 [ext_resource type="Script" path="res://scripts/entities/player.gd" id="1_wjnyu"]
 [ext_resource type="Texture2D" uid="uid://bhyomon57xhkb" path="res://textures/entities/player/aggy.png" id="2_a0c7w"]
 [ext_resource type="Texture2D" uid="uid://cwvi2mdo0jm16" path="res://textures/particles/dash_sparkle.png" id="2_xt3nf"]
 [ext_resource type="Texture2D" uid="uid://chhetuxwbm4ve" path="res://textures/particles/rect6.png" id="3_phb3f"]
 [ext_resource type="FontFile" uid="uid://buhockuvonca8" path="res://resources/fonts/cheesefont.ttf" id="3_pv6nv"]
+[ext_resource type="Texture2D" uid="uid://narnijprcq8o" path="res://textures/particles/fancy_sparkle.png" id="4_h1p3s"]
 [ext_resource type="PackedScene" uid="uid://d4l174v4ofimd" path="res://scenes/components/hitbox.tscn" id="4_nyx63"]
 [ext_resource type="Texture2D" uid="uid://cjb607gabfujh" path="res://textures/entities/player/whip.png" id="7_sirx4"]
 [ext_resource type="PackedScene" uid="uid://6bfdrlmoe75y" path="res://scenes/components/hurtbox.tscn" id="8_tuvmm"]
@@ -256,6 +257,7 @@ editor_description = "the name's Aggy Saintsworn"
 script = ExtResource("1_wjnyu")
 dash_sparkle_texture = ExtResource("2_xt3nf")
 circle_texture = ExtResource("3_phb3f")
+fancy_sparkle_texture = ExtResource("4_h1p3s")
 starting_hp = 46
 
 [node name="visuals" type="Node2D" parent="."]

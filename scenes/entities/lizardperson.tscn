@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://dln0jrisxv1tc"]
+[gd_scene load_steps=10 format=3 uid="uid://dln0jrisxv1tc"]
 
 [ext_resource type="Script" path="res://scripts/entities/lizardperson.gd" id="1_plw4v"]
 [ext_resource type="Texture2D" uid="uid://c78kjqr6t5wel" path="res://textures/entities/lizardperson.png" id="2_57foc"]
 [ext_resource type="PackedScene" uid="uid://d4l174v4ofimd" path="res://scenes/components/hitbox.tscn" id="3_ntww7"]
 [ext_resource type="PackedScene" uid="uid://6bfdrlmoe75y" path="res://scenes/components/hurtbox.tscn" id="4_mtkeu"]
+[ext_resource type="PackedScene" uid="uid://b3012evdp0k0" path="res://scenes/components/fire_emitter.tscn" id="5_g8iyx"]
 
 [sub_resource type="Animation" id="Animation_sheqr"]
 resource_name = "walk"
@@ -72,5 +73,11 @@ ignore_in_detection = ["evil"]
 position = Vector2(0, -22)
 shape = SubResource("CapsuleShape2D_oylfu")
 debug_color = Color(0.858824, 0, 0.129412, 0.701961)
+
+[node name="fire_emitter" parent="." instance=ExtResource("5_g8iyx")]
+properties = {
+"dimensions": Vector2(32, -54),
+"emit_cd": 1
+}
 
 [connection signal="hit" from="hitbox" to="." method="_on_hitbox_hit"]

@@ -83,18 +83,21 @@ func _physics_process(delta):
 		dash_power_x = 0.0
 	
 	if is_attacking > 0:
-		if SaveManager.get_powerup("strength"):
-			spawn_whip_particle(fancy_sparkle_texture)
-		else:
-			spawn_whip_particle(dash_sparkle_texture)
+		if is_attacking < 20:
+			if SaveManager.get_powerup("strength"):
+				spawn_whip_particle(fancy_sparkle_texture)
+			else:
+				spawn_whip_particle(dash_sparkle_texture)
 		
-		gravity_power = 0.5
 		is_attacking -= 1
 		is_allowed_to_dash = false
 		if is_floored:
-			gravity_power = 0.0
+			base_walk_speed = 0.0
+		else:
+			base_walk_speed = 80.0
 	
 	if is_dashing <= 0 && is_attacking <= 0:
+		base_walk_speed = 80.0
 		gravity_power = 1.0
 	
 	hp = clamp(hp, 0, SaveManager.get_powerup("max_hp"))
@@ -114,7 +117,8 @@ func _process(_delta):
 	
 	if Globals.active:
 		if abs(velocity.x) > 0:
-			$visuals.scale.x = sign(velocity.x)
+			if is_attacking <= 0:
+				$visuals.scale.x = sign(velocity.x)
 		var normal_state : bool = is_dashing <= 0 && is_attacking <= 0
 		if normal_state:
 			$visuals/whip.hide()
@@ -137,8 +141,7 @@ func _process(_delta):
 
 
 func get_input():
-	if is_attacking <= 0:
-		input_dir = Input.get_vector("left", "right", "up", "down")
+	input_dir = Input.get_vector("left", "right", "up", "down")
 	input_dir.x = sign(snapped(input_dir.x, 1.0))
 	input_dir.y = sign(snapped(input_dir.y, 1.0))
 	if input_dir.x != 0:
@@ -174,11 +177,10 @@ func get_input():
 			$hurtbox.damage = 3
 		else:
 			$hurtbox.damage = 1
-		is_attacking = 30
+		is_attacking = 27
 		$hurtbox.scale.x = $visuals.scale.x
 		$anim.stop()
 		$anim.play("whip")
-		gravity_power = 0.5
 
 
 func execute_jump(power_amplify : float = 1.0):

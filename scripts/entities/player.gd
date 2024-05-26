@@ -101,6 +101,7 @@ func _physics_process(delta):
 		gravity_power = 1.0
 	
 	hp = clamp(hp, 0, SaveManager.get_powerup("max_hp"))
+	
 	if hit_effect > 0:
 		hit_effect -= 0.4
 	hit_effect = clamp(hit_effect, 0, 50.0)

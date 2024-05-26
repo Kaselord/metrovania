@@ -66,7 +66,7 @@ position = Vector2(0, -22)
 shape = SubResource("RectangleShape2D_ub0a1")
 
 [node name="hurtbox" parent="." instance=ExtResource("4_mtkeu")]
-damage = 1
+damage = 3
 ignore_in_detection = ["evil"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hurtbox"]

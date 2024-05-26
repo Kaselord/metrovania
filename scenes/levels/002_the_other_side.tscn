@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://i33jmy7bq5vr" path="res://scenes/level_elements/door.tscn" id="2_tvq86"]
 
 [node name="002_the_other_side" instance=ExtResource("1_47fr0")]
+music = "losing_my_train_of_thought"
 bg_colour = Color(0.34902, 0.360784, 0.435294, 1)
 
 [node name="tiles" parent="." index="1"]

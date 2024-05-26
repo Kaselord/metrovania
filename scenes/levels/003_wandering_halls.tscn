@@ -9,6 +9,7 @@
 
 [node name="003_wandering_halls" instance=ExtResource("1_i1yg4")]
 bottom_right = Vector2i(720, 360)
+music = "losing_my_train_of_thought"
 bg_colour = Color(0.34902, 0.360784, 0.435294, 1)
 
 [node name="bigpillar" type="Sprite2D" parent="parallax_bg/very_close" index="0"]

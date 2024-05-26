@@ -21,6 +21,7 @@ Globals="*res://scenes/autoloads/globals.tscn"
 Interface="*res://scenes/autoloads/interface.tscn"
 Preloads="*res://scenes/autoloads/preloads.tscn"
 SaveManager="*res://scenes/autoloads/save_manager.tscn"
+MusicManager="*res://scenes/autoloads/music_manager.tscn"
 
 [display]
 

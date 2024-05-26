@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://i33jmy7bq5vr" path="res://scenes/level_elements/door.tscn" id="2_k32la"]
 [ext_resource type="PackedScene" uid="uid://dln0jrisxv1tc" path="res://scenes/entities/lizardperson.tscn" id="3_6nvow"]
 
-[node name="004_train_tower" instance=ExtResource("1_4el34")]
+[node name="005_train_tower" instance=ExtResource("1_4el34")]
 top_left = Vector2i(-188, 0)
 bottom_right = Vector2i(320, 270)
 

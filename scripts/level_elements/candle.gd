@@ -2,6 +2,7 @@ extends Area2D
 
 var extinguished : bool = false
 var anim_cooldown : int = 0
+@export var heart_scene : PackedScene
 
 
 func _physics_process(_delta):
@@ -20,4 +21,9 @@ func _physics_process(_delta):
 
 func _on_area_entered(area):
 	if area.is_in_group("whip"):
-		extinguished = true
+		if !extinguished:
+			if Globals.level_reference != null:
+				var heart = heart_scene.instantiate()
+				heart.position = position
+				Globals.level_reference.get_node("interactive").call_deferred("add_child", heart)
+			extinguished = true

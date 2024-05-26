@@ -70,6 +70,12 @@ position = Vector2(200, 118)
 [node name="candle2" parent="interactive" index="1" instance=ExtResource("3_twam3")]
 position = Vector2(408, 118)
 
+[node name="candle3" parent="interactive" index="2" instance=ExtResource("3_twam3")]
+position = Vector2(200, 294)
+
+[node name="candle4" parent="interactive" index="3" instance=ExtResource("3_twam3")]
+position = Vector2(408, 294)
+
 [node name="lizardperson" parent="entities" index="0" instance=ExtResource("3_26xg5")]
 position = Vector2(282, 144)
 from_x = 96.0

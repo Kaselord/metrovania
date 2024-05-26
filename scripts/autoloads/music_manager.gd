@@ -3,7 +3,7 @@ extends Node
 var loop_start : float = 0.0
 var loop_end : float = 1.0
 var current_song_name : String = ""
-var mute_music : bool = false
+var mute_music : bool = true
 
 
 var song_table = {
@@ -20,7 +20,7 @@ func play_song(tag : String):
 		loop_end = song_table[tag][2]
 		current_song_name = tag
 		$player.play(0.0)
-		print("now playing " + tag)
+		print("~ now playing " + "\'" + tag + "\'")
 	elif tag == "none":
 		current_song_name = "none"
 		$player.stream = null

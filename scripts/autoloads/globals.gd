@@ -83,4 +83,4 @@ func update_game_interface():
 			if player_damage_happened:
 				player_damage_happened = false
 				healthbar_text.label_settings.font_color = Color(1, 0, 0, 1)
-			healthbar_text.text = str(clamp(get_player_value("hp"), 0, 99))
+			healthbar_text.text = str(clamp(get_player_value("hp"), 0, 100))

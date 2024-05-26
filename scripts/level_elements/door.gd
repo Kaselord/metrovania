@@ -5,7 +5,7 @@ extends Area2D
 @export var send_to_travel_point : String
 @export var new_room_path : String
 @export var collider_size : Vector2 = Vector2(16, 16)
-var spawn_protection : int = 15
+var spawn_protection : int = 20
 var player_is_here : bool = false
 var direction_table = {
 	"left" : [-1, "x"],
@@ -22,22 +22,29 @@ func _ready():
 
 
 func _physics_process(_delta):
+	if !Engine.is_editor_hint() && Globals.active:
+		if spawn_protection > 0:
+			spawn_protection -= 1
 	if player_is_here && !Engine.is_editor_hint() && Globals.active:
 		# get the axis that this door is facing
 		var axis : String = direction_table[direction][1]
 		# get the player input
-		var player_input = Globals.get_player_value("input_dir")
 		var player_velocity = Globals.get_player_value("velocity")
 		# get the direction that this door is facing
 		var door_direction = direction_table[direction][0]
-		if Globals.player_reference != null:
+		if Globals.player_reference != null && spawn_protection <= 0:
 			if axis == "x":
 				# check if x input is equal to door direction
-				if door_direction == sign(player_input.x):
+				if door_direction == sign(player_velocity.x):
 					request_level_change()
 			if axis == "y":
 				if door_direction == sign(player_velocity.y):
 					request_level_change()
+		elif Globals.player_reference != null && spawn_protection > 0:
+			if axis == "x":
+				Globals.player_reference.position.x -= door_direction
+			if axis == "y":
+				Globals.player_reference.position.y -= door_direction
 	elif Engine.is_editor_hint():
 		update_collider()
 

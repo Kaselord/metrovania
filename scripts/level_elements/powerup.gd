@@ -14,6 +14,12 @@ func _ready():
 
 
 func _physics_process(_delta):
+	if Globals.level_reference != null: # delete if already collected
+		var path_to_self : String = String(Globals.level_reference.get_path_to(self))
+		var level_file_path : String = Globals.level_reference.scene_file_path
+		if SaveManager.get_permanent_deletion(path_to_self, level_file_path):
+			call_deferred("free")
+	
 	angle += 0.05
 	position = orig_pos + Vector2(sin(angle), cos(angle)) * 8
 	if particle_cd > 0:
@@ -41,4 +47,8 @@ func _on_body_entered(body):
 	if body.is_in_group("player"):
 		SaveManager.set_powerup(tag, true)
 		Interface.start_text("dash")
+		if Globals.level_reference != null:
+			var path_to_self : String = String(Globals.level_reference.get_path_to(self))
+			var level_file_path : String = Globals.level_reference.scene_file_path
+			SaveManager.set_permanent_deletion(path_to_self, level_file_path)
 		call_deferred("free")

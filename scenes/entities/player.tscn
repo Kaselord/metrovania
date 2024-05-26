@@ -273,6 +273,7 @@ dash_sparkle_texture = ExtResource("2_xt3nf")
 circle_texture = ExtResource("3_phb3f")
 fancy_sparkle_texture = ExtResource("4_h1p3s")
 starting_hp = 46
+temporarily_save_death = false
 
 [node name="visuals" type="Node2D" parent="."]
 

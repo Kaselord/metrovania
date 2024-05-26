@@ -24,6 +24,9 @@ var is_allowed_to_dash : bool = true
 var double_jump_remains : bool = true
 var hit_effect : float = 0.0
 var is_attacking : int = 0
+var dashes_remaing : int = 0
+var x_speed_amplify : float = 1.0
+var attack_speed_adder : float = 0.0
 
 
 func _ready():
@@ -41,11 +44,13 @@ func _physics_process(delta):
 		midair_speed_boost = lerp(midair_speed_boost, 1.0, 0.25)
 	else:
 		midair_speed_boost = 1.2
-	walking_velocity = lerp(walking_velocity, input_dir.x * base_walk_speed, base_accel)
+	walking_velocity = lerp(walking_velocity, input_dir.x * base_walk_speed * x_speed_amplify, base_accel)
 	
-	velocity.x = (walking_velocity * midair_speed_boost) * gravity_power + dash_power_x
+	velocity.x = (walking_velocity * midair_speed_boost) * gravity_power + dash_power_x + attack_speed_adder
 	if Globals.active:
 		velocity.y = clamp(velocity.y + gravity * delta * gravity_power, -jump_power * 2, gravity)
+	
+	attack_speed_adder = lerp(attack_speed_adder, 0.0, 0.2)
 	
 	if Globals.active:
 		move_and_slide()
@@ -92,13 +97,18 @@ func _physics_process(delta):
 		is_attacking -= 1
 		is_allowed_to_dash = false
 		if is_floored:
-			base_walk_speed = 0.0
+			x_speed_amplify = 0.0
 		else:
-			base_walk_speed = 80.0
+			x_speed_amplify = 1.0
+		if is_attacking == 0:
+			is_allowed_to_dash = true
 	
 	if is_dashing <= 0 && is_attacking <= 0:
-		base_walk_speed = 80.0
+		x_speed_amplify = 1.0
 		gravity_power = 1.0
+	
+	if is_on_floor():
+		dashes_remaing = 1
 	
 	hp = clamp(hp, 0, SaveManager.get_powerup("max_hp"))
 	
@@ -164,14 +174,16 @@ func get_input():
 			velocity.y *= 0.5
 	
 	if Input.is_action_just_pressed("dash") && is_dashing <= 0 && is_allowed_to_dash && SaveManager.get_powerup("dash"):
-		if !is_floored:
-			is_allowed_to_dash = false
-		spawn_dash_particles()
-		is_dashing = 16
-		velocity.y = 0
-		dash_power_x = look_dir * base_walk_speed * 5
-		trail_color = Color(1, 0, 0, 0.05)
-		gravity_power = 0
+		if dashes_remaing > 0:
+			dashes_remaing -= 1
+			if !is_floored:
+				is_allowed_to_dash = false
+			spawn_dash_particles()
+			is_dashing = 16
+			velocity.y = 0
+			dash_power_x = look_dir * base_walk_speed * 5
+			trail_color = Color(1, 0, 0, 0.05)
+			gravity_power = 0
 	
 	if Input.is_action_just_pressed("attack") && is_dashing <= 0 && is_attacking <= 0:
 		if SaveManager.get_powerup("strength"):
@@ -191,6 +203,7 @@ func execute_jump(power_amplify : float = 1.0):
 	coyote_buffer = 0
 	if is_dashing > 0:
 		is_dashing = 10
+	dashes_remaing = 1
 	is_allowed_to_dash = true
 
 
@@ -231,7 +244,7 @@ func spawn_dash_particles(diameter : float = 1.0, is_whip_end : bool = false):
 			particle.final["rotation"] = randf_range(0.0, 180)
 			particle.texture = dash_sparkle_texture
 			particle.lifetime = randi_range(16, 24)
-			Globals.level_reference.get_node("particles_back").call_deferred("add_child", particle)
+			Globals.level_reference.get_node("particles_front").call_deferred("add_child", particle)
 
 
 func spawn_double_jump_particles(circle_size : float = 1.0):
@@ -274,6 +287,14 @@ func spawn_whip_particle(texture : Texture):
 		particle.final["position"] = $visuals/whip/end_point.global_position + random_vector_add
 		
 		Globals.level_reference.get_node("particles_front").call_deferred("add_child", particle)
+
+
+func attack_speed():
+	var multiplier : float = 1.5
+	if !is_floored:
+		multiplier = 2.2
+	attack_speed_adder = base_walk_speed * look_dir * multiplier
+	velocity.y = clamp(velocity.y, -9999, -jump_power * 0.25)
 
 
 func reset_movement():

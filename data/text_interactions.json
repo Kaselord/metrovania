@@ -4,5 +4,9 @@
 		["You", "Death itself stands in my way? If you do not let me pass, I shall strike you down like all other monsters!"],
 		["Death", "...A ruthless genocide - I cannot allow that. Your powers will be removed."],
 		["Death", "Let's see if you have the courage to keep going. Farewell, Aggy Saintsworn.", "powerup_stealing"]
+	],
+	"dash" : [
+		["none", "You found the hasty cloak!"],
+		["none", "Shift / C / L to dash."]    
 	]
 }

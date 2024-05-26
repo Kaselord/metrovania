@@ -40,5 +40,5 @@ func emit_trail_particle():
 func _on_body_entered(body):
 	if body.is_in_group("player"):
 		SaveManager.set_powerup(tag, true)
-		
+		Interface.start_text("dash")
 		call_deferred("free")

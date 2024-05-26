@@ -6,9 +6,9 @@ var temporary_savings : Dictionary = {
 }
 var permanent_savings : Dictionary = {
 	"player_powerups" : {
-		"dash" : true,
-		"double_jump" : true,
-		"strength" : true,
+		"dash" : false,
+		"double_jump" : false,
+		"strength" : false,
 		"current_hp" : 100,
 		"max_hp" : 100
 	}

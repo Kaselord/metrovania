@@ -64,6 +64,13 @@ send_to_travel_point = "entrance_right"
 new_room_path = "res://scenes/levels/005_train_tower.tscn"
 collider_size = Vector2(8, 48)
 
+[node name="door_right" parent="travel_points" index="2" instance=ExtResource("2_vupil")]
+position = Vector2(724, 128)
+direction = "right"
+send_to_travel_point = "cliffhanger"
+new_room_path = "res://scenes/levels/006_switzerland.tscn"
+collider_size = Vector2(8, 48)
+
 [node name="candle" parent="interactive" index="0" instance=ExtResource("3_twam3")]
 position = Vector2(200, 118)
 

@@ -23,6 +23,7 @@ func _physics_process(_delta):
 		else:
 			trigger_internal_hit()
 		if is_player_hitbox && current_damager.void_out:
+			print("voidout")
 			Globals.emit_signal("level_switch")
 
 

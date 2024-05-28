@@ -21,4 +21,5 @@ func _on_body_entered(body):
 			Globals.player_damage_happened = true
 		call_deferred("free")
 	velocity = Vector2(0, 0)
+	position.y = snapped(position.y, 16) - 4
 	sit = true

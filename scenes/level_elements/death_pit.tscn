@@ -4,8 +4,9 @@
 [ext_resource type="Script" path="res://scripts/level_elements/death_pit.gd" id="2_0iome"]
 [ext_resource type="Texture2D" uid="uid://cdqctry1b0fuc" path="res://textures/particles/skull_particle.png" id="3_t8vsa"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_drmgm"]
-size = Vector2(64, 16)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6i7bi"]
+resource_local_to_scene = true
+size = Vector2(16, 16)
 
 [node name="death_pit" instance=ExtResource("1_qtraw")]
 script = ExtResource("2_0iome")
@@ -17,5 +18,5 @@ void_out = true
 
 [node name="collider" type="CollisionShape2D" parent="." index="0"]
 position = Vector2(0, 8)
-shape = SubResource("RectangleShape2D_drmgm")
+shape = SubResource("RectangleShape2D_6i7bi")
 debug_color = Color(1, 0, 0, 0.419608)

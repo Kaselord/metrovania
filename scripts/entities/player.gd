@@ -312,4 +312,5 @@ func _on_hitbox_hit():
 
 
 func _on_hurtbox_has_hit():
+	dashes_remaing = 1
 	spawn_dash_particles(0.5, true)

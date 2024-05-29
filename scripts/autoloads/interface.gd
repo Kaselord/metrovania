@@ -11,6 +11,7 @@ var current_paragraph_length : int = 0
 var displayed_paragraph_characters : float = 0.0
 var typewriter_effect_speed : float = 0.4
 var name_of_speaker_length : int = 0
+var display_save_prompt : bool = false
 
 
 func _ready():
@@ -20,6 +21,7 @@ func _ready():
 
 
 func _physics_process(_delta):
+	# -- dialogue system shenanigans --
 	if transition_value < max_transition:
 		transition_value += 1
 	
@@ -37,6 +39,16 @@ func _physics_process(_delta):
 			$text_box/display_dialogue.visible_characters = name_of_speaker_length + int(displayed_paragraph_characters)
 	else:
 		$text_box.modulate.a = clamp($text_box.modulate.a - 0.05, 0.0, 1.0)
+	
+	# -- save prompt stuffs --
+	# make sure the value doesn't accidentally stay true when going to a menu
+	if Globals.player_reference == null:
+		display_save_prompt = false
+	# actual input for this is handled in save_point.gd
+	if display_save_prompt:
+		$save_prompt.modulate.a = lerp($save_prompt.modulate.a, 1.0, 0.1)
+	else:
+		$save_prompt.modulate.a = lerp($save_prompt.modulate.a, 0.0, 0.15)
 
 
 func start_text(text_identifier : String = "", pause_gameplay : bool = true):

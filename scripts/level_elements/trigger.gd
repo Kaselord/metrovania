@@ -23,7 +23,7 @@ func _on_body_entered(body):
 	if body.is_in_group("player"):
 		do_thing()
 		if permanently_delete:
-			pass # append [filepath of current level, trigger name] to save file
+			SaveManager.set_permanent_deletion(Globals.level_reference.get_path_to(self), name)
 		call_deferred("free")
 
 

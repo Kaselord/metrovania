@@ -1,10 +1,9 @@
-[gd_scene load_steps=23 format=3 uid="uid://cno20wi12dln"]
+[gd_scene load_steps=21 format=3 uid="uid://cno20wi12dln"]
 
 [ext_resource type="Script" path="res://scripts/entities/player.gd" id="1_wjnyu"]
 [ext_resource type="Texture2D" uid="uid://bhyomon57xhkb" path="res://textures/entities/player/aggy.png" id="2_a0c7w"]
 [ext_resource type="Texture2D" uid="uid://cwvi2mdo0jm16" path="res://textures/particles/dash_sparkle.png" id="2_xt3nf"]
 [ext_resource type="Texture2D" uid="uid://chhetuxwbm4ve" path="res://textures/particles/rect6.png" id="3_phb3f"]
-[ext_resource type="FontFile" uid="uid://buhockuvonca8" path="res://resources/fonts/cheesefont.ttf" id="3_pv6nv"]
 [ext_resource type="Texture2D" uid="uid://narnijprcq8o" path="res://textures/particles/fancy_sparkle.png" id="4_h1p3s"]
 [ext_resource type="PackedScene" uid="uid://d4l174v4ofimd" path="res://scenes/components/hitbox.tscn" id="4_nyx63"]
 [ext_resource type="Texture2D" uid="uid://cjb607gabfujh" path="res://textures/entities/player/whip.png" id="7_sirx4"]
@@ -15,10 +14,6 @@ size = Vector2(16, 23)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_30d10"]
 radius = 8.0
-
-[sub_resource type="LabelSettings" id="LabelSettings_hohei"]
-font = ExtResource("3_pv6nv")
-font_size = 8
 
 [sub_resource type="Animation" id="Animation_2kp2n"]
 length = 0.001
@@ -301,22 +296,6 @@ shape = SubResource("RectangleShape2D_dgldw")
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
 position = Vector2(0, -8)
 shape = SubResource("CircleShape2D_30d10")
-
-[node name="debug" type="Label" parent="."]
-visible = false
-offset_left = -50.0
-offset_top = -106.0
-offset_right = 50.0
-offset_bottom = -6.0
-pivot_offset = Vector2(50, 50)
-text = "SPD_X : 100
-SPD_Y : 100
-POS_X : 2000
-POS_Y : 2000"
-label_settings = SubResource("LabelSettings_hohei")
-horizontal_alignment = 1
-vertical_alignment = 1
-metadata/_edit_use_anchors_ = true
 
 [node name="anim" type="AnimationPlayer" parent="."]
 libraries = {

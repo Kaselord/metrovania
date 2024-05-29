@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://2c1dhsejyya7"]
+
+[ext_resource type="Script" path="res://scripts/level_elements/save_point.gd" id="1_3parh"]
+[ext_resource type="Texture2D" uid="uid://e7a7uxgvbr0a" path="res://textures/other/flag.png" id="1_mx7eo"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fok8c"]
+size = Vector2(38, 44)
+
+[node name="save_point" type="Area2D"]
+script = ExtResource("1_3parh")
+
+[node name="sprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_mx7eo")
+offset = Vector2(13, -23)
+hframes = 3
+vframes = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(13, -22)
+shape = SubResource("RectangleShape2D_fok8c")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

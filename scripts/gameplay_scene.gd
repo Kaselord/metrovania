@@ -6,10 +6,15 @@ var temporary_player_reference : Node = null
 @export var player_packed_scene : PackedScene
 # ["start", "res://scenes/levels/000_entrance.tscn"]
 var level_switch_data = ["door_left", "res://scenes/levels/003_wandering_halls.tscn"]
+# only disable for testing!
+var load_from_save : bool = true
 
 
 func _ready():
 	add_to_group("gameplay")
+	SaveManager.load_from_savestate(0)
+	if load_from_save:
+		level_switch_data = SaveManager.permanent_savings["current_load_data"]
 	unload_current_level()
 	load_level(level_switch_data)
 
@@ -61,6 +66,7 @@ func load_level(data = ["travel_point_name", "res://scenes/levels/000_entrance.t
 	var new_level = load(data[1]).instantiate()
 	$active_level.call_deferred("add_child", new_level)
 	level_switch_data = data
+	SaveManager.permanent_savings["current_load_data"] = data
 
 
 func instantiate_new_player():
@@ -74,4 +80,6 @@ func find_travel_point_position(active_level : Node = null):
 		for point in active_level.get_node("travel_points").get_children():
 			if point.name == level_switch_data[0]:
 				travel_point_pos = point.position
+				if point.is_in_group("save_point"):
+					travel_point_pos.x -= 48
 	return travel_point_pos

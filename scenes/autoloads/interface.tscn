@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://cx4m5lxlathc"]
+[gd_scene load_steps=6 format=3 uid="uid://cx4m5lxlathc"]
 
 [ext_resource type="Script" path="res://scripts/autoloads/interface.gd" id="1_nwj3h"]
 [ext_resource type="Texture2D" uid="uid://johwut2y3fn1" path="res://textures/interface/textbox.png" id="2_6kuo3"]
@@ -7,6 +7,12 @@
 [sub_resource type="LabelSettings" id="LabelSettings_cc7fg"]
 font = ExtResource("3_4uhn6")
 font_size = 8
+
+[sub_resource type="LabelSettings" id="LabelSettings_1pc1x"]
+font = ExtResource("3_4uhn6")
+font_size = 8
+outline_size = 5
+outline_color = Color(0, 0, 0, 1)
 
 [node name="interface" type="CanvasLayer"]
 layer = 2
@@ -32,3 +38,23 @@ text = "Dracula:
 What is a man? A miserable little pile of secrets. But enough talk... Have at you!"
 label_settings = SubResource("LabelSettings_cc7fg")
 autowrap_mode = 2
+
+[node name="save_prompt" type="Node2D" parent="."]
+modulate = Color(1, 1, 1, 0)
+
+[node name="bg" type="ColorRect" parent="save_prompt"]
+offset_top = 81.0
+offset_right = 320.0
+offset_bottom = 102.0
+color = Color(0, 0, 0, 0.392157)
+
+[node name="label" type="Label" parent="save_prompt"]
+offset_left = 82.0
+offset_top = 82.0
+offset_right = 246.0
+offset_bottom = 105.0
+pivot_offset = Vector2(82, 9)
+text = "'S' or 'Down Arrow' to save your game."
+label_settings = SubResource("LabelSettings_1pc1x")
+horizontal_alignment = 1
+vertical_alignment = 1

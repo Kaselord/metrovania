@@ -5,6 +5,7 @@ var hp : int = 1
 var has_loaded : bool = false
 @export var starting_hp : int = 1
 @export var temporarily_save_death : bool = true
+@export var set_ablaze : bool = true
 
 
 func _ready():
@@ -28,6 +29,8 @@ func hit():
 
 
 func death():
+	if set_ablaze:
+		SoundPlayer.new_sound(Preloads.sfx_fire)
 	if temporarily_save_death && Globals.level_reference != null:
 		var path_to_self : String = String(Globals.level_reference.get_path_to(self))
 		var level_file_path : String = Globals.level_reference.scene_file_path

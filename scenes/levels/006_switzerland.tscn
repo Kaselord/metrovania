@@ -9,7 +9,6 @@
 [node name="006_switzerland" instance=ExtResource("1_byq8a")]
 top_left = Vector2i(0, -300)
 bottom_right = Vector2i(672, 180)
-music = ""
 bg_colour = Color(0.34902, 0.360784, 0.435294, 1)
 
 [node name="tiles" parent="." index="1"]

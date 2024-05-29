@@ -8,13 +8,14 @@ var mute_music : bool = true
 
 var song_table = {
 	 # [file, start loop, end loop]
-	"losing_my_train_of_thought" : [load("res://audio/music/losing_my_train_of_thought.ogg"), 13.74, 82.29]
+	"losing_my_train_of_thought" : [load("res://audio/music/losing_my_train_of_thought.ogg"), 13.74, 82.29],
+	"ride_of_death" : [load("res://audio/music/ride_of_death.ogg"), 2.0, 5.0]
 }
 
 
 func play_song(tag : String):
 	if current_song_name != tag && tag != "none" && !mute_music:
-		$player.volume_db = -16.0
+		$player.volume_db = -6.0
 		$player.stream = song_table[tag][0]
 		loop_start = song_table[tag][1]
 		loop_end = song_table[tag][2]
@@ -32,3 +33,10 @@ func _process(_delta):
 		if current_song_name != "none" && !mute_music: # don't loop if there is no song
 			$player.play(loop_start)
 			print("music loop")
+
+
+func trigger_special_thing(tag : String = ""):
+	match tag:
+		"train_start":
+			loop_start = 18.86
+			loop_end = 54.85

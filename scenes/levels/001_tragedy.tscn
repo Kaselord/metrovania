@@ -272,6 +272,7 @@ size = Vector2(20, 160)
 
 [node name="001_tragedy" instance=ExtResource("1_7wlcg")]
 bottom_right = Vector2i(1920, 180)
+music = "ride_of_death"
 
 [node name="sky_gradient" type="Polygon2D" parent="parallax_bg/very_far_back" index="0"]
 texture = SubResource("GradientTexture2D_vynlb")

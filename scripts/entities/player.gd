@@ -27,6 +27,9 @@ var is_attacking : int = 0
 var dashes_remaing : int = 0
 var x_speed_amplify : float = 1.0
 var attack_speed_adder : float = 0.0
+var max_dash_value : int = 16
+@export var sfx_whip_hit : AudioStream
+@export var sfx_kick_hit : AudioStream
 
 
 func _ready():
@@ -80,12 +83,35 @@ func _physics_process(delta):
 			spawn_trail_particle(trail_color)
 	
 	if is_dashing > 0:
-		gravity_power = 0
+		if max_dash_value > 16:
+			dash_power_x = look_dir * base_walk_speed * 3.5
+			gravity_power = 0.8
+			if !is_floored:
+				is_dashing = 8
+		else:
+			dash_power_x = look_dir * base_walk_speed * 5
+			gravity_power = 0
+		$kick_hurtbox/CollisionShape2D.disabled = false
+		$collider.scale = lerp($collider.scale, Vector2(1.25, 0.5), 0.3)
+		$collider.position = lerp($collider.position, Vector2(0, -8.5), 0.3)
+		$kick_hurtbox.scale.x = look_dir
+		$hitbox.scale = Vector2(0.5, 0.5)
 		is_dashing -= 1
 		trail_color = Color(1, 0, 0, 0.05)
+		
+		# prematurely end dash if met with a wall
+		if abs(velocity.x) < 1 && is_dashing > 4:
+			is_dashing = 4
+			max_dash_value = 16
 	else:
+		$kick_hurtbox/CollisionShape2D.disabled = true
+		$collider.scale = lerp($collider.scale, Vector2(1.0, 1.0), 0.3)
+		$collider.position = lerp($collider.position, Vector2(0, -17), 0.3)
+		$hitbox.scale = Vector2(1, 1)
 		trail_color = Color(0, 0, 1, 0.05)
 		dash_power_x = 0.0
+	
+	print(velocity)
 	
 	if is_attacking > 0:
 		if is_attacking < 20:
@@ -146,13 +172,18 @@ func _process(_delta):
 				else: # jumping
 					$anim.play("jump")
 		elif is_dashing > 0:
-			$anim.play("dash")
+			if is_dashing > 4 && is_dashing < (max_dash_value - 3):
+				$anim.play("dash")
+			else:
+				$anim.play("enter_dash")
 	else:
 		$anim.stop()
+		$visuals.rotation_degrees = 0
 
 
 func get_input():
-	input_dir = Input.get_vector("left", "right", "up", "down")
+	if is_dashing <= 0:
+		input_dir = Input.get_vector("left", "right", "up", "down")
 	input_dir.x = sign(snapped(input_dir.x, 1.0))
 	input_dir.y = sign(snapped(input_dir.y, 1.0))
 	if input_dir.x != 0:
@@ -180,6 +211,7 @@ func get_input():
 				is_allowed_to_dash = false
 			spawn_dash_particles()
 			is_dashing = 16
+			max_dash_value = 16
 			velocity.y = 0
 			dash_power_x = look_dir * base_walk_speed * 5
 			trail_color = Color(1, 0, 0, 0.05)
@@ -202,7 +234,10 @@ func execute_jump(power_amplify : float = 1.0):
 	jump_buffer = 0
 	coyote_buffer = 0
 	if is_dashing > 0:
-		is_dashing = 10
+		velocity.y *= 0.75
+		is_dashing = 32
+		max_dash_value = 48
+		jump_has_been_released = true
 	dashes_remaing = 1
 	is_allowed_to_dash = true
 
@@ -312,5 +347,11 @@ func _on_hitbox_hit():
 
 
 func _on_hurtbox_has_hit():
+	SoundPlayer.new_sound(sfx_whip_hit, 0.0, randf_range(0.8, 1.1))
 	dashes_remaing = 1
 	spawn_dash_particles(0.5, true)
+
+
+func _on_kick_hurtbox_has_hit():
+	$hitbox.immunity = 36
+	SoundPlayer.new_sound(sfx_kick_hit, 0.0, randf_range(0.8, 1.1))

@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://cno20wi12dln"]
+[gd_scene load_steps=24 format=3 uid="uid://cno20wi12dln"]
 
 [ext_resource type="Script" path="res://scripts/entities/player.gd" id="1_wjnyu"]
 [ext_resource type="Texture2D" uid="uid://bhyomon57xhkb" path="res://textures/entities/player/aggy.png" id="2_a0c7w"]
@@ -6,14 +6,14 @@
 [ext_resource type="Texture2D" uid="uid://chhetuxwbm4ve" path="res://textures/particles/rect6.png" id="3_phb3f"]
 [ext_resource type="Texture2D" uid="uid://narnijprcq8o" path="res://textures/particles/fancy_sparkle.png" id="4_h1p3s"]
 [ext_resource type="PackedScene" uid="uid://d4l174v4ofimd" path="res://scenes/components/hitbox.tscn" id="4_nyx63"]
+[ext_resource type="AudioStream" uid="uid://dndrfkokeiikg" path="res://audio/sfx/whip_hit.mp3" id="5_ujiei"]
+[ext_resource type="AudioStream" uid="uid://ls8h5gqhsop4" path="res://audio/sfx/kick.mp3" id="6_ite4o"]
 [ext_resource type="Texture2D" uid="uid://cjb607gabfujh" path="res://textures/entities/player/whip.png" id="7_sirx4"]
 [ext_resource type="PackedScene" uid="uid://6bfdrlmoe75y" path="res://scenes/components/hurtbox.tscn" id="8_tuvmm"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_dgldw"]
-size = Vector2(16, 23)
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_30d10"]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0c07l"]
 radius = 8.0
+height = 34.0
 
 [sub_resource type="Animation" id="Animation_2kp2n"]
 length = 0.001
@@ -92,7 +92,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [3]
+"values": [10]
 }
 
 [sub_resource type="Animation" id="Animation_xkpxi"]
@@ -243,10 +243,26 @@ tracks/5/keys = {
 }]
 }
 
+[sub_resource type="Animation" id="Animation_554bj"]
+resource_name = "enter_dash"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("visuals/sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [11]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_v5fev"]
 _data = {
 "RESET": SubResource("Animation_2kp2n"),
 "dash": SubResource("Animation_m3nnl"),
+"enter_dash": SubResource("Animation_554bj"),
 "fall": SubResource("Animation_xkpxi"),
 "idle": SubResource("Animation_bhsxq"),
 "jump": SubResource("Animation_2d0uo"),
@@ -261,21 +277,26 @@ height = 28.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w2jnv"]
 size = Vector2(95, 7)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tmnnp"]
+
 [node name="player" type="CharacterBody2D"]
 editor_description = "the name's Aggy Saintsworn"
 script = ExtResource("1_wjnyu")
 dash_sparkle_texture = ExtResource("2_xt3nf")
 circle_texture = ExtResource("3_phb3f")
 fancy_sparkle_texture = ExtResource("4_h1p3s")
+sfx_whip_hit = ExtResource("5_ujiei")
+sfx_kick_hit = ExtResource("6_ite4o")
 starting_hp = 46
 temporarily_save_death = false
+set_ablaze = false
 
 [node name="visuals" type="Node2D" parent="."]
 
 [node name="sprite" type="Sprite2D" parent="visuals"]
 position = Vector2(0, -22)
 texture = ExtResource("2_a0c7w")
-hframes = 10
+hframes = 12
 frame = 7
 
 [node name="whip" type="Sprite2D" parent="visuals"]
@@ -289,13 +310,10 @@ region_rect = Rect2(0, 0, 76, 5)
 [node name="end_point" type="Node2D" parent="visuals/whip"]
 position = Vector2(38, 0)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -19.5)
-shape = SubResource("RectangleShape2D_dgldw")
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
-position = Vector2(0, -8)
-shape = SubResource("CircleShape2D_30d10")
+[node name="collider" type="CollisionShape2D" parent="."]
+position = Vector2(0, -8.5)
+scale = Vector2(0.5, 0.5)
+shape = SubResource("CapsuleShape2D_0c07l")
 
 [node name="anim" type="AnimationPlayer" parent="."]
 libraries = {
@@ -324,5 +342,17 @@ shape = SubResource("RectangleShape2D_w2jnv")
 disabled = true
 debug_color = Color(0.952941, 0, 0.564706, 0.419608)
 
+[node name="kick_hurtbox" parent="." instance=ExtResource("8_tuvmm")]
+position = Vector2(0, -24)
+damage = 1
+ignore_in_detection = ["player"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="kick_hurtbox"]
+position = Vector2(17, 16)
+shape = SubResource("RectangleShape2D_tmnnp")
+disabled = true
+debug_color = Color(0.952941, 0, 0.564706, 0.419608)
+
 [connection signal="hit" from="hitbox" to="." method="_on_hitbox_hit"]
 [connection signal="has_hit" from="hurtbox" to="." method="_on_hurtbox_has_hit"]
+[connection signal="has_hit" from="kick_hurtbox" to="." method="_on_kick_hurtbox_has_hit"]

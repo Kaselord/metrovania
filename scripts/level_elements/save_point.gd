@@ -10,11 +10,12 @@ func _ready():
 
 
 func _physics_process(_delta):
-	if anim_play_cd > 0:
-		anim_play_cd -= 1
-	else:
-		anim_play_cd = 8
-		update_frame()
+	if Globals.active:
+		if anim_play_cd > 0:
+			anim_play_cd -= 1
+		else:
+			anim_play_cd = 8
+			update_frame()
 	$sprite.rotation_degrees = lerp($sprite.rotation_degrees, 0.0, 0.1)
 
 
@@ -28,6 +29,8 @@ func _process(_delta):
 			frame_adder = 3
 			$sprite.rotation_degrees = -20
 			update_frame()
+			Interface.start_text("save")
+			SoundPlayer.new_sound(Preloads.sfx_save_point)
 
 
 func _on_body_entered(body):

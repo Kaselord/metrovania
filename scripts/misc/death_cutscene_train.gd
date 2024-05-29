@@ -20,6 +20,7 @@ func _ready():
 func _physics_process(_delta):
 	if Globals.ongoing_event == "death_train":
 		Globals.ongoing_event = ""
+		MusicManager.play_song("none")
 		pos_target = pos_target + Vector2(0, 90)
 		alpha_target = 1.0
 		do_things = true

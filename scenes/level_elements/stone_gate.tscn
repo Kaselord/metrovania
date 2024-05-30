@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://plkui0usubkd"]
+
+[ext_resource type="Script" path="res://scripts/level_elements/stone_gate.gd" id="1_fh6pb"]
+[ext_resource type="Texture2D" uid="uid://caeau6lrx0dvm" path="res://textures/other/stone_gate.png" id="1_tibhv"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6vjiv"]
+size = Vector2(32, 56)
+
+[node name="stone_gate" type="StaticBody2D"]
+collision_layer = 3
+collision_mask = 3
+script = ExtResource("1_fh6pb")
+
+[node name="sprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_tibhv")
+offset = Vector2(0, -28)
+
+[node name="collider" type="CollisionShape2D" parent="."]
+position = Vector2(0, -28)
+shape = SubResource("RectangleShape2D_6vjiv")

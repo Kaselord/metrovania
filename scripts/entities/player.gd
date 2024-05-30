@@ -92,7 +92,7 @@ func _physics_process(delta):
 			dash_power_x = look_dir * base_walk_speed * 5
 			gravity_power = 0
 		$kick_hurtbox/CollisionShape2D.disabled = false
-		$collider.scale = lerp($collider.scale, Vector2(1.25, 0.5), 0.3)
+		$collider.scale = lerp($collider.scale, Vector2(1.0, 0.5), 0.2)
 		$collider.position = lerp($collider.position, Vector2(0, -8.5), 0.3)
 		$kick_hurtbox.scale.x = look_dir
 		$hitbox.scale = Vector2(0.5, 0.5)
@@ -100,18 +100,16 @@ func _physics_process(delta):
 		trail_color = Color(1, 0, 0, 0.05)
 		
 		# prematurely end dash if met with a wall
-		if abs(velocity.x) < 1 && is_dashing > 4:
-			is_dashing = 4
+		if abs(velocity.x) < 1:
 			max_dash_value = 16
 	else:
 		$kick_hurtbox/CollisionShape2D.disabled = true
-		$collider.scale = lerp($collider.scale, Vector2(1.0, 1.0), 0.3)
+		$collider.scale = lerp($collider.scale, Vector2(1.0, 1.0), 0.2)
 		$collider.position = lerp($collider.position, Vector2(0, -17), 0.3)
 		$hitbox.scale = Vector2(1, 1)
 		trail_color = Color(0, 0, 1, 0.05)
 		dash_power_x = 0.0
 	
-	print(velocity)
 	
 	if is_attacking > 0:
 		if is_attacking < 20:
@@ -335,6 +333,11 @@ func attack_speed():
 func reset_movement():
 	velocity = Vector2(0, 0)
 	is_dashing = 0
+
+
+func refresh_health():
+	hp = SaveManager.get_powerup("max_hp")
+	Globals.player_damage_happened = true
 
 
 func _on_hitbox_hit():

@@ -17,7 +17,7 @@ func _physics_process(delta):
 func _on_body_entered(body):
 	if body.is_in_group("player"):
 		if Globals.player_reference != null:
-			Globals.player_reference.hp += 5
+			Globals.player_reference.hp += 3
 			Globals.player_damage_happened = true
 		call_deferred("free")
 	velocity = Vector2(0, 0)

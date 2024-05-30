@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://ckcca11ffellh"]
+[gd_scene load_steps=4 format=3 uid="uid://ckcca11ffellh"]
 
 [ext_resource type="PackedScene" uid="uid://df25grdvss11u" path="res://scenes/level_base.tscn" id="1_47fr0"]
 [ext_resource type="PackedScene" uid="uid://i33jmy7bq5vr" path="res://scenes/level_elements/door.tscn" id="2_tvq86"]
+[ext_resource type="PackedScene" uid="uid://bo01scwqs54nq" path="res://scenes/level_elements/trigger.tscn" id="3_jdic4"]
 
 [node name="002_the_other_side" instance=ExtResource("1_47fr0")]
 music = "losing_my_train_of_thought"
@@ -20,3 +21,8 @@ direction = "right"
 send_to_travel_point = "door_left"
 new_room_path = "res://scenes/levels/003_wandering_halls.tscn"
 collider_size = Vector2(8, 48)
+
+[node name="trigger" parent="travel_points" index="2" instance=ExtResource("3_jdic4")]
+position = Vector2(210, 160)
+function = "save_game"
+permanently_delete = true

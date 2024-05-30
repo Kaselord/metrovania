@@ -31,6 +31,8 @@ func _physics_process(delta):
 
 
 func _on_hitbox_hit():
-	walk_dir *= -1
+	if Globals.player_reference != null:
+		if position.x - Globals.player_reference.position.x != 0:
+			walk_dir = sign(position.x - Globals.player_reference.position.x)
 	velocity.y = -50
 	$sprite.scale.y = 0.6

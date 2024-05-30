@@ -82,4 +82,5 @@ func find_travel_point_position(active_level : Node = null):
 				travel_point_pos = point.position
 				if point.is_in_group("save_point"):
 					travel_point_pos.x -= 48
+					travel_point_pos.y -= 1
 	return travel_point_pos

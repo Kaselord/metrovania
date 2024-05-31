@@ -45,7 +45,7 @@ func do_thing():
 			Interface.start_text(params[0], true)
 		"save_game":
 			SaveManager.permanent_savings["current_load_data"][0] = "wake_up"
-			SaveManager.create_savestate()
+			SaveManager.save_to_disk()
 		"open_gate":
 			var gate = get_node(params[0])
 			gate.down = false

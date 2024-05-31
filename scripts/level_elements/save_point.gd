@@ -24,7 +24,7 @@ func _process(_delta):
 		if Input.is_action_just_pressed("down"): # do the actual saving
 			Interface.display_save_prompt = false
 			SaveManager.permanent_savings["current_load_data"][0] = name
-			SaveManager.create_savestate()
+			SaveManager.save_to_disk()
 			SaveManager.reset_temporary()
 			frame_adder = 3
 			$sprite.rotation_degrees = -20

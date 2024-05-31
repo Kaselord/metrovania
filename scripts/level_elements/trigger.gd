@@ -22,7 +22,9 @@ func _process(_delta):
 		if !initiated:
 			if Globals.level_reference != null:
 				initiated = true
-				if SaveManager.get_permanent_deletion(Globals.level_reference.get_path_to(self), name):
+				var path_to_self : String = String(Globals.level_reference.get_path_to(self))
+				var level_file_path : String = Globals.level_reference.scene_file_path
+				if SaveManager.get_permanent_deletion(path_to_self, level_file_path):
 					$collider.disabled = true
 
 
@@ -31,7 +33,9 @@ func _on_body_entered(body):
 		do_thing()
 		if permanently_delete:
 			if Globals.level_reference != null:
-				SaveManager.set_permanent_deletion(Globals.level_reference.get_path_to(self), name)
+				var path_to_self : String = String(Globals.level_reference.get_path_to(self))
+				var level_file_path : String = Globals.level_reference.scene_file_path
+				SaveManager.set_permanent_deletion(path_to_self, level_file_path)
 		call_deferred("free")
 
 
@@ -45,4 +49,6 @@ func do_thing():
 		"open_gate":
 			var gate = get_node(params[0])
 			gate.down = false
-			SaveManager.set_permanent_deletion(Globals.level_reference.get_path_to(gate), gate.name)
+			var path_to_gate : String = String(Globals.level_reference.get_path_to(gate))
+			var level_file_path : String = Globals.level_reference.scene_file_path
+			SaveManager.set_permanent_deletion(path_to_gate, level_file_path)

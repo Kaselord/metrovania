@@ -16,7 +16,7 @@ var display_save_prompt : bool = false
 
 func _ready():
 	var text_file = FileAccess.open("res://data/text_interactions.json", FileAccess.READ)
-	text_table = JSON.parse_string(text_file.get_as_text())
+	text_table = JSON.parse_string(text_file.get_as_text()) as Dictionary
 	text_file.close()
 
 

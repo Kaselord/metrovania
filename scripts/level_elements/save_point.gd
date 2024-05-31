@@ -31,6 +31,9 @@ func _process(_delta):
 			update_frame()
 			Interface.start_text("save")
 			SoundPlayer.new_sound(Preloads.sfx_save_point)
+			if Globals.player_reference != null:
+				Globals.player_reference.refresh_health()
+				Globals.player_damage_happened = true
 
 
 func _on_body_entered(body):

@@ -1180,4 +1180,6 @@ metadata/_edit_lock_ = true
 
 [node name="entities" type="Node2D" parent="."]
 
+[node name="projectiles" type="Node2D" parent="."]
+
 [node name="particles_front" type="Node2D" parent="."]

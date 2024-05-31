@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://b4rxx7wpywh27"]
+[gd_scene load_steps=9 format=3 uid="uid://b4rxx7wpywh27"]
 
 [ext_resource type="PackedScene" uid="uid://df25grdvss11u" path="res://scenes/level_base.tscn" id="1_jylvc"]
 [ext_resource type="PackedScene" uid="uid://i33jmy7bq5vr" path="res://scenes/level_elements/door.tscn" id="2_fcyum"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://plkui0usubkd" path="res://scenes/level_elements/stone_gate.tscn" id="4_imxw6"]
 [ext_resource type="PackedScene" uid="uid://2c1dhsejyya7" path="res://scenes/level_elements/save_point.tscn" id="6_7fgqs"]
 [ext_resource type="PackedScene" uid="uid://dp51oo1cx47an" path="res://scenes/level_elements/health_up.tscn" id="6_7n6j7"]
+[ext_resource type="PackedScene" uid="uid://baqexlx4sr5sy" path="res://scenes/entities/skeletor.tscn" id="8_f8svo"]
 
 [node name="007_side_path" instance=ExtResource("1_jylvc")]
 top_left = Vector2i(0, -250)
@@ -56,5 +57,8 @@ position = Vector2(248, 240)
 width = 112.0
 particle_height = 80.0
 
-[node name="health_up" parent="." index="10" instance=ExtResource("6_7n6j7")]
+[node name="health_up" parent="interactive" index="2" instance=ExtResource("6_7n6j7")]
 position = Vector2(477, 72)
+
+[node name="skeletor" parent="entities" index="0" instance=ExtResource("8_f8svo")]
+position = Vector2(385, -80)

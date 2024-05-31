@@ -1,0 +1,119 @@
+[gd_scene load_steps=12 format=3 uid="uid://baqexlx4sr5sy"]
+
+[ext_resource type="Script" path="res://scripts/entities/skeletor.gd" id="1_ei4q2"]
+[ext_resource type="Texture2D" uid="uid://bk01agwr6i11g" path="res://textures/entities/skeletor/skeletor.png" id="2_is6wm"]
+[ext_resource type="PackedScene" uid="uid://c5ekcvrlsw7mu" path="res://scenes/projectiles/spear.tscn" id="2_nrg15"]
+[ext_resource type="PackedScene" uid="uid://d4l174v4ofimd" path="res://scenes/components/hitbox.tscn" id="3_ckg7m"]
+[ext_resource type="PackedScene" uid="uid://b3012evdp0k0" path="res://scenes/components/fire_emitter.tscn" id="5_kuao1"]
+
+[sub_resource type="Animation" id="Animation_wr6kc"]
+resource_name = "idle"
+length = 0.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sprite:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_0wyn6"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sprite:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_32u0g"]
+resource_name = "attack"
+length = 0.4
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sprite:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 0), Vector2i(1, 0), Vector2i(2, 0), Vector2i(0, 0)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.25),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"throw_spear"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bpifm"]
+_data = {
+"RESET": SubResource("Animation_0wyn6"),
+"attack": SubResource("Animation_32u0g"),
+"idle": SubResource("Animation_wr6kc")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_t5r6i"]
+size = Vector2(20, 38)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6laqj"]
+size = Vector2(22, 39)
+
+[node name="skeletor" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("1_ei4q2")
+spear_scene = ExtResource("2_nrg15")
+starting_hp = 5
+
+[node name="sprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_is6wm")
+offset = Vector2(0, -24)
+hframes = 3
+
+[node name="anim" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_bpifm")
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -19)
+shape = SubResource("RectangleShape2D_t5r6i")
+
+[node name="hitbox" parent="." instance=ExtResource("3_ckg7m")]
+entity = NodePath("..")
+ignore_tag = "evil"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox"]
+position = Vector2(0, -19.5)
+shape = SubResource("RectangleShape2D_6laqj")
+debug_color = Color(0.933333, 0, 0.643137, 0.419608)
+
+[node name="fire_emitter" parent="." instance=ExtResource("5_kuao1")]
+properties = {
+"dimensions": Vector2(32, -48),
+"emit_cd": 1
+}

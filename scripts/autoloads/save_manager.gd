@@ -77,11 +77,11 @@ func save_to_disk():
 	file.store_string(JSON.stringify(savestates))
 	file.close()
 
-
+ 
 func load_from_disk():
 	if FileAccess.file_exists(OS.get_executable_path().get_base_dir() + "/" + "save_file.json"):
 		var file = FileAccess.open(OS.get_executable_path().get_base_dir() + "/" + "save_file.json", FileAccess.READ)
 		print("loaded from " + OS.get_executable_path().get_base_dir() + "/" + "save_file.json")
 		if file.get_as_text() != "":
-			savestates = JSON.parse_string(file.get_as_text())
+			savestates = JSON.parse_string(file.get_as_text()) as Array
 		file.close()

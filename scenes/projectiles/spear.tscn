@@ -1,0 +1,32 @@
+[gd_scene load_steps=6 format=3 uid="uid://c5ekcvrlsw7mu"]
+
+[ext_resource type="Texture2D" uid="uid://1im5t3ikbovp" path="res://textures/projectiles/spear.png" id="1_772qt"]
+[ext_resource type="Script" path="res://scripts/projectiles/spear.gd" id="1_mh6ng"]
+[ext_resource type="PackedScene" uid="uid://6bfdrlmoe75y" path="res://scenes/components/hurtbox.tscn" id="3_3hyrb"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xenni"]
+radius = 8.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7ulov"]
+size = Vector2(4, 42)
+
+[node name="spear" type="Area2D"]
+script = ExtResource("1_mh6ng")
+
+[node name="sprite" type="Sprite2D" parent="."]
+rotation = 0.785398
+texture = ExtResource("1_772qt")
+offset = Vector2(-1, -1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_xenni")
+
+[node name="hurtbox" parent="." instance=ExtResource("3_3hyrb")]
+ignore_in_detection = ["evil"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hurtbox"]
+position = Vector2(0, -1)
+shape = SubResource("RectangleShape2D_7ulov")
+debug_color = Color(0.94902, 0, 0.576471, 0.419608)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

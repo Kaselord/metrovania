@@ -282,6 +282,7 @@ height = 28.0
 size = Vector2(95, 7)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tmnnp"]
+size = Vector2(27, 20)
 
 [node name="player" type="CharacterBody2D"]
 editor_description = "the name's Aggy Saintsworn"
@@ -353,7 +354,7 @@ damage = 1
 ignore_in_detection = ["player"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="kick_hurtbox"]
-position = Vector2(17, 16)
+position = Vector2(13.5, 16)
 shape = SubResource("RectangleShape2D_tmnnp")
 disabled = true
 debug_color = Color(0.952941, 0, 0.564706, 0.419608)

@@ -16,6 +16,7 @@ func _process(_delta):
 func _on_body_entered(body):
 	if body.is_in_group("player"):
 		SaveManager.set_powerup("max_hp", SaveManager.get_powerup("max_hp") + 5)
+		Interface.start_text("health_up")
 		if Globals.player_reference != null:
 			Globals.player_reference.refresh_health()
 		if Globals.level_reference != null:

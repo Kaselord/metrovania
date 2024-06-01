@@ -25,11 +25,14 @@ func _physics_process(delta):
 	else:
 		$anim.stop()
 		if hp <= 0:
+			$hitbox/CollisionShape2D.disabled = true
 			$fire_emitter.active = true
 			if $sprite.modulate.a > 0:
 				$sprite.modulate -= Color(0.01, 0.01, 0.01, 0.01)
 			else:
 				call_deferred("free")
+	$sprite.scale.y = lerp($sprite.scale.y, 1.0, 0.2)
+	$sprite.rotation_degrees = lerp($sprite.rotation_degrees, 0.0, 0.1)
 
 
 func throw_spear():
@@ -44,6 +47,8 @@ func throw_spear():
 
 func hit():
 	super()
+	$sprite.scale.y = 0.5
+	$sprite.rotation_degrees = -$sprite.scale.x * 30
 	velocity.y = -80
 	if Globals.player_reference != null:
 		velocity.x = sign(position.x - Globals.player_reference.position.x) * 64

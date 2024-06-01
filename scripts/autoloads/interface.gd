@@ -12,6 +12,10 @@ var displayed_paragraph_characters : float = 0.0
 var typewriter_effect_speed : float = 0.4
 var name_of_speaker_length : int = 0
 var display_save_prompt : bool = false
+@export var sfx_text_continue : AudioStream
+var text_sound_cd : int = 0
+var max_text_sound_cd : int = 5
+var text_sound_pitch = 1.2
 
 
 func _ready():
@@ -34,7 +38,14 @@ func _physics_process(_delta):
 				continue_active_text()
 			else:
 				typewriter_effect_speed = 1.5
+				max_text_sound_cd = 3
+				text_sound_pitch = 1.5
 		if displayed_paragraph_characters < current_paragraph_length:
+			if text_sound_cd > 0:
+				text_sound_cd -= 1
+			else:
+				text_sound_cd = max_text_sound_cd
+				SoundPlayer.new_sound(sfx_text_continue, 0.0, text_sound_pitch + randf_range(-0.1, 0.1))
 			displayed_paragraph_characters += typewriter_effect_speed
 			$text_box/display_dialogue.visible_characters = name_of_speaker_length + int(displayed_paragraph_characters)
 	else:
@@ -68,6 +79,8 @@ func continue_active_text():
 	# confirm that index hasn't surpassed amount of dialogues
 	if current_text_index < length_of_current_text:
 		typewriter_effect_speed = 0.4
+		max_text_sound_cd = 5
+		text_sound_pitch = 1.2
 		var name_of_speaker : String = text_table[current_text_identifier][current_text_index][0]
 		var paragraph : String = text_table[current_text_identifier][current_text_index][1]
 		displayed_paragraph_characters = 0.0

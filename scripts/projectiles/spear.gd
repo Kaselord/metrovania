@@ -1,6 +1,12 @@
 extends Area2D
 
 var velocity : Vector2 = Vector2(0, 0)
+var tag_override : Array = ["evil"]
+var final_color : Color = Color(0, 1, 0, 0)
+
+
+func _ready():
+	$hurtbox.ignore_in_detection = tag_override
 
 
 func _physics_process(delta):
@@ -29,7 +35,7 @@ func spawn_trail_particle():
 		particle.init["position"] = global_position
 		particle.final["rotation"] = $sprite.rotation_degrees
 		particle.final["position"] = global_position
-		particle.final["modulate"] = Color(0, 1, 0, 0)
+		particle.final["modulate"] = final_color
 		particle.lifetime = 20
 		particle.texture = $sprite.texture
 		Globals.level_reference.get_node("particles_back").call_deferred("add_child", particle)

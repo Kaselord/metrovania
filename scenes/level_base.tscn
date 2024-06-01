@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://df25grdvss11u"]
+[gd_scene load_steps=19 format=3 uid="uid://df25grdvss11u"]
 
 [ext_resource type="Script" path="res://scripts/level_base.gd" id="1_ip5t6"]
 [ext_resource type="Texture2D" uid="uid://prslkgmu5vej" path="res://icon.svg" id="1_ykyvf"]
@@ -7,6 +7,8 @@
 [ext_resource type="Texture2D" uid="uid://dr1tflj1gxoqd" path="res://textures/tiles/train_parts.png" id="5_e7yq5"]
 [ext_resource type="Texture2D" uid="uid://bi35yu6ov1q37" path="res://textures/tiles/clean_bricks.png" id="6_a7ulw"]
 [ext_resource type="Texture2D" uid="uid://c0db3sy1lq1uf" path="res://textures/tiles/bg_bricks_light.png" id="7_mp7nu"]
+[ext_resource type="Texture2D" uid="uid://v1nti4j7brp3" path="res://textures/tiles/bg_mesh.png" id="8_vkw3s"]
+[ext_resource type="Texture2D" uid="uid://cyoq3t6mb4kb6" path="res://textures/tiles/bg_dark_patches.png" id="9_ay1vn"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_wdv4v"]
 texture = ExtResource("1_ykyvf")
@@ -1100,6 +1102,27 @@ texture = ExtResource("7_mp7nu")
 4:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 4:1/0/physics_layer_0/angular_velocity = 0.0
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_rswhp"]
+texture = ExtResource("8_vkw3s")
+0:0/0 = 0
+0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/0/physics_layer_0/angular_velocity = 0.0
+1:0/0 = 0
+1:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+1:0/0/physics_layer_0/angular_velocity = 0.0
+0:1/0 = 0
+0:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:1/0/physics_layer_0/angular_velocity = 0.0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_br3yx"]
+texture = ExtResource("9_ay1vn")
+0:0/0 = 0
+0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/0/physics_layer_0/angular_velocity = 0.0
+1:0/0 = 0
+1:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+1:0/0/physics_layer_0/angular_velocity = 0.0
+
 [sub_resource type="TileSet" id="TileSet_hysfe"]
 physics_layer_0/collision_layer = 3
 physics_layer_0/collision_mask = 3
@@ -1114,6 +1137,8 @@ sources/2 = SubResource("TileSetAtlasSource_1bas5")
 sources/3 = SubResource("TileSetAtlasSource_8ohgk")
 sources/4 = SubResource("TileSetAtlasSource_pdb1v")
 sources/5 = SubResource("TileSetAtlasSource_38qcb")
+sources/6 = SubResource("TileSetAtlasSource_rswhp")
+sources/7 = SubResource("TileSetAtlasSource_br3yx")
 
 [node name="level_base" type="Node2D"]
 script = ExtResource("1_ip5t6")
@@ -1140,8 +1165,12 @@ motion_scale = Vector2(0.9, 0.9)
 [node name="tiles" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_hysfe")
 format = 2
-layer_0/z_index = -1
+layer_1/z_index = -1
 layer_1/tile_data = PackedInt32Array()
+layer_2/z_index = -2
+layer_2/tile_data = PackedInt32Array()
+layer_3/z_index = -3
+layer_3/tile_data = PackedInt32Array()
 
 [node name="editor" type="Node2D" parent="."]
 z_index = 5

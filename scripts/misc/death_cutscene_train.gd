@@ -46,6 +46,7 @@ func _physics_process(_delta):
 				SaveManager.set_powerup("double_jump", false)
 				SaveManager.set_powerup("strength", false)
 				SaveManager.set_powerup("max_hp", 40)
+				SaveManager.set_powerup("spear", false)
 				Globals.level_switch_data = ["wake_up", "res://scenes/levels/002_the_other_side.tscn"]
 				Globals.emit_signal("level_switch")
 				if Globals.player_reference != null:

@@ -11,5 +11,8 @@
 	],
 	"save" : [
 		["none", "Your game has been saved successfully!"]
+	],
+	"health_up" : [
+		["none", "Your max health has been increased by 5!"]
 	]
 }

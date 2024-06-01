@@ -30,6 +30,7 @@ var attack_speed_adder : float = 0.0
 var max_dash_value : int = 16
 @export var sfx_whip_hit : AudioStream
 @export var sfx_kick_hit : AudioStream
+@export var spear_scene : PackedScene
 
 
 func _ready():
@@ -338,6 +339,17 @@ func reset_movement():
 func refresh_health():
 	hp = SaveManager.get_powerup("max_hp")
 	Globals.player_damage_happened = true
+
+
+func throw_spear():
+	if Globals.level_reference != null && SaveManager.get_powerup("spear"):
+		var spear = spear_scene.instantiate()
+		spear.position = global_position + Vector2($visuals.scale.x * 8, -24)
+		spear.velocity.x = $visuals.scale.x * 200
+		spear.velocity.y = -200
+		spear.tag_override = ["player"]
+		spear.final_color = Color(1, 0, 1, 0)
+		Globals.level_reference.get_node("projectiles").call_deferred("add_child", spear)
 
 
 func _on_hitbox_hit():

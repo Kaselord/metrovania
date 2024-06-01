@@ -22,6 +22,7 @@ offset = Vector2(-1, -1)
 shape = SubResource("CircleShape2D_xenni")
 
 [node name="hurtbox" parent="." instance=ExtResource("3_3hyrb")]
+damage = 3
 ignore_in_detection = ["evil"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hurtbox"]

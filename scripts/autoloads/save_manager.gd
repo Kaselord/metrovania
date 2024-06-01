@@ -9,6 +9,7 @@ var permanent_savings : Dictionary = {
 		"dash" : true,
 		"double_jump" : true,
 		"strength" : true,
+		"spear" : true,
 		"max_hp" : 100
 	},
 	"permanent_deletion" : [], # same as temporary

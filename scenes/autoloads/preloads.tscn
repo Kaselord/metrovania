@@ -1,12 +1,14 @@
-[gd_scene load_steps=5 format=3 uid="uid://dpnojh1gtug6k"]
+[gd_scene load_steps=6 format=3 uid="uid://dpnojh1gtug6k"]
 
 [ext_resource type="Script" path="res://scripts/autoloads/preloads.gd" id="1_3ddgk"]
 [ext_resource type="PackedScene" uid="uid://cii5wxp3b1h8y" path="res://scenes/particles/texture_particle.tscn" id="2_yr3ek"]
 [ext_resource type="AudioStream" uid="uid://b07dw053tier" path="res://audio/sfx/save_jingle.ogg" id="3_lkye0"]
 [ext_resource type="AudioStream" uid="uid://5vd3myv4afpn" path="res://audio/sfx/fire.mp3" id="4_dqdbn"]
+[ext_resource type="AudioStream" uid="uid://xq7gtrj5to7o" path="res://audio/sfx/enemy_death.mp3" id="5_vxwqv"]
 
 [node name="Preloads" type="Node"]
 script = ExtResource("1_3ddgk")
 texture_particle = ExtResource("2_yr3ek")
 sfx_save_point = ExtResource("3_lkye0")
 sfx_fire = ExtResource("4_dqdbn")
+sfx_scream = ExtResource("5_vxwqv")

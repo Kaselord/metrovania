@@ -30,6 +30,7 @@ func hit():
 
 func death():
 	if set_ablaze:
+		SoundPlayer.new_sound(Preloads.sfx_scream, 0.0, randf_range(0.9, 1.0))
 		SoundPlayer.new_sound(Preloads.sfx_fire)
 	if temporarily_save_death && Globals.level_reference != null:
 		var path_to_self : String = String(Globals.level_reference.get_path_to(self))

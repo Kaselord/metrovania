@@ -30,6 +30,7 @@ var attack_speed_adder : float = 0.0
 var max_dash_value : int = 16
 @export var sfx_whip_hit : AudioStream
 @export var sfx_kick_hit : AudioStream
+@export var sfx_player_hurt : AudioStream
 @export var spear_scene : PackedScene
 
 
@@ -357,6 +358,7 @@ func _on_hitbox_hit():
 	Globals.active = false
 	Globals.time_until_active = 5
 	hit_effect = 20.0
+	SoundPlayer.new_sound(sfx_player_hurt, 0.0, randf_range(0.9, 1.1))
 	if is_dashing <= 0:
 		velocity.y = -jump_power * 0.5
 

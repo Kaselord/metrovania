@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://cno20wi12dln"]
+[gd_scene load_steps=27 format=3 uid="uid://cno20wi12dln"]
 
 [ext_resource type="Script" path="res://scripts/entities/player.gd" id="1_wjnyu"]
 [ext_resource type="Texture2D" uid="uid://bhyomon57xhkb" path="res://textures/entities/player/aggy.png" id="2_a0c7w"]
@@ -16,6 +16,9 @@
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0c07l"]
 radius = 8.0
 height = 34.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_v30el"]
+size = Vector2(16, 10)
 
 [sub_resource type="Animation" id="Animation_2kp2n"]
 length = 0.001
@@ -319,9 +322,12 @@ region_rect = Rect2(0, 0, 76, 5)
 position = Vector2(38, 0)
 
 [node name="collider" type="CollisionShape2D" parent="."]
-position = Vector2(0, -8.5)
-scale = Vector2(0.5, 0.5)
+position = Vector2(0, -17)
 shape = SubResource("CapsuleShape2D_0c07l")
+
+[node name="collider2" type="CollisionShape2D" parent="."]
+position = Vector2(0, -5)
+shape = SubResource("RectangleShape2D_v30el")
 
 [node name="anim" type="AnimationPlayer" parent="."]
 libraries = {

@@ -69,6 +69,13 @@ position = Vector2(488, 80)
 [node name="temporary_checkpoint3" parent="travel_points" index="5" instance=ExtResource("5_dev1v")]
 position = Vector2(328, 176)
 
+[node name="boss_gate" parent="travel_points" index="6" instance=ExtResource("2_fcyum")]
+position = Vector2(852, -16)
+direction = "right"
+send_to_travel_point = "entrance"
+new_room_path = "res://scenes/levels/08_spider_den.tscn"
+collider_size = Vector2(8, 80)
+
 [node name="trigger" parent="interactive" index="0" instance=ExtResource("4_dti2k")]
 position = Vector2(456, 80)
 function = "open_gate"

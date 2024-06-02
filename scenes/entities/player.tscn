@@ -15,10 +15,10 @@
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0c07l"]
 radius = 8.0
-height = 34.0
+height = 32.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v30el"]
-size = Vector2(16, 10)
+size = Vector2(14, 12)
 
 [sub_resource type="Animation" id="Animation_2kp2n"]
 length = 0.001
@@ -322,11 +322,11 @@ region_rect = Rect2(0, 0, 76, 5)
 position = Vector2(38, 0)
 
 [node name="collider" type="CollisionShape2D" parent="."]
-position = Vector2(0, -17)
+position = Vector2(0, -16)
 shape = SubResource("CapsuleShape2D_0c07l")
 
 [node name="collider2" type="CollisionShape2D" parent="."]
-position = Vector2(0, -5)
+position = Vector2(0, -6)
 shape = SubResource("RectangleShape2D_v30el")
 
 [node name="anim" type="AnimationPlayer" parent="."]
@@ -366,6 +366,10 @@ position = Vector2(13.5, 16)
 shape = SubResource("RectangleShape2D_tmnnp")
 disabled = true
 debug_color = Color(0.952941, 0, 0.564706, 0.419608)
+
+[node name="ceiling_check" type="RayCast2D" parent="."]
+position = Vector2(0, -12)
+target_position = Vector2(0, -21)
 
 [connection signal="hit" from="hitbox" to="." method="_on_hitbox_hit"]
 [connection signal="has_hit" from="hurtbox" to="." method="_on_hurtbox_has_hit"]

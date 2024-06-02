@@ -94,10 +94,9 @@ func _physics_process(delta):
 			dash_power_x = look_dir * base_walk_speed * 5
 			gravity_power = 0
 		$kick_hurtbox/CollisionShape2D.disabled = false
-		$collider.scale = lerp($collider.scale, Vector2(1.0, 0.5), 0.2)
-		$collider.position = lerp($collider.position, Vector2(0, -8.5), 0.3)
 		$kick_hurtbox.scale.x = look_dir
 		$hitbox.scale = Vector2(0.5, 0.5)
+		$collider.disabled = true
 		is_dashing -= 1
 		trail_color = Color(1, 0, 0, 0.05)
 		
@@ -106,9 +105,10 @@ func _physics_process(delta):
 			max_dash_value = 16
 	else:
 		$kick_hurtbox/CollisionShape2D.disabled = true
-		$collider.scale = lerp($collider.scale, Vector2(1.0, 1.0), 0.2)
-		$collider.position = lerp($collider.position, Vector2(0, -17), 0.3)
 		$hitbox.scale = Vector2(1, 1)
+		# ensure that the player will not get stuck in ceilings
+		if !$ceiling_check.is_colliding():
+			$collider.disabled = false
 		trail_color = Color(0, 0, 1, 0.05)
 		dash_power_x = 0.0
 	
@@ -350,7 +350,20 @@ func throw_spear():
 		spear.velocity.y = -200
 		spear.tag_override = ["player"]
 		spear.final_color = Color(1, 0, 1, 0)
+		spear.damage = 1
+		spear.destroy_on_wall = false
 		Globals.level_reference.get_node("projectiles").call_deferred("add_child", spear)
+		
+		var spear_b = spear_scene.instantiate()
+		spear_b.destroy_on_wall = false
+		spear_b.position = global_position + Vector2($visuals.scale.x * 8, -24)
+		spear_b.velocity.x = $visuals.scale.x * 200
+		spear_b.velocity.y = 200
+		spear_b.tag_override = ["player"]
+		spear_b.final_color = Color(1, 0, 1, 0)
+		spear_b.gravity_dir = -1
+		spear_b.damage = 1
+		Globals.level_reference.get_node("projectiles").call_deferred("add_child", spear_b)
 
 
 func _on_hitbox_hit():

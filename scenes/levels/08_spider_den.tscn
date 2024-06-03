@@ -30,4 +30,4 @@ new_room_path = "res://scenes/levels/007_side_path.tscn"
 collider_size = Vector2(8, 80)
 
 [node name="spider_thing" parent="entities" index="0" instance=ExtResource("3_or5pp")]
-position = Vector2(212, 144)
+position = Vector2(423, 112)

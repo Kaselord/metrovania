@@ -9,7 +9,8 @@ var mute_music : bool = true
 var song_table = {
 	 # [file, start loop, end loop]
 	"losing_my_train_of_thought" : [load("res://audio/music/losing_my_train_of_thought.ogg"), 13.74, 82.29],
-	"ride_of_death" : [load("res://audio/music/ride_of_death.ogg"), 2.0, 5.0]
+	"ride_of_death" : [load("res://audio/music/ride_of_death.ogg"), 2.0, 5.0],
+	"it_doesnt_want_to_die" : [load("res://audio/music/it_doesnt_want_to_die.ogg"), 3.428, 82.29]
 }
 
 

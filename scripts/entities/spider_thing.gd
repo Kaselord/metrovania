@@ -6,10 +6,13 @@ var dst_to_last_frame : Vector2 = Vector2(0, 0)
 var leg_move_immunities : Array = [0, 0, 0, 0, 0, 0]
 var max_leg_immunity_value : int = 20
 var flee_amplify : float = 1.0
+var attack_cd : int = 60
+var start : bool = false
+@export var eye_projectile_scene : PackedScene
 
 
 func _physics_process(_delta):
-	if Globals.active && hp > 0:
+	if Globals.active && hp > 0 && start:
 		prev_pos = position
 		
 		if $floor_check.is_colliding() && $floor_check.get_collider().name == "tiles":
@@ -39,10 +42,22 @@ func _physics_process(_delta):
 		leg_anim($visuals/leg_left_bottom, Vector2(-10, -24), 2)
 		leg_anim($visuals/leg_right_bottom, Vector2(10, -24), 3)
 		$visuals.modulate = lerp($visuals.modulate, Color(1, 1, 1, 1), 0.2)
+		
+		if attack_cd > 0:
+			attack_cd -= 1
+		else:
+			$visuals/eye.scale = Vector2(0, 0)
+			attack_cd = choose_attack()
+		
 	elif hp <= 0:
 		$visuals.modulate -= Color(0.01, 0.01, 0.01, 0.01)
 		if $visuals.modulate.a <= 0:
 			call_deferred("free")
+	elif !start:
+		if Globals.player_reference != null:
+			if abs(Globals.player_reference.position.x - position.x) < 214:
+				start = true
+				MusicManager.play_song("it_doesnt_want_to_die")
 	
 	$visuals/eye.scale = lerp($visuals/eye.scale, Vector2(1.0, 1.0), 0.2)
 
@@ -72,6 +87,18 @@ func leg_anim(leg_node : Line2D, leg_origin : Vector2, assigned_index : int):
 	leg_node.points[0] = leg_origin
 	
 	leg_node.points[1] = lerp(leg_node.points[0], leg_node.points[2], 0.5) + Vector2(sign(leg_origin.x) * 24, -8)
+
+
+func choose_attack():
+	spawn_eye()
+	return 10
+
+
+func spawn_eye():
+	if Globals.level_reference != null:
+		var eye_projectile = eye_projectile_scene.instantiate()
+		eye_projectile.position = $visuals/eye.global_position
+		Globals.level_reference.get_node("projectiles").call_deferred("add_child", eye_projectile)
 
 
 func hit():

@@ -1,6 +1,5 @@
-extends Area2D
+extends Projectile
 
-var velocity : Vector2 = Vector2(0, 0)
 var tag_override : Array = ["evil"]
 var final_color : Color = Color(0, 1, 0, 0)
 var gravity_dir : float = 1.0
@@ -16,7 +15,6 @@ func _ready():
 
 func _physics_process(delta):
 	if Globals.active:
-		position += velocity * delta
 		velocity.y += 500 * delta * gravity_dir
 		if velocity.x != 0:
 			$sprite.rotation_degrees += sign(velocity.x) * 15 * gravity_dir
@@ -26,6 +24,8 @@ func _physics_process(delta):
 		$hurtbox.rotation_degrees = $sprite.rotation_degrees
 		
 		spawn_trail_particle()
+	
+	super(delta)
 	
 	if !destroy_on_wall:
 		lifetime += 1

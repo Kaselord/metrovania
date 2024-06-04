@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://c1umcir2xcsi3"]
+[gd_scene load_steps=4 format=3 uid="uid://c1umcir2xcsi3"]
 
 [ext_resource type="PackedScene" uid="uid://c21tx281aortw" path="res://scenes/user_interface/interface_manager.tscn" id="1_7ujax"]
 [ext_resource type="PackedScene" uid="uid://cuehwo36unc5g" path="res://scenes/user_interface/button.tscn" id="2_pcyuc"]
+[ext_resource type="PackedScene" uid="uid://c2mpbl2l0beok" path="res://scenes/user_interface/slider.tscn" id="3_vfpc4"]
 
 [node name="settings" type="Node2D"]
 
@@ -24,3 +25,11 @@ on_action = "window_mode"
 parameters = ["res://scenes/main_menu.tscn"]
 display_text = "WINDOW MODE"
 has_param = true
+
+[node name="slider_sfx_volume" parent="interface_manager" instance=ExtResource("3_vfpc4")]
+position = Vector2(160, 64)
+slider_label_text = "SFX VOLUME:"
+
+[node name="slider_music_volume" parent="interface_manager" instance=ExtResource("3_vfpc4")]
+position = Vector2(160, 88)
+slider_label_text = "MUSIC VOLUME:"

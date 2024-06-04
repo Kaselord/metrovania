@@ -1,0 +1,31 @@
+[gd_scene load_steps=6 format=3 uid="uid://c2mpbl2l0beok"]
+
+[ext_resource type="Script" path="res://scripts/user_interface/slider.gd" id="1_0ym0y"]
+[ext_resource type="Texture2D" uid="uid://dwexd2lml7j1m" path="res://textures/interface/slider.png" id="2_maiqp"]
+[ext_resource type="Texture2D" uid="uid://cwvi2mdo0jm16" path="res://textures/particles/dash_sparkle.png" id="3_xtqoh"]
+[ext_resource type="FontFile" uid="uid://buhockuvonca8" path="res://resources/fonts/cheesefont.ttf" id="4_nm5yq"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_wyhyb"]
+font = ExtResource("4_nm5yq")
+font_size = 8
+outline_size = 5
+outline_color = Color(0, 0, 0, 1)
+
+[node name="slider" type="Node2D"]
+script = ExtResource("1_0ym0y")
+
+[node name="label" type="Label" parent="."]
+offset_left = -32.0
+offset_top = -11.0
+offset_right = 32.0
+offset_bottom = -3.0
+text = "SLIDER:"
+label_settings = SubResource("LabelSettings_wyhyb")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="bar" type="Sprite2D" parent="."]
+texture = ExtResource("2_maiqp")
+
+[node name="knob" type="Sprite2D" parent="."]
+texture = ExtResource("3_xtqoh")

@@ -70,6 +70,9 @@ func _physics_process(_delta):
 		if Globals.player_reference != null:
 			if abs(Globals.player_reference.position.x - position.x) < 214:
 				start = true
+				for path in open_gates_on_death:
+					var gate = get_node(path)
+					gate.down = true
 				MusicManager.play_song("it_doesnt_want_to_die")
 	
 	$visuals/eye.scale = lerp($visuals/eye.scale, Vector2(1.0, 1.0), 0.2)

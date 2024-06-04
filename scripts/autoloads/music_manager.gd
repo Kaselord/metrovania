@@ -16,24 +16,36 @@ var song_table = {
 
 func play_song(tag : String):
 	if current_song_name != tag && tag != "none" && !mute_music:
-		$player.volume_db = -6.0
-		$player.stream = song_table[tag][0]
 		loop_start = song_table[tag][1]
 		loop_end = song_table[tag][2]
-		current_song_name = tag
-		$player.play(0.0)
+		if current_song_name == "none":
+			current_song_name = tag
+			$player.volume_db = -6
+			trigger_song_play()
+		else:
+			$anim.play("transition")
+			current_song_name = tag
 		print("~ now playing " + "\'" + tag + "\'")
 	elif tag == "none":
 		current_song_name = "none"
-		$player.stream = null
-		$player.stop()
+		$anim.play("transition")
 
 
 func _process(_delta):
 	if $player.get_playback_position() >= loop_end or !$player.playing:
-		if current_song_name != "none" && !mute_music: # don't loop if there is no song
+		 # don't loop if there is no song or it's transitioning
+		if current_song_name != "none" && !mute_music && !$anim.is_playing():
 			$player.play(loop_start)
 			print("music loop")
+
+
+func trigger_song_play():
+	if current_song_name != "none":
+		$player.stream = song_table[current_song_name][0]
+		$player.play(0.0)
+	else:
+		$player.stream = null
+		$player.stop()
 
 
 func trigger_special_thing(tag : String = ""):

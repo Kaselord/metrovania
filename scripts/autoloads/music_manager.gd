@@ -2,7 +2,7 @@ extends Node
 
 var loop_start : float = 0.0
 var loop_end : float = 1.0
-var current_song_name : String = ""
+var current_song_name : String = "none"
 var mute_music : bool = false
 
 
@@ -39,5 +39,6 @@ func _process(_delta):
 func trigger_special_thing(tag : String = ""):
 	match tag:
 		"train_start":
+			$player.play(8.5)
 			loop_start = 18.86
 			loop_end = 54.85

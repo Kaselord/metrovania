@@ -9,4 +9,17 @@ func _ready():
 
 
 func _process(_delta):
-	pass
+	var change : int = 0
+	if Input.is_action_just_pressed("up"):
+		change = -1
+	if Input.is_action_just_pressed("down"):
+		change = 1
+	if change != 0:
+		# neglect old selection
+		get_child(selection_index).selected = false
+	selection_index = clamp(selection_index + change, 0, max_selection_index)
+	# activate current selection
+	get_child(selection_index).selected = true
+	
+	if Input.is_action_just_pressed("jump"):
+		get_child(selection_index).action()

@@ -5,7 +5,9 @@ var hp : int = 1
 var has_loaded : bool = false
 @export var starting_hp : int = 1
 @export var temporarily_save_death : bool = true
+@export var permanently_save_death : bool = false
 @export var set_ablaze : bool = true
+@export var open_gates_on_death : Array = []
 
 
 func _ready():
@@ -20,6 +22,11 @@ func _process(_delta):
 				var path_to_self : String = String(Globals.level_reference.get_path_to(self))
 				var level_file_path : String = Globals.level_reference.scene_file_path
 				if SaveManager.get_temporary_deletion(path_to_self, level_file_path):
+					call_deferred("free")
+			if permanently_save_death:
+				var path_to_self : String = String(Globals.level_reference.get_path_to(self))
+				var level_file_path : String = Globals.level_reference.scene_file_path
+				if SaveManager.get_permanent_deletion(path_to_self, level_file_path):
 					call_deferred("free")
 
 
@@ -36,3 +43,11 @@ func death():
 		var path_to_self : String = String(Globals.level_reference.get_path_to(self))
 		var level_file_path : String = Globals.level_reference.scene_file_path
 		SaveManager.set_temporary_deletion(path_to_self, level_file_path)
+	for path in open_gates_on_death:
+		var gate = get_node_or_null(path)
+		if gate != null:
+			gate.down = false
+	if permanently_save_death && Globals.level_reference != null:
+		var path_to_self : String = String(Globals.level_reference.get_path_to(self))
+		var level_file_path : String = Globals.level_reference.scene_file_path
+		SaveManager.set_permanent_deletion(path_to_self, level_file_path)

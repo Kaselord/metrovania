@@ -79,7 +79,7 @@ collider_size = Vector2(8, 80)
 [node name="trigger" parent="interactive" index="0" instance=ExtResource("4_dti2k")]
 position = Vector2(456, 80)
 function = "open_gate"
-params = [NodePath("../../behind_tiles/stone_gate")]
+params = [NodePath("../../behind_tiles/stone_gate"), false]
 permanently_delete = true
 
 [node name="death_pit" parent="interactive" index="1" instance=ExtResource("2_n876d")]

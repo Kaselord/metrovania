@@ -1,3 +1,32 @@
-[gd_scene format=3 uid="uid://cijgs157omkmf"]
+[gd_scene load_steps=3 format=3 uid="uid://cijgs157omkmf"]
+
+[ext_resource type="PackedScene" uid="uid://c21tx281aortw" path="res://scenes/user_interface/interface_manager.tscn" id="1_6f26v"]
+[ext_resource type="PackedScene" uid="uid://cuehwo36unc5g" path="res://scenes/user_interface/button.tscn" id="2_ecg8f"]
 
 [node name="main_menu" type="Node2D"]
+
+[node name="interface_manager" parent="." instance=ExtResource("1_6f26v")]
+
+[node name="button_play" parent="interface_manager" instance=ExtResource("2_ecg8f")]
+position = Vector2(160, 72)
+on_action = "switch_scene"
+parameters = ["res://scenes/gameplay_scene.tscn"]
+display_text = "PLAY"
+
+[node name="button_settings" parent="interface_manager" instance=ExtResource("2_ecg8f")]
+position = Vector2(160, 88)
+display_text = "SETTINGS"
+
+[node name="button_delete_save" parent="interface_manager" instance=ExtResource("2_ecg8f")]
+position = Vector2(160, 104)
+display_text = "DELETE SAVE DATA"
+
+[node name="button_quit" parent="interface_manager" instance=ExtResource("2_ecg8f")]
+position = Vector2(160, 120)
+on_action = "quit"
+display_text = "QUIT"
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 320.0
+offset_bottom = 180.0
+color = Color(0, 0, 0, 1)

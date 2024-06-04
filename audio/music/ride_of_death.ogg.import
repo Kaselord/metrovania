@@ -13,7 +13,7 @@ dest_files=["res://.godot/imported/ride_of_death.ogg-57649949b1412c60c01915fcb14
 [params]
 
 loop=false
-loop_offset=0
-bpm=0
+loop_offset=0.0
+bpm=0.0
 beat_count=0
 bar_beats=4

@@ -148,6 +148,7 @@ func hit():
 	$visuals/eye.scale = Vector2(1.4, 1.4)
 	$visuals.modulate = Color(1, 0, 0, 1)
 	if hp <= 0:
+		MusicManager.play_song("none")
 		$fire_emitter.active = true
 		$fire_emitter2.active = true
 		$hitbox/CollisionShape2D.disabled = true

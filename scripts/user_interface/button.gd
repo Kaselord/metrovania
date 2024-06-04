@@ -1,13 +1,17 @@
 extends InterfaceElement
 
-@export_enum("switch_scene", "delete_save", "quit", "do_nothing") var on_action : String = "do_nothing"
+@export_enum("switch_scene", "delete_save", "quit", "do_nothing", "window_mode") var on_action : String = "do_nothing"
 @export var parameters : Array = []
 @export var display_text : String = "BUTTON"
+@export var has_param : bool = false
 var color_hue : float = 0.0
 var stored_transition_file : String = ""
 
 func _ready():
 	$label.text = display_text
+	if has_param:
+		$additional_param.show()
+		update_param_display()
 
 
 func _physics_process(_delta):
@@ -37,3 +41,24 @@ func action():
 				get_tree().quit()
 		"do_nothing":
 			print("this message should not be visible in the final product")
+		"window_mode":
+			var mode = DisplayServer.window_get_mode()
+			if mode == DisplayServer.WINDOW_MODE_FULLSCREEN:
+				DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
+			elif mode == DisplayServer.WINDOW_MODE_WINDOWED:
+				DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_MAXIMIZED)
+			elif mode == DisplayServer.WINDOW_MODE_MAXIMIZED:
+				DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
+			update_param_display()
+
+
+func update_param_display():
+	match on_action:
+		"window_mode":
+			var current_window_mode = DisplayServer.window_get_mode()
+			var mode_as_string : String = "WINDOWED"
+			if current_window_mode == DisplayServer.WINDOW_MODE_FULLSCREEN:
+				mode_as_string = "FULLSCREEN"
+			elif current_window_mode == DisplayServer.WINDOW_MODE_MAXIMIZED:
+				mode_as_string = "MAXIMIZED"
+			$additional_param.text = "(" + mode_as_string + ")"

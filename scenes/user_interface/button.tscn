@@ -1,7 +1,13 @@
-[gd_scene load_steps=4 format=3 uid="uid://cuehwo36unc5g"]
+[gd_scene load_steps=5 format=3 uid="uid://cuehwo36unc5g"]
 
 [ext_resource type="FontFile" uid="uid://buhockuvonca8" path="res://resources/fonts/cheesefont.ttf" id="1_s6u6k"]
 [ext_resource type="Script" path="res://scripts/user_interface/button.gd" id="1_y1u7a"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_ddluf"]
+font = ExtResource("1_s6u6k")
+font_size = 8
+font_color = Color(1, 1, 1, 0.498039)
+outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_owd8w"]
 font = ExtResource("1_s6u6k")
@@ -11,6 +17,25 @@ outline_color = Color(0, 0, 0, 1)
 
 [node name="button" type="Node2D"]
 script = ExtResource("1_y1u7a")
+
+[node name="additional_param" type="Label" parent="."]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -160.0
+offset_top = 3.0
+offset_right = 160.0
+offset_bottom = 19.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(160, 6)
+text = "(PARAM)"
+label_settings = SubResource("LabelSettings_ddluf")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="label" type="Label" parent="."]
 anchors_preset = 8

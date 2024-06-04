@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=3 uid="uid://c1umcir2xcsi3"]
+
+[ext_resource type="PackedScene" uid="uid://c21tx281aortw" path="res://scenes/user_interface/interface_manager.tscn" id="1_7ujax"]
+[ext_resource type="PackedScene" uid="uid://cuehwo36unc5g" path="res://scenes/user_interface/button.tscn" id="2_pcyuc"]
+
+[node name="settings" type="Node2D"]
+
+[node name="background" type="ColorRect" parent="."]
+offset_right = 320.0
+offset_bottom = 180.0
+color = Color(0, 0, 0, 1)
+
+[node name="interface_manager" parent="." instance=ExtResource("1_7ujax")]
+
+[node name="button_return" parent="interface_manager" instance=ExtResource("2_pcyuc")]
+position = Vector2(160, 16)
+on_action = "switch_scene"
+parameters = ["res://scenes/main_menu.tscn"]
+display_text = "RETURN TO MENU"
+
+[node name="button_window_mode" parent="interface_manager" instance=ExtResource("2_pcyuc")]
+position = Vector2(160, 32)
+on_action = "window_mode"
+parameters = ["res://scenes/main_menu.tscn"]
+display_text = "WINDOW MODE"
+has_param = true

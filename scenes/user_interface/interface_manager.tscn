@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://c21tx281aortw"]
+
+[ext_resource type="Script" path="res://scripts/user_interface/interface_manager.gd" id="1_7yrln"]
+
+[node name="interface_manager" type="Node"]
+script = ExtResource("1_7yrln")

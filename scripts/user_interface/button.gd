@@ -2,6 +2,11 @@ extends InterfaceElement
 
 @export_enum("switch_scene", "delete_save", "quit") var on_action : String = "start_game"
 @export var parameters : Array = []
+@export var display_text : String = "BUTTON"
+
+
+func _ready():
+	$label.text = display_text
 
 
 func action():

@@ -38,6 +38,7 @@ func _ready():
 	add_to_group("player")
 	Globals.player_reference = self
 	$hurtbox.add_to_group("whip")
+	$kick_hurtbox.add_to_group("kick")
 	super()
 
 

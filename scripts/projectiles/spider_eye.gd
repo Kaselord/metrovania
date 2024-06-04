@@ -35,3 +35,10 @@ func _on_body_entered(body):
 			velocity.y = -bounces * 100
 			velocity.x *= 0.5
 			bounces -= 1
+
+
+func _on_area_entered(area):
+	if area.is_in_group("kick"):
+		$hurtbox.ignore_in_detection = ["player"]
+		velocity.x = -velocity.x * 2
+		velocity.y = -20

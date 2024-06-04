@@ -10,7 +10,9 @@ var attack_cd : int = 60
 var start : bool = false
 var rage : int = 0
 var eyes_remaining : int = 1
+var fire_cd : int = -1
 @export var eye_projectile_scene : PackedScene
+@export var fireball_scene : PackedScene
 
 
 func _physics_process(_delta):
@@ -50,6 +52,15 @@ func _physics_process(_delta):
 		else: 
 			$visuals/eye.scale = Vector2(0, 0)
 			attack_cd = choose_attack()
+		
+		if fire_cd > 0:
+			fire_cd -= 1
+			$visuals/eye/iris/fire_emitter.active = true
+		else:
+			$visuals/eye/iris/fire_emitter.active = false
+			if fire_cd == 0:
+				spawn_fireball()
+				fire_cd = -1
 		
 	elif hp <= 0:
 		$visuals.modulate -= Color(0.01, 0.01, 0.01, 0.01)
@@ -95,12 +106,20 @@ func choose_attack():
 	var cooldown : int = 60
 	if rage > 8:
 		cooldown = 20
+		eyes_remaining = 0
 	if rage <= 0:
 		cooldown = 80
 	
 	if eyes_remaining > 0:
 		eyes_remaining -= 1
 		spawn_eye()
+	else:
+		fire_cd = 30
+		cooldown = 120
+		if rage < 8:
+			eyes_remaining = 2
+		else:
+			cooldown = 40
 	
 	if rage > 0:
 		rage -= 1
@@ -113,6 +132,13 @@ func spawn_eye():
 		var eye_projectile = eye_projectile_scene.instantiate()
 		eye_projectile.position = $visuals/eye.global_position
 		Globals.level_reference.get_node("projectiles").call_deferred("add_child", eye_projectile)
+
+
+func spawn_fireball():
+	if Globals.level_reference != null:
+		var fireball = fireball_scene.instantiate()
+		fireball.position = $visuals/eye/iris/fire_emitter.global_position
+		Globals.level_reference.get_node("projectiles").call_deferred("add_child", fireball)
 
 
 func hit():

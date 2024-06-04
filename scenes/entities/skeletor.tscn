@@ -6,23 +6,6 @@
 [ext_resource type="PackedScene" uid="uid://d4l174v4ofimd" path="res://scenes/components/hitbox.tscn" id="3_ckg7m"]
 [ext_resource type="PackedScene" uid="uid://b3012evdp0k0" path="res://scenes/components/fire_emitter.tscn" id="5_kuao1"]
 
-[sub_resource type="Animation" id="Animation_wr6kc"]
-resource_name = "idle"
-length = 0.5
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("sprite:frame_coords")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [Vector2i(0, 0)]
-}
-
 [sub_resource type="Animation" id="Animation_0wyn6"]
 length = 0.001
 tracks/0/type = "value"
@@ -67,6 +50,23 @@ tracks/1/keys = {
 "args": [],
 "method": &"throw_spear"
 }]
+}
+
+[sub_resource type="Animation" id="Animation_wr6kc"]
+resource_name = "idle"
+length = 0.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sprite:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(0, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_bpifm"]

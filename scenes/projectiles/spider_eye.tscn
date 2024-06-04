@@ -32,4 +32,5 @@ ignore_in_detection = ["evil"]
 shape = SubResource("CircleShape2D_xgqxm")
 debug_color = Color(0.94902, 0, 0.584314, 0.419608)
 
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

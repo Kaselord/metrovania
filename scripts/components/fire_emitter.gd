@@ -3,9 +3,10 @@ extends Node2D
 @export var fire_texture : Texture
 @export var properties = {
 	"emit_cd" : 1,
-	"dimensions" : Vector2(32, -32)
+	"dimensions" : Vector2(32, -32),
 }
 @export var active : bool = false
+@export var fire_size : float = 1.0
 var cooldown : int = 0
 
 
@@ -29,13 +30,13 @@ func create_fire_particle(height : float = -32.0, width : float = 32, starting_c
 		var position_adder : float = randf_range(-width*0.25, width*0.25)
 		var angle : float = randf_range(-1.0, 1.0)
 		var vector_dir : Vector2 = Vector2(sin(angle), cos(angle))
-		particle.init["position"] = global_position + Vector2(position_adder, 0)
+		particle.init["position"] = global_position + Vector2(position_adder, 0) * fire_size
 		particle.init["rotation"] = randf_range(-180, 180)
 		var scale_factor : float = randf_range(0.25, 1.5)
-		particle.init["scale"] = Vector2(scale_factor, scale_factor)
+		particle.init["scale"] = Vector2(scale_factor, scale_factor) * fire_size
 		particle.init["modulate"] = starting_color
 		
-		var position_vector : Vector2 = Vector2(vector_dir.x * randf_range(0, width), vector_dir.y * height)
+		var position_vector : Vector2 = Vector2(vector_dir.x * randf_range(0, width), vector_dir.y * height * fire_size)
 		particle.final["position"] = global_position + Vector2(position_adder, 0) + position_vector
 		particle.final["rotation"] = randf_range(-180, 180)
 		particle.final["scale"] = Vector2(scale_factor, scale_factor) * 0.5

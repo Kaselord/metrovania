@@ -3,7 +3,7 @@ extends Node
 var loop_start : float = 0.0
 var loop_end : float = 1.0
 var current_song_name : String = ""
-var mute_music : bool = true
+var mute_music : bool = false
 
 
 var song_table = {

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bnhpcx4y61u2l"]
+
+[ext_resource type="Script" path="res://scripts/projectiles/flaming_ball.gd" id="1_rg7af"]
+
+[node name="flaming_ball" type="Area2D"]
+script = ExtResource("1_rg7af")

@@ -8,6 +8,8 @@ var max_leg_immunity_value : int = 20
 var flee_amplify : float = 1.0
 var attack_cd : int = 60
 var start : bool = false
+var rage : int = 0
+var eyes_remaining : int = 1
 @export var eye_projectile_scene : PackedScene
 
 
@@ -45,7 +47,7 @@ func _physics_process(_delta):
 		
 		if attack_cd > 0:
 			attack_cd -= 1
-		else:
+		else: 
 			$visuals/eye.scale = Vector2(0, 0)
 			attack_cd = choose_attack()
 		
@@ -90,8 +92,20 @@ func leg_anim(leg_node : Line2D, leg_origin : Vector2, assigned_index : int):
 
 
 func choose_attack():
-	spawn_eye()
-	return 10
+	var cooldown : int = 60
+	if rage > 8:
+		cooldown = 20
+	if rage <= 0:
+		cooldown = 80
+	
+	if eyes_remaining > 0:
+		eyes_remaining -= 1
+		spawn_eye()
+	
+	if rage > 0:
+		rage -= 1
+	
+	return cooldown
 
 
 func spawn_eye():
@@ -104,6 +118,7 @@ func spawn_eye():
 func hit():
 	super()
 	flee_amplify = 8
+	rage += 2
 	$visuals/eye.scale = Vector2(1.4, 1.4)
 	$visuals.modulate = Color(1, 0, 0, 1)
 	if hp <= 0:

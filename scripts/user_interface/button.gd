@@ -41,6 +41,7 @@ func action():
 			pass # are you sure????
 		"quit":
 			if OS.get_name() != "Web":
+				SaveManager.save_to_disk()
 				get_tree().quit()
 		"do_nothing":
 			print("this message should not be visible in the final product")

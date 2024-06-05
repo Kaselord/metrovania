@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://cx4m5lxlathc"]
+[gd_scene load_steps=8 format=3 uid="uid://cx4m5lxlathc"]
 
 [ext_resource type="Script" path="res://scripts/autoloads/interface.gd" id="1_nwj3h"]
 [ext_resource type="Texture2D" uid="uid://johwut2y3fn1" path="res://textures/interface/textbox.png" id="2_6kuo3"]
@@ -15,8 +15,15 @@ font_size = 8
 outline_size = 5
 outline_color = Color(0, 0, 0, 1)
 
+[sub_resource type="LabelSettings" id="LabelSettings_7cmb8"]
+font = ExtResource("3_4uhn6")
+font_size = 8
+font_color = Color(1, 0, 0, 1)
+outline_size = 5
+outline_color = Color(0, 0, 0, 1)
+
 [node name="interface" type="CanvasLayer"]
-layer = 2
+layer = 3
 script = ExtResource("1_nwj3h")
 sfx_text_continue = ExtResource("2_nb0ka")
 
@@ -60,3 +67,15 @@ text = "'S' or 'Down Arrow' to save your game."
 label_settings = SubResource("LabelSettings_1pc1x")
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="screen_image" type="Sprite2D" parent="."]
+position = Vector2(160, 90)
+
+[node name="window_focus_info" type="Label" parent="."]
+visible = false
+offset_left = 3.0
+offset_top = 172.0
+offset_right = 167.0
+offset_bottom = 195.0
+text = "THE GAME WINDOW IS OUT OF FOCUS!!"
+label_settings = SubResource("LabelSettings_7cmb8")

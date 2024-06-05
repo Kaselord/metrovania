@@ -325,14 +325,6 @@ func spawn_whip_particle(texture : Texture):
 		Globals.level_reference.get_node("particles_front").call_deferred("add_child", particle)
 
 
-func attack_speed():
-	var multiplier : float = 1.5
-	if !is_floored:
-		multiplier = 2.2
-	attack_speed_adder = base_walk_speed * look_dir * multiplier
-	velocity.y = clamp(velocity.y, -9999, -jump_power * 0.25)
-
-
 func reset_movement():
 	velocity = Vector2(0, 0)
 	is_dashing = 0

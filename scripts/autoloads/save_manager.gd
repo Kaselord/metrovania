@@ -13,9 +13,22 @@ var permanent_savings : Dictionary = {
 		"max_hp" : 100
 	},
 	"permanent_deletion" : [], # same as temporary
-	"current_load_data" : ["start", "res://scenes/levels/000_entrance.tscn"]
+	"current_load_data" : ["start", "res://scenes/levels/000_entrance.tscn"],
+	"default_settings" : {
+		"window_mode" : DisplayServer.WINDOW_MODE_WINDOWED,
+		"volume_sfx" : 0.5,
+		"volume_music" : 0.5
+	}
 }
 var max_savestate_amount : int = 64
+
+
+func _ready():
+	load_from_disk()
+	AudioServer.set_bus_volume_db(1, lerp(-32, 16, permanent_savings["default_settings"]["volume_sfx"]))
+	AudioServer.set_bus_volume_db(2, lerp(-32, 16, permanent_savings["default_settings"]["volume_music"]))
+	DisplayServer.window_set_mode(permanent_savings["default_settings"]["window_mode"])
+	get_window().grab_focus()
 
 
 func set_powerup(tag : String, value : Variant):

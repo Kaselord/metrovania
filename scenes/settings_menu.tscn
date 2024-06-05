@@ -29,7 +29,9 @@ has_param = true
 [node name="slider_sfx_volume" parent="interface_manager" instance=ExtResource("3_vfpc4")]
 position = Vector2(160, 64)
 slider_label_text = "SFX VOLUME:"
+affected_property = "volume_sfx"
 
 [node name="slider_music_volume" parent="interface_manager" instance=ExtResource("3_vfpc4")]
 position = Vector2(160, 88)
 slider_label_text = "MUSIC VOLUME:"
+affected_property = "volume_music"

@@ -10,6 +10,7 @@ func new_sound(stream : AudioStream, volume_db : float = 0.0, pitch : float = 1.
 	streamplayer.pitch_scale = pitch
 	streamplayer.name = "sound" + str(name_index)
 	streamplayer.autoplay = true
+	streamplayer.bus = "SFX"
 	if name_index < 255:
 		name_index += 1
 	else:

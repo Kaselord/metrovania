@@ -9,6 +9,9 @@ var stored_transition_file : String = ""
 
 func _ready():
 	$label.text = display_text
+
+
+func init():
 	if has_param:
 		$additional_param.show()
 		update_param_display()
@@ -50,6 +53,7 @@ func action():
 			elif mode == DisplayServer.WINDOW_MODE_MAXIMIZED:
 				DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
 			update_param_display()
+			SaveManager.permanent_savings["default_settings"]["window_mode"] = DisplayServer.window_get_mode()
 
 
 func update_param_display():

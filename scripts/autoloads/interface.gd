@@ -60,6 +60,11 @@ func _physics_process(_delta):
 		$save_prompt.modulate.a = lerp($save_prompt.modulate.a, 1.0, 0.1)
 	else:
 		$save_prompt.modulate.a = lerp($save_prompt.modulate.a, 0.0, 0.15)
+	
+	if !DisplayServer.window_is_focused():
+		$window_focus_info.show()
+	else:
+		$window_focus_info.hide()
 
 
 func start_text(text_identifier : String = "", pause_gameplay : bool = true):
@@ -108,3 +113,7 @@ func continue_active_text():
 func abandon_text():
 	Globals.time_until_active = 1
 	text_active = false
+
+
+func death_effect():
+	$screen_image.texture = ImageTexture.create_from_image(get_viewport().get_texture().get_image())

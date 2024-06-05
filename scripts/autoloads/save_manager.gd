@@ -67,7 +67,7 @@ func get_permanent_deletion(path_to_thing : String, level_scene_path : String):
 
 func save_to_disk():
 	var file = FileAccess.open(OS.get_executable_path().get_base_dir() + "/" + "save_file.json", FileAccess.WRITE)
-	print("saved to " + OS.get_executable_path().get_base_dir() + "/" + "save_file.json")
+	print_rich("[color=#27ff00]" + "saved to " + OS.get_executable_path().get_base_dir() + "/" + "save_file.json" + "[/color]")
 	file.store_string(JSON.stringify(permanent_savings))
 	file.close()
 
@@ -75,7 +75,7 @@ func save_to_disk():
 func load_from_disk():
 	if FileAccess.file_exists(OS.get_executable_path().get_base_dir() + "/" + "save_file.json"):
 		var file = FileAccess.open(OS.get_executable_path().get_base_dir() + "/" + "save_file.json", FileAccess.READ)
-		print("loaded from " + OS.get_executable_path().get_base_dir() + "/" + "save_file.json")
+		print_rich("[color=#27ff00]" + "loaded from " + OS.get_executable_path().get_base_dir() + "/" + "save_file.json" + "[/color]")
 		if file.get_as_text() != "":
 			permanent_savings = JSON.parse_string(file.get_as_text()) as Dictionary
 		file.close()

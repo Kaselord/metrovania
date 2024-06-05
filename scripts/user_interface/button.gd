@@ -20,7 +20,7 @@ func init():
 func _physics_process(_delta):
 	if selected:
 		if color_hue < 1.0:
-			color_hue += 0.02
+			color_hue += 0.01
 		else:
 			color_hue = 0.0
 		$label.modulate.h = color_hue

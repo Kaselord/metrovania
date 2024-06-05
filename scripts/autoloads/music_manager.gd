@@ -10,7 +10,8 @@ var song_table = {
 	 # [file, start loop, end loop]
 	"losing_my_train_of_thought" : [load("res://audio/music/losing_my_train_of_thought.ogg"), 13.74, 82.29],
 	"ride_of_death" : [load("res://audio/music/ride_of_death.ogg"), 2.0, 5.0],
-	"it_doesnt_want_to_die" : [load("res://audio/music/it_doesnt_want_to_die.ogg"), 3.428, 82.29]
+	"it_doesnt_want_to_die" : [load("res://audio/music/it_doesnt_want_to_die.ogg"), 3.428, 82.29],
+	"darkness_is_approaching" : [load("res://audio/music/darkness_is_approaching.ogg"), 5.333, 37.33]
 }
 
 
@@ -25,7 +26,7 @@ func play_song(tag : String):
 		else:
 			$anim.play("transition")
 			current_song_name = tag
-		print("~ now playing " + "\'" + tag + "\'")
+		print_rich("[i][color=#ff80fd]" + "~ now playing " + "\'" + tag + "\'" + "[/color][/i]")
 	elif tag == "none":
 		current_song_name = "none"
 		$anim.play("transition")
@@ -36,7 +37,7 @@ func _process(_delta):
 		 # don't loop if there is no song or it's transitioning
 		if current_song_name != "none" && !mute_music && !$anim.is_playing():
 			$player.play(loop_start)
-			print("music loop")
+			print_rich("[color=#9400af]music loop[/color]")
 
 
 func trigger_song_play():

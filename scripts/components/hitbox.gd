@@ -23,7 +23,7 @@ func _physics_process(_delta):
 		else:
 			trigger_internal_hit()
 		if is_player_hitbox && current_damager.void_out:
-			print("voidout")
+			print_rich("[color=#ffeb00]voidout[/color]")
 			Globals.emit_signal("level_switch")
 
 
@@ -35,7 +35,10 @@ func trigger_internal_hit():
 		emit_signal("hit")
 		current_damager.emit_signal("has_hit")
 		entity_node.hit()
-		print("hit from " + current_damager.get_parent().name + " to " + get_node(entity).name + " - " + str(current_damager.damage) + " dmg")
+		var debug_damager : String = "[color=#c00016]" + current_damager.get_parent().name + "[/color]"
+		var debug_victim : String = "[color=#0092e0]" + get_node(entity).name + "[/color]"
+		var debug_damage_number : String = "[color=#68e086]" + str(current_damager.damage) + " dmg" + "[/color]"
+		print_rich("hit from " + debug_damager + " to " + debug_victim + " - " + debug_damage_number)
 
 
 func _on_area_entered(area):

@@ -19,7 +19,7 @@ func _physics_process(_delta):
 		value = clamp(value + Input.get_axis("left", "right") * 0.02, 0.0, 1.0)
 		update_property()
 		if color_hue < 1.0:
-			color_hue += 0.02
+			color_hue += 0.01
 		else:
 			color_hue = 0.0
 		$label.modulate.h = color_hue

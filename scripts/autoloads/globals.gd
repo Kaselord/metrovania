@@ -71,7 +71,7 @@ func _on_level_switch():
 		# additional 25 frames until things start moving
 		time_until_active = 25
 		is_switching_level = true
-		print_rich("[color=#ff6700][b]" + "level switch - " + str(level_switch_data) + "[/color][/b]")
+		print_rich("[color=#ff6700][b]" + "level switch - " + str(level_switch_data))
 
 
 func update_game_interface():

@@ -1,0 +1,45 @@
+[gd_scene load_steps=5 format=3 uid="uid://dw7khpubau1ld"]
+
+[ext_resource type="Script" path="res://scripts/user_interface/input_showcase.gd" id="1_a8g7b"]
+[ext_resource type="FontFile" uid="uid://buhockuvonca8" path="res://resources/fonts/cheesefont.ttf" id="1_kj7w1"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_a5y1y"]
+font = ExtResource("1_kj7w1")
+font_size = 8
+outline_size = 5
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_xuixx"]
+font = ExtResource("1_kj7w1")
+font_size = 8
+font_color = Color(0.494118, 0.494118, 0.494118, 1)
+outline_size = 5
+outline_color = Color(0, 0, 0, 1)
+
+[node name="input_showcase" type="Node2D"]
+script = ExtResource("1_a8g7b")
+
+[node name="input_name" type="Label" parent="."]
+offset_left = -160.0
+offset_top = -10.0
+offset_right = 160.0
+offset_bottom = 14.0
+pivot_offset = Vector2(160, 10)
+text = "WAWAWAWA"
+label_settings = SubResource("LabelSettings_a5y1y")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="input_list" type="Label" parent="."]
+offset_left = -160.0
+offset_top = 9.0
+offset_right = 160.0
+offset_bottom = 105.0
+pivot_offset = Vector2(160, 0)
+text = "INPUT 1
+INPUT 2
+INPUT 3
+INPUT 4
+INPUT 5"
+label_settings = SubResource("LabelSettings_xuixx")
+horizontal_alignment = 1

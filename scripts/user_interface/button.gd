@@ -1,6 +1,6 @@
 extends InterfaceElement
 
-@export_enum("switch_scene", "delete_save", "quit", "do_nothing", "window_mode") var on_action : String = "do_nothing"
+@export_enum("switch_scene", "delete_save", "quit", "do_nothing", "window_mode", "globals_activity") var on_action : String = "do_nothing"
 @export var parameters : Array = []
 @export var display_text : String = "BUTTON"
 @export var has_param : bool = false
@@ -28,8 +28,16 @@ func _physics_process(_delta):
 		$label.modulate.v = 0.75
 		if Interface.transition_value == 0:
 			get_tree().change_scene_to_file(stored_transition_file)
+		
+		if on_action == "globals_activity":
+			Globals.active = true
+			Globals.time_until_active = 0
 	else:
+		Globals.active = false
+		Globals.time_until_active = 1
 		$label.modulate = Color(1, 1, 1, 1)
+	if on_action == "globals_activity":
+		update_param_display()
 
 
 func action():
@@ -67,3 +75,8 @@ func update_param_display():
 			elif current_window_mode == DisplayServer.WINDOW_MODE_MAXIMIZED:
 				mode_as_string = "MAXIMIZED"
 			$additional_param.text = "(" + mode_as_string + ")"
+		"globals_activity":
+			if Globals.active:
+				$additional_param.text = "(ACTIVE)"
+			else:
+				$additional_param.text = "(NOT ACTIVE)"

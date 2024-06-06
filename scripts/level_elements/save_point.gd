@@ -30,7 +30,7 @@ func _process(_delta):
 			$sprite.rotation_degrees = -20
 			update_frame()
 			Interface.start_text("save")
-			SoundPlayer.new_sound(Preloads.sfx_save_point)
+			#SoundPlayer.new_sound(Preloads.sfx_save_point)
 			if Globals.player_reference != null:
 				Globals.player_reference.refresh_health()
 				Globals.player_damage_happened = true

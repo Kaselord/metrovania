@@ -8,6 +8,7 @@ var temporary_player_reference : Node = null
 var level_switch_data = ["door_left", "res://scenes/levels/003_wandering_halls.tscn"]
 # only disable for testing!
 var load_from_save : bool = true
+var pause_menu_active : bool = false
 
 
 func _ready():
@@ -38,6 +39,13 @@ func _process(_delta):
 				$camera.limit_right = active_level.bottom_right.x
 				$camera.limit_bottom = active_level.bottom_right.y
 				set_deferred("temporary_player_reference", null)
+
+
+func _physics_process(_delta):
+	if pause_menu_active:
+		$interface/pause_menu.modulate.a = lerp($interface/pause_menu.modulate.a, 1.0, 0.3)
+	else:
+		$interface/pause_menu.modulate.a = lerp($interface/pause_menu.modulate.a, 0.0, 0.3)
 
 
 func unload_current_level():

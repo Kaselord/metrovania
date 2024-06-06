@@ -14,5 +14,9 @@
 	],
 	"health_up" : [
 		["none", "Your max health has been increased by 5!"]
-	]
+	],
+    "double_jump" : [
+        ["none", "You found the repulsive boots!"],
+        ["none", "Jump again in the air to activate a double jump."]
+    ]
 }

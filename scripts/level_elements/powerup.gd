@@ -46,7 +46,7 @@ func emit_trail_particle():
 func _on_body_entered(body):
 	if body.is_in_group("player"):
 		SaveManager.set_powerup(tag, true)
-		Interface.start_text("dash")
+		Interface.start_text(unlock_text)
 		if Globals.level_reference != null:
 			var path_to_self : String = String(Globals.level_reference.get_path_to(self))
 			var level_file_path : String = Globals.level_reference.scene_file_path

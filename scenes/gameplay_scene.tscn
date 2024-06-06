@@ -39,3 +39,10 @@ text = "95"
 label_settings = SubResource("LabelSettings_8ws8m")
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="pause_menu" type="Node2D" parent="interface"]
+modulate = Color(1, 1, 1, 0)
+
+[node name="poly" type="Polygon2D" parent="interface/pause_menu"]
+color = Color(0, 0, 0, 0.890196)
+polygon = PackedVector2Array(320, 0, 160, 0, 160, 180, 320, 180)

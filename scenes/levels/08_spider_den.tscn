@@ -39,6 +39,13 @@ send_to_travel_point = "boss_gate"
 new_room_path = "res://scenes/levels/007_side_path.tscn"
 collider_size = Vector2(8, 80)
 
+[node name="forest_start" parent="travel_points" index="1" instance=ExtResource("2_nih88")]
+position = Vector2(726, 112)
+direction = "right"
+send_to_travel_point = "door"
+new_room_path = "res://scenes/levels/009_forest.tscn"
+collider_size = Vector2(8, 48)
+
 [node name="trigger" parent="interactive" index="0" instance=ExtResource("4_dib0f")]
 position = Vector2(112, 160)
 function = "open_gate"

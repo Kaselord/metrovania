@@ -1,6 +1,6 @@
 extends InterfaceElement
 
-@export_enum("switch_scene", "delete_save", "quit", "do_nothing", "window_mode", "globals_activity") var on_action : String = "do_nothing"
+@export_enum("switch_scene", "quit", "do_nothing", "window_mode", "globals_activity", "delete_save") var on_action : String = "do_nothing"
 @export var parameters : Array = []
 @export var display_text : String = "BUTTON"
 @export var has_param : bool = false
@@ -45,8 +45,6 @@ func action():
 		"switch_scene":
 			Interface.transition_value = -25
 			stored_transition_file = parameters[0]
-		"delete_save":
-			pass # are you sure????
 		"quit":
 			if OS.get_name() != "Web":
 				SaveManager.save_to_disk()
@@ -63,6 +61,12 @@ func action():
 				DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
 			update_param_display()
 			SaveManager.permanent_savings["default_settings"]["window_mode"] = DisplayServer.window_get_mode()
+		"delete_save":
+			SaveManager.reset_permanent()
+			SaveManager.save_to_disk()
+			Interface.transition_value = -25
+			stored_transition_file = "res://scenes/main_menu.tscn"
+			print_rich("[b][i][color=#ff0000]SAVE DATA HAS BEEN WIPED")
 
 
 func update_param_display():

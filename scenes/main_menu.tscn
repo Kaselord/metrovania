@@ -32,6 +32,8 @@ display_text = "SETTINGS"
 
 [node name="button_delete_save" parent="interface_manager" instance=ExtResource("2_ecg8f")]
 position = Vector2(160, 104)
+on_action = "switch_scene"
+parameters = ["res://scenes/delete_save_menu.tscn"]
 display_text = "DELETE SAVE DATA"
 
 [node name="button_controls" parent="interface_manager" instance=ExtResource("2_ecg8f")]

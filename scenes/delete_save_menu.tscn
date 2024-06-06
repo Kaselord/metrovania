@@ -1,0 +1,41 @@
+[gd_scene load_steps=5 format=3 uid="uid://xoja665sim12"]
+
+[ext_resource type="PackedScene" uid="uid://c21tx281aortw" path="res://scenes/user_interface/interface_manager.tscn" id="1_r7hh1"]
+[ext_resource type="PackedScene" uid="uid://cuehwo36unc5g" path="res://scenes/user_interface/button.tscn" id="2_7k1bj"]
+[ext_resource type="FontFile" uid="uid://buhockuvonca8" path="res://resources/fonts/cheesefont.ttf" id="3_f5lbn"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_ly1we"]
+font = ExtResource("3_f5lbn")
+font_size = 8
+font_color = Color(0.388235, 0.501961, 0.568627, 1)
+outline_size = 5
+outline_color = Color(0, 0, 0, 1)
+
+[node name="delete_save_menu" type="Node2D"]
+
+[node name="background" type="ColorRect" parent="."]
+offset_right = 320.0
+offset_bottom = 180.0
+color = Color(0, 0, 0, 1)
+
+[node name="interface_manager" parent="." instance=ExtResource("1_r7hh1")]
+
+[node name="button_no" parent="interface_manager" instance=ExtResource("2_7k1bj")]
+position = Vector2(160, 98)
+on_action = "switch_scene"
+parameters = ["res://scenes/main_menu.tscn"]
+display_text = "NO"
+
+[node name="button_yes" parent="interface_manager" instance=ExtResource("2_7k1bj")]
+position = Vector2(160, 114)
+on_action = "delete_save"
+display_text = "YES"
+
+[node name="confirm" type="Label" parent="."]
+offset_top = 73.0
+offset_right = 320.0
+offset_bottom = 96.0
+text = "DO YOU REALLY WANT TO DELETE YOUR SAVE DATA?"
+label_settings = SubResource("LabelSettings_ly1we")
+horizontal_alignment = 1
+vertical_alignment = 1

@@ -20,7 +20,6 @@ var permanent_savings : Dictionary = {
 		"volume_music" : 0.5
 	}
 }
-var max_savestate_amount : int = 64
 
 
 func _ready():
@@ -52,6 +51,27 @@ func get_temporary_deletion(path_to_thing : String, level_scene_path : String):
 
 func reset_temporary():
 	temporary_savings["temporary_deletion"] = []
+
+
+func reset_permanent():
+	var init_data : Dictionary = {
+		"player_powerups" : {
+			"dash" : true,
+			"double_jump" : true,
+			"strength" : true,
+			"spear" : false,
+			"max_hp" : 100
+		},
+		"permanent_deletion" : [], # same as temporary
+		"current_load_data" : ["start", "res://scenes/levels/000_entrance.tscn"],
+		# keep settings
+		"default_settings" : {
+			"window_mode" : permanent_savings["default_settings"]["window_mode"],
+			"volume_sfx" : permanent_savings["default_settings"]["volume_sfx"],
+			"volume_music" : permanent_savings["default_settings"]["volume_music"]
+		}
+	}
+	permanent_savings = init_data
 
 
 func set_permanent_deletion(path_to_thing : String, level_scene_path : String):

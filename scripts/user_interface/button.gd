@@ -6,6 +6,7 @@ extends InterfaceElement
 @export var has_param : bool = false
 var color_hue : float = 0.0
 var stored_transition_file : String = ""
+var triggered_level_transition : bool = false
 
 func _ready():
 	$label.text = display_text
@@ -26,8 +27,6 @@ func _physics_process(_delta):
 		$label.modulate.h = color_hue
 		$label.modulate.s = 1.0
 		$label.modulate.v = 0.75
-		if Interface.transition_value == 0:
-			get_tree().change_scene_to_file(stored_transition_file)
 		
 		if on_action == "globals_activity":
 			Globals.active = true
@@ -38,6 +37,9 @@ func _physics_process(_delta):
 		$label.modulate = Color(1, 1, 1, 1)
 	if on_action == "globals_activity":
 		update_param_display()
+	if triggered_level_transition:
+		if Interface.transition_value == 0:
+			get_tree().change_scene_to_file(stored_transition_file)
 
 
 func action():
@@ -45,6 +47,7 @@ func action():
 		"switch_scene":
 			Interface.transition_value = -25
 			stored_transition_file = parameters[0]
+			triggered_level_transition = true
 		"quit":
 			if OS.get_name() != "Web":
 				SaveManager.save_to_disk()
@@ -66,6 +69,7 @@ func action():
 			SaveManager.save_to_disk()
 			Interface.transition_value = -25
 			stored_transition_file = "res://scenes/main_menu.tscn"
+			triggered_level_transition = true
 			print_rich("[b][i][color=#ff0000]SAVE DATA HAS BEEN WIPED")
 
 

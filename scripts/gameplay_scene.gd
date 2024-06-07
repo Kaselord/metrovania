@@ -81,6 +81,7 @@ func load_level(data = ["travel_point_name", "res://scenes/levels/000_entrance.t
 	var new_level = load(data[1]).instantiate()
 	$active_level.call_deferred("add_child", new_level)
 	level_switch_data = data
+	pause_menu_active = false
 
 
 func instantiate_new_player():

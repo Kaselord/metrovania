@@ -8,6 +8,7 @@ var time_until_switch : int = 0
 var time_until_active : int = 0
 var is_switching_level : bool = false
 var level_switch_data = ["", "res://scenes/levels/000_entrance.tscn"]
+var current_level_name : String = "res://scenes/levels/000_entrance.tscn"
 var ongoing_event : String = ""
 var time : float = 0.0
 var player_damage_happened : bool = false
@@ -71,6 +72,8 @@ func _on_level_switch():
 		# additional 25 frames until things start moving
 		time_until_active = 25
 		is_switching_level = true
+		current_level_name = level_switch_data[1]
+		print(level_switch_data[1])
 		print_rich("[color=#ff6700][b]" + "level switch - " + str(level_switch_data))
 
 

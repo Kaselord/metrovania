@@ -1,10 +1,19 @@
-[gd_scene load_steps=7 format=3 uid="uid://cot0i7vjoju27"]
+[gd_scene load_steps=11 format=3 uid="uid://cot0i7vjoju27"]
 
 [ext_resource type="PackedScene" uid="uid://cno20wi12dln" path="res://scenes/entities/player.tscn" id="1_7d14y"]
 [ext_resource type="Script" path="res://scripts/gameplay_scene.gd" id="1_tc3iw"]
 [ext_resource type="Script" path="res://scripts/camera.gd" id="3_veka5"]
 [ext_resource type="Texture2D" uid="uid://d3da2c6gwe434" path="res://textures/interface/health_circle.png" id="4_7kaim"]
+[ext_resource type="PackedScene" uid="uid://c21tx281aortw" path="res://scenes/user_interface/interface_manager.tscn" id="4_f4d2b"]
 [ext_resource type="FontFile" uid="uid://buhockuvonca8" path="res://resources/fonts/cheesefont.ttf" id="5_f76wf"]
+[ext_resource type="PackedScene" uid="uid://cuehwo36unc5g" path="res://scenes/user_interface/button.tscn" id="5_g7000"]
+[ext_resource type="FontFile" uid="uid://bkdup4giffeyl" path="res://resources/fonts/sandfont.ttf" id="6_hhrny"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_h7svy"]
+font = ExtResource("6_hhrny")
+font_size = 8
+outline_size = 5
+outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_8ws8m"]
 font = ExtResource("5_f76wf")
@@ -23,6 +32,39 @@ script = ExtResource("3_veka5")
 
 [node name="interface" type="CanvasLayer" parent="."]
 
+[node name="pause_menu" type="Node2D" parent="interface"]
+
+[node name="poly" type="Polygon2D" parent="interface/pause_menu"]
+color = Color(0, 0, 0, 0.890196)
+polygon = PackedVector2Array(320, 0, 0, 0, 0, 180, 320, 180)
+
+[node name="interface_manager" parent="interface/pause_menu" instance=ExtResource("4_f4d2b")]
+
+[node name="button_return_game" parent="interface/pause_menu/interface_manager" instance=ExtResource("5_g7000")]
+position = Vector2(160, 48)
+on_action = "set_property"
+parameters = [NodePath("../../../.."), "pause_menu_active", false]
+display_text = "RETURN TO GAME"
+
+[node name="button_respawn" parent="interface/pause_menu/interface_manager" instance=ExtResource("5_g7000")]
+position = Vector2(160, 72)
+on_action = "respawn"
+display_text = "RESPAWN AT CHECKPOINT"
+
+[node name="button_main_menu" parent="interface/pause_menu/interface_manager" instance=ExtResource("5_g7000")]
+position = Vector2(160, 96)
+on_action = "switch_scene"
+parameters = ["res://scenes/main_menu.tscn"]
+display_text = "GO TO MAIN MENU"
+
+[node name="big_title" type="Label" parent="interface/pause_menu"]
+offset_right = 320.0
+offset_bottom = 23.0
+text = "--GAME PAUSED--"
+label_settings = SubResource("LabelSettings_h7svy")
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="healthbar" type="Node2D" parent="interface"]
 position = Vector2(16, 16)
 
@@ -39,10 +81,3 @@ text = "95"
 label_settings = SubResource("LabelSettings_8ws8m")
 horizontal_alignment = 1
 vertical_alignment = 1
-
-[node name="pause_menu" type="Node2D" parent="interface"]
-modulate = Color(1, 1, 1, 0)
-
-[node name="poly" type="Polygon2D" parent="interface/pause_menu"]
-color = Color(0, 0, 0, 0.890196)
-polygon = PackedVector2Array(320, 0, 160, 0, 160, 180, 320, 180)

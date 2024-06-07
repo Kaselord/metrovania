@@ -23,7 +23,7 @@ func _process(_delta):
 	if Interface.display_save_prompt && frame_adder <= 0:
 		if Input.is_action_just_pressed("down"): # do the actual saving
 			Interface.display_save_prompt = false
-			SaveManager.permanent_savings["current_load_data"][0] = name
+			SaveManager.permanent_savings["current_load_data"] = [name, Globals.current_level_name]
 			SaveManager.save_to_disk()
 			SaveManager.reset_temporary()
 			frame_adder = 3

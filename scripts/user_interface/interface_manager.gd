@@ -1,4 +1,4 @@
-extends Node
+extends Node2D
 
 var selection_index : int = 0
 @export var active : bool = true

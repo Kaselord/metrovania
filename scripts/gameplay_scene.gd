@@ -17,6 +17,7 @@ func _ready():
 		level_switch_data = SaveManager.permanent_savings["current_load_data"]
 	unload_current_level()
 	load_level(level_switch_data)
+	Globals.current_level_name = level_switch_data[1]
 
 
 func _process(_delta):
@@ -39,13 +40,20 @@ func _process(_delta):
 				$camera.limit_right = active_level.bottom_right.x
 				$camera.limit_bottom = active_level.bottom_right.y
 				set_deferred("temporary_player_reference", null)
+	
+	if Input.is_action_just_pressed("pause"):
+		pause_menu_active = !pause_menu_active
 
 
 func _physics_process(_delta):
 	if pause_menu_active:
 		$interface/pause_menu.modulate.a = lerp($interface/pause_menu.modulate.a, 1.0, 0.3)
+		$interface/pause_menu/interface_manager.active = true
+		Globals.active = false
+		Globals.time_until_active = 1
 	else:
 		$interface/pause_menu.modulate.a = lerp($interface/pause_menu.modulate.a, 0.0, 0.3)
+		$interface/pause_menu/interface_manager.active = false
 
 
 func unload_current_level():
@@ -73,7 +81,6 @@ func load_level(data = ["travel_point_name", "res://scenes/levels/000_entrance.t
 	var new_level = load(data[1]).instantiate()
 	$active_level.call_deferred("add_child", new_level)
 	level_switch_data = data
-	SaveManager.permanent_savings["current_load_data"] = data
 
 
 func instantiate_new_player():

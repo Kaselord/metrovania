@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://ctt5pylkvpul8"]
+[gd_scene load_steps=8 format=3 uid="uid://ctt5pylkvpul8"]
 
 [ext_resource type="PackedScene" uid="uid://df25grdvss11u" path="res://scenes/level_base.tscn" id="1_i1yg4"]
 [ext_resource type="Texture2D" uid="uid://txavbtxsljw2" path="res://textures/decoration/bg_big_pillar.png" id="2_qur2c"]
@@ -6,7 +6,6 @@
 [ext_resource type="Texture2D" uid="uid://btxkk7k4i6mux" path="res://textures/decoration/cloud.png" id="2_wgx7y"]
 [ext_resource type="PackedScene" uid="uid://dln0jrisxv1tc" path="res://scenes/entities/lizardperson.tscn" id="3_26xg5"]
 [ext_resource type="PackedScene" uid="uid://dj0y3r1hogdsa" path="res://scenes/level_elements/candle.tscn" id="3_twam3"]
-[ext_resource type="PackedScene" uid="uid://2c1dhsejyya7" path="res://scenes/level_elements/save_point.tscn" id="5_urhsx"]
 [ext_resource type="PackedScene" uid="uid://daa1ch37xpew2" path="res://scenes/entities/swordknight.tscn" id="6_7o2gh"]
 
 [node name="003_wandering_halls" instance=ExtResource("1_i1yg4")]
@@ -86,9 +85,6 @@ direction = "right"
 send_to_travel_point = "gate"
 new_room_path = "res://scenes/levels/007_side_path.tscn"
 collider_size = Vector2(8, 48)
-
-[node name="save_point" parent="travel_points" index="4" instance=ExtResource("5_urhsx")]
-position = Vector2(443, 145)
 
 [node name="candle" parent="interactive" index="0" instance=ExtResource("3_twam3")]
 position = Vector2(200, 118)

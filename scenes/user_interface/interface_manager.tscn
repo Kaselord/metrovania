@@ -2,5 +2,5 @@
 
 [ext_resource type="Script" path="res://scripts/user_interface/interface_manager.gd" id="1_7yrln"]
 
-[node name="interface_manager" type="Node"]
+[node name="interface_manager" type="Node2D"]
 script = ExtResource("1_7yrln")

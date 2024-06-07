@@ -1,9 +1,10 @@
 extends InterfaceElement
 
-@export_enum("switch_scene", "quit", "do_nothing", "window_mode", "globals_activity", "delete_save") var on_action : String = "do_nothing"
+@export_enum("switch_scene", "quit", "do_nothing", "window_mode", "globals_activity", "delete_save", "set_property", "respawn") var on_action : String = "do_nothing"
 @export var parameters : Array = []
 @export var display_text : String = "BUTTON"
 @export var has_param : bool = false
+@export var affect_global_activity : bool = false
 var color_hue : float = 0.0
 var stored_transition_file : String = ""
 var triggered_level_transition : bool = false
@@ -32,8 +33,9 @@ func _physics_process(_delta):
 			Globals.active = true
 			Globals.time_until_active = 0
 	else:
-		Globals.active = false
-		Globals.time_until_active = 1
+		if affect_global_activity:
+			Globals.active = false
+			Globals.time_until_active = 1
 		$label.modulate = Color(1, 1, 1, 1)
 	if on_action == "globals_activity":
 		update_param_display()
@@ -71,6 +73,12 @@ func action():
 			stored_transition_file = "res://scenes/main_menu.tscn"
 			triggered_level_transition = true
 			print_rich("[b][i][color=#ff0000]SAVE DATA HAS BEEN WIPED")
+		"set_property":
+			get_node(parameters[0]).set_deferred(parameters[1], parameters[2])
+		"respawn":
+			Globals.level_switch_data = SaveManager.permanent_savings["current_load_data"]
+			print(Globals.level_switch_data)
+			Globals.emit_signal("level_switch")
 
 
 func update_param_display():

@@ -39,12 +39,14 @@ position = Vector2(160, 16)
 on_action = "switch_scene"
 parameters = ["res://scenes/main_menu.tscn"]
 display_text = "RETURN TO MENU"
+affect_global_activity = true
 
 [node name="try_movement_button" parent="interface_manager" instance=ExtResource("2_gt42k")]
 position = Vector2(160, 32)
 on_action = "globals_activity"
 display_text = "TEST MOVEMENT"
 has_param = true
+affect_global_activity = true
 
 [node name="input_move" parent="." instance=ExtResource("4_8ovvf")]
 position = Vector2(48, 55)

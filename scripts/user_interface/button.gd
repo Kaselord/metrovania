@@ -77,7 +77,6 @@ func action():
 			get_node(parameters[0]).set_deferred(parameters[1], parameters[2])
 		"respawn":
 			Globals.level_switch_data = SaveManager.permanent_savings["current_load_data"]
-			print(Globals.level_switch_data)
 			Globals.emit_signal("level_switch")
 
 

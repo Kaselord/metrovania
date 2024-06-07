@@ -6,7 +6,7 @@ var base_walk_speed : float = 80.0
 var base_accel : float = 0.35
 var gravity : float = 500.0
 var jump_power : float = 200.0
-var is_floored : bool = false
+var is_floored : bool = true
 var jump_buffer : int = 0
 var coyote_buffer : int = 0
 var jump_has_been_released : bool = false
@@ -31,6 +31,11 @@ var max_dash_value : int = 16
 @export var sfx_whip_hit : AudioStream
 @export var sfx_kick_hit : AudioStream
 @export var sfx_player_hurt : AudioStream
+@export var sfx_land_a : AudioStream
+@export var sfx_land_b : AudioStream
+@export var sfx_whip_fly : AudioStream
+@export var sfx_slide : AudioStream
+@export var sfx_double_jump : AudioStream
 @export var spear_scene : PackedScene
 
 
@@ -60,6 +65,13 @@ func _physics_process(delta):
 	
 	if Globals.active:
 		move_and_slide()
+	
+	# was i in the air last frame but am on the floor now?
+	if !is_floored && is_on_floor():
+		if randi_range(0, 1) == 0:
+			SoundPlayer.new_sound(sfx_land_a, -8.0, randf_range(0.9, 1.1))
+		else:
+			SoundPlayer.new_sound(sfx_land_b, -8.0, randf_range(0.9, 1.1))
 	
 	is_floored = is_on_floor()
 	if is_floored:
@@ -195,6 +207,7 @@ func get_input():
 			execute_jump()
 		elif double_jump_remains && SaveManager.get_powerup("double_jump"): # double jump!
 			double_jump_remains = false
+			SoundPlayer.new_sound(sfx_double_jump, -4.0, randf_range(0.9, 1.0))
 			spawn_double_jump_particles()
 			spawn_double_jump_particles(0.5)
 			execute_jump(1.2)
@@ -207,6 +220,7 @@ func get_input():
 	
 	if Input.is_action_just_pressed("dash") && is_dashing <= 0 && is_allowed_to_dash && SaveManager.get_powerup("dash"):
 		if dashes_remaing > 0:
+			SoundPlayer.new_sound(sfx_slide, -6.0, randf_range(0.9, 1.1))
 			dashes_remaing -= 1
 			if !is_floored:
 				is_allowed_to_dash = false
@@ -227,6 +241,7 @@ func get_input():
 		$hurtbox.scale.x = $visuals.scale.x
 		$anim.stop()
 		$anim.play("whip")
+		SoundPlayer.new_sound(sfx_whip_fly, 0.0, randf_range(0.9, 1.0))
 
 
 func execute_jump(power_amplify : float = 1.0):

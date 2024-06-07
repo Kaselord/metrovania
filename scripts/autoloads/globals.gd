@@ -73,7 +73,6 @@ func _on_level_switch():
 		time_until_active = 25
 		is_switching_level = true
 		current_level_name = level_switch_data[1]
-		print(level_switch_data[1])
 		print_rich("[color=#ff6700][b]" + "level switch - " + str(level_switch_data))
 
 

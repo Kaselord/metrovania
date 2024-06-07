@@ -285,7 +285,7 @@ radius = 7.0
 height = 28.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w2jnv"]
-size = Vector2(95, 7)
+size = Vector2(95, 15)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tmnnp"]
 size = Vector2(27, 20)
@@ -358,7 +358,7 @@ damage = 1
 ignore_in_detection = ["player"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hurtbox"]
-position = Vector2(46.5, 0.5)
+position = Vector2(46.5, 4.5)
 shape = SubResource("RectangleShape2D_w2jnv")
 disabled = true
 debug_color = Color(0.952941, 0, 0.564706, 0.419608)

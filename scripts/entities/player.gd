@@ -41,10 +41,12 @@ var max_dash_value : int = 16
 
 func _ready():
 	add_to_group("player")
+	add_to_group("entity")
 	Globals.player_reference = self
 	$hurtbox.add_to_group("whip")
 	$kick_hurtbox.add_to_group("kick")
-	super()
+	hp = SaveManager.permanent_savings["player_powerups"]["max_hp"]
+	
 
 
 func _physics_process(delta):

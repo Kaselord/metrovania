@@ -11,6 +11,7 @@ var has_loaded : bool = false
 
 
 func _ready():
+	add_to_group("entity")
 	hp = starting_hp
 
 

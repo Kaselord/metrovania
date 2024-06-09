@@ -46,7 +46,7 @@ func _ready():
 	Globals.player_reference = self
 	$hurtbox.add_to_group("whip")
 	$kick_hurtbox.add_to_group("kick")
-	hp = 1#SaveManager.permanent_savings["player_powerups"]["max_hp"]
+	hp = SaveManager.permanent_savings["player_powerups"]["max_hp"]
 
 
 func _physics_process(delta):
@@ -382,7 +382,7 @@ func _on_hitbox_hit():
 		SoundPlayer.new_sound(sfx_player_hurt, 0.0, randf_range(0.9, 1.1))
 	if is_dashing <= 0:
 		velocity.y = -jump_power * 0.5
-	if hp <= 0:
+	if hp <= 0: # GAME OVER
 		Globals.player_is_dead = true
 		hp = 0
 		Globals.update_game_interface()
@@ -390,6 +390,7 @@ func _on_hitbox_hit():
 		SoundPlayer.new_sound(sfx_death, 6.0)
 		MusicManager.play_song("none")
 		Interface.death_effect()
+		SaveManager.reset_temporary()
 		get_tree().call_deferred("change_scene_to_file", "res://scenes/game_over.tscn")
 
 

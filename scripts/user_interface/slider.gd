@@ -37,8 +37,12 @@ func update_property():
 		"volume_sfx":
 			AudioServer.set_bus_volume_db(1, lerp(-32, 16, value))
 			SaveManager.permanent_savings["default_settings"]["volume_sfx"] = value
+			if value <= 0.0:
+				AudioServer.set_bus_volume_db(1, -80.0)
 		"volume_music":
 			AudioServer.set_bus_volume_db(2, lerp(-32, 16, value))
+			if value <= 0.0:
+				AudioServer.set_bus_volume_db(2, -80.0)
 			SaveManager.permanent_savings["default_settings"]["volume_music"] = value
 
 

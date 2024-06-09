@@ -7,6 +7,7 @@ extends Node2D
 }
 @export var active : bool = false
 @export var fire_size : float = 1.0
+@export var optional_spawn_parent : NodePath
 var cooldown : int = 0
 
 
@@ -25,7 +26,7 @@ func _physics_process(_delta):
 
 
 func create_fire_particle(height : float = -32.0, width : float = 32, starting_color : Color = Color(1, 1, 1, 1)):
-	if Globals.level_reference != null:
+	if Globals.level_reference != null or str(optional_spawn_parent) != "":
 		var particle = Preloads.texture_particle.instantiate()
 		var position_adder : float = randf_range(-width*0.25, width*0.25)
 		var angle : float = randf_range(-1.0, 1.0)
@@ -44,5 +45,7 @@ func create_fire_particle(height : float = -32.0, width : float = 32, starting_c
 		
 		particle.lifetime = randi_range(10, 60)
 		particle.texture = fire_texture
-		
-		Globals.level_reference.get_node("particles_front").call_deferred("add_child", particle)
+		if str(optional_spawn_parent) == "":
+			Globals.level_reference.get_node("particles_front").call_deferred("add_child", particle)
+		else:
+			get_node(optional_spawn_parent).call_deferred("add_child", particle)

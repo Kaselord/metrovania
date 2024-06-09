@@ -25,7 +25,11 @@ var permanent_savings : Dictionary = {
 func _ready():
 	load_from_disk()
 	AudioServer.set_bus_volume_db(1, lerp(-32, 16, permanent_savings["default_settings"]["volume_sfx"]))
+	if permanent_savings["default_settings"]["volume_sfx"] <= 0.0:
+		AudioServer.set_bus_volume_db(1, -80.0)
 	AudioServer.set_bus_volume_db(2, lerp(-32, 16, permanent_savings["default_settings"]["volume_music"]))
+	if permanent_savings["default_settings"]["volume_music"] <= 0.0:
+		AudioServer.set_bus_volume_db(2, -80.0)
 	DisplayServer.window_set_mode(permanent_savings["default_settings"]["window_mode"])
 	get_window().grab_focus()
 

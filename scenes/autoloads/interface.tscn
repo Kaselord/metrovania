@@ -1,10 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://cx4m5lxlathc"]
+[gd_scene load_steps=13 format=3 uid="uid://cx4m5lxlathc"]
 
 [ext_resource type="Script" path="res://scripts/autoloads/interface.gd" id="1_nwj3h"]
 [ext_resource type="Texture2D" uid="uid://johwut2y3fn1" path="res://textures/interface/textbox.png" id="2_6kuo3"]
 [ext_resource type="AudioStream" uid="uid://ykardj8642sg" path="res://audio/sfx/text_continue.mp3" id="2_nb0ka"]
 [ext_resource type="FontFile" uid="uid://buhockuvonca8" path="res://resources/fonts/cheesefont.ttf" id="3_4uhn6"]
 [ext_resource type="Texture2D" uid="uid://c8h0swt7vihiq" path="res://textures/interface/DEATH.png" id="5_3l8bq"]
+[ext_resource type="PackedScene" uid="uid://b3012evdp0k0" path="res://scenes/components/fire_emitter.tscn" id="6_uxjvc"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_cc7fg"]
 font = ExtResource("3_4uhn6")
@@ -100,6 +101,66 @@ tracks/5/keys = {
 "method": &"reset_player_deadness"
 }]
 }
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("screen_image/fire_emitter:active")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 2, 4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("screen_image/fire_emitter3:active")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 2, 4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("screen_image/fire_emitter2:active")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0, 2, 4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("screen_image/fire_emitter5:active")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0, 2, 4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("screen_image/fire_emitter4:active")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0, 2, 4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
 
 [sub_resource type="Animation" id="Animation_vrixs"]
 length = 0.001
@@ -150,6 +211,66 @@ tracks/3/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector2(1, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("screen_image/fire_emitter:active")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("screen_image/fire_emitter3:active")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("screen_image/fire_emitter2:active")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("screen_image/fire_emitter5:active")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("screen_image/fire_emitter4:active")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ui3gm"]
@@ -210,6 +331,46 @@ position = Vector2(160, 90)
 [node name="death" type="Sprite2D" parent="screen_image"]
 texture = ExtResource("5_3l8bq")
 
+[node name="fire_emitter" parent="screen_image" instance=ExtResource("6_uxjvc")]
+position = Vector2(-80, 48)
+properties = {
+"dimensions": Vector2(160, -180),
+"emit_cd": 1
+}
+optional_spawn_parent = NodePath("../../particles")
+
+[node name="fire_emitter3" parent="screen_image" instance=ExtResource("6_uxjvc")]
+position = Vector2(0, 48)
+properties = {
+"dimensions": Vector2(160, -180),
+"emit_cd": 1
+}
+optional_spawn_parent = NodePath("../../particles")
+
+[node name="fire_emitter2" parent="screen_image" instance=ExtResource("6_uxjvc")]
+position = Vector2(80, 48)
+properties = {
+"dimensions": Vector2(160, -180),
+"emit_cd": 1
+}
+optional_spawn_parent = NodePath("../../particles")
+
+[node name="fire_emitter4" parent="screen_image" instance=ExtResource("6_uxjvc")]
+position = Vector2(140, 48)
+properties = {
+"dimensions": Vector2(120, -180),
+"emit_cd": 1
+}
+optional_spawn_parent = NodePath("../../particles")
+
+[node name="fire_emitter5" parent="screen_image" instance=ExtResource("6_uxjvc")]
+position = Vector2(-140, 48)
+properties = {
+"dimensions": Vector2(120, -180),
+"emit_cd": 1
+}
+optional_spawn_parent = NodePath("../../particles")
+
 [node name="window_focus_info" type="Label" parent="."]
 visible = false
 offset_left = 3.0
@@ -223,3 +384,5 @@ label_settings = SubResource("LabelSettings_7cmb8")
 libraries = {
 "": SubResource("AnimationLibrary_ui3gm")
 }
+
+[node name="particles" type="Node2D" parent="."]

@@ -41,7 +41,7 @@ func _process(_delta):
 				$camera.limit_bottom = active_level.bottom_right.y
 				set_deferred("temporary_player_reference", null)
 	
-	if Input.is_action_just_pressed("pause"):
+	if Input.is_action_just_pressed("pause") && !Globals.player_is_dead:
 		pause_menu_active = !pause_menu_active
 
 

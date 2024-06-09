@@ -68,6 +68,12 @@ send_to_travel_point = "forest_start"
 new_room_path = "res://scenes/levels/08_spider_den.tscn"
 collider_size = Vector2(8, 48)
 
+[node name="door2" parent="travel_points" index="1" instance=ExtResource("2_14gh7")]
+position = Vector2(-4, -160)
+send_to_travel_point = "cliff"
+new_room_path = "res://scenes/levels/010_big_green.tscn"
+collider_size = Vector2(8, 48)
+
 [node name="powerup" parent="interactive" index="0" instance=ExtResource("2_rolqr")]
 position = Vector2(96, 119)
 tag = "double_jump"

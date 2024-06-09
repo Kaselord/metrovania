@@ -36,6 +36,7 @@ var max_dash_value : int = 16
 @export var sfx_whip_fly : AudioStream
 @export var sfx_slide : AudioStream
 @export var sfx_double_jump : AudioStream
+@export var sfx_death : AudioStream
 @export var spear_scene : PackedScene
 
 
@@ -45,14 +46,10 @@ func _ready():
 	Globals.player_reference = self
 	$hurtbox.add_to_group("whip")
 	$kick_hurtbox.add_to_group("kick")
-	hp = SaveManager.permanent_savings["player_powerups"]["max_hp"]
-	
+	hp = 1#SaveManager.permanent_savings["player_powerups"]["max_hp"]
 
 
 func _physics_process(delta):
-	if Input.is_action_pressed("test"):
-		position = lerp(position, get_global_mouse_position(), 0.1)
-	
 	if is_floored:
 		midair_speed_boost = lerp(midair_speed_boost, 1.0, 0.25)
 	else:
@@ -381,9 +378,19 @@ func _on_hitbox_hit():
 	Globals.active = false
 	Globals.time_until_active = 5
 	hit_effect = 20.0
-	SoundPlayer.new_sound(sfx_player_hurt, 0.0, randf_range(0.9, 1.1))
+	if hp > 0:
+		SoundPlayer.new_sound(sfx_player_hurt, 0.0, randf_range(0.9, 1.1))
 	if is_dashing <= 0:
 		velocity.y = -jump_power * 0.5
+	if hp <= 0:
+		Globals.player_is_dead = true
+		hp = 0
+		Globals.update_game_interface()
+		Globals.active = false
+		SoundPlayer.new_sound(sfx_death, 6.0)
+		MusicManager.play_song("none")
+		Interface.death_effect()
+		get_tree().call_deferred("change_scene_to_file", "res://scenes/game_over.tscn")
 
 
 func _on_hurtbox_has_hit():

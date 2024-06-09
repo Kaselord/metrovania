@@ -12,10 +12,15 @@ var current_level_name : String = "res://scenes/levels/000_entrance.tscn"
 var ongoing_event : String = ""
 var time : float = 0.0
 var player_damage_happened : bool = false
+var player_is_dead : bool = false
 
 
 func _physics_process(delta):
 	time += delta
+	
+	if player_is_dead:
+		active = false
+		time_until_active = 1
 	
 	if !active && get_tree().current_scene != null && get_tree().current_scene.is_in_group("gameplay"):
 		if time_until_switch > 0:
@@ -81,9 +86,9 @@ func update_game_interface():
 	if gameplay_scene != null && gameplay_scene.is_in_group("gameplay"):
 		# player health bar
 		var healthbar_text = gameplay_scene.get_node("interface/healthbar/amount")
-		if get_player_value("hp") != null:
+		if player_reference != null:
 			healthbar_text.label_settings.font_color = lerp(healthbar_text.label_settings.font_color, Color(1, 1, 1, 1), 0.1)
 			if player_damage_happened:
 				player_damage_happened = false
 				healthbar_text.label_settings.font_color = Color(1, 0, 0, 1)
-			healthbar_text.text = str(clamp(get_player_value("hp"), 0, 100))
+			healthbar_text.text = str(clamp(player_reference.hp, 0, 100))

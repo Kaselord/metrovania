@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=3 uid="uid://b2jlvpctljf4u"]
+
+[ext_resource type="Script" path="res://scripts/misc/game_over.gd" id="1_i8p27"]
+[ext_resource type="PackedScene" uid="uid://c21tx281aortw" path="res://scenes/user_interface/interface_manager.tscn" id="1_petr8"]
+[ext_resource type="PackedScene" uid="uid://cuehwo36unc5g" path="res://scenes/user_interface/button.tscn" id="3_h6vig"]
+
+[node name="game_over" type="Node2D"]
+script = ExtResource("1_i8p27")
+
+[node name="background" type="ColorRect" parent="."]
+offset_right = 320.0
+offset_bottom = 180.0
+color = Color(0, 0, 0, 1)
+
+[node name="interface_manager" parent="." instance=ExtResource("1_petr8")]
+active = false
+
+[node name="button_continue" parent="interface_manager" instance=ExtResource("3_h6vig")]
+position = Vector2(160, 78)
+on_action = "switch_scene"
+parameters = ["res://scenes/gameplay_scene.tscn"]
+display_text = "CONTINUE"
+
+[node name="button_main_menu" parent="interface_manager" instance=ExtResource("3_h6vig")]
+position = Vector2(160, 102)
+on_action = "switch_scene"
+parameters = ["res://scenes/main_menu.tscn"]
+display_text = "QUIT TO MENU"

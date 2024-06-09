@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://cno20wi12dln"]
+[gd_scene load_steps=33 format=3 uid="uid://cno20wi12dln"]
 
 [ext_resource type="Script" path="res://scripts/entities/player.gd" id="1_wjnyu"]
 [ext_resource type="Texture2D" uid="uid://bhyomon57xhkb" path="res://textures/entities/player/aggy.png" id="2_a0c7w"]
@@ -17,6 +17,7 @@
 [ext_resource type="AudioStream" uid="uid://c2t106ppirq05" path="res://audio/sfx/whip_swing.ogg" id="10_xi0pe"]
 [ext_resource type="AudioStream" uid="uid://djt0mpwrivclp" path="res://audio/sfx/slide.ogg" id="11_yxtir"]
 [ext_resource type="AudioStream" uid="uid://c2d8qngswo1n0" path="res://audio/sfx/double_jump.ogg" id="12_bgvxu"]
+[ext_resource type="AudioStream" uid="uid://b7jiyv4cd4mv7" path="res://audio/sfx/death.ogg" id="13_4r1bo"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0c07l"]
 radius = 8.0
@@ -303,6 +304,7 @@ sfx_land_b = ExtResource("9_j4phc")
 sfx_whip_fly = ExtResource("10_xi0pe")
 sfx_slide = ExtResource("11_yxtir")
 sfx_double_jump = ExtResource("12_bgvxu")
+sfx_death = ExtResource("13_4r1bo")
 spear_scene = ExtResource("7_nu2qi")
 starting_hp = 46
 temporarily_save_death = false

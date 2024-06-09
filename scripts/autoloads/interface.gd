@@ -22,6 +22,7 @@ func _ready():
 	var text_file = FileAccess.open("res://data/text_interactions.json", FileAccess.READ)
 	text_table = JSON.parse_string(text_file.get_as_text()) as Dictionary
 	text_file.close()
+	$screen_image.visible = false
 
 
 func _physics_process(_delta):
@@ -117,3 +118,9 @@ func abandon_text():
 
 func death_effect():
 	$screen_image.texture = ImageTexture.create_from_image(get_viewport().get_texture().get_image())
+	$screen_image.visible = true
+	$anim.play("game_over")
+
+
+func reset_player_deadness():
+	Globals.player_is_dead = false

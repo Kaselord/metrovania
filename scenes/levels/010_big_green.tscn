@@ -54,6 +54,12 @@ position = Vector2(40, 96)
 [node name="temporary_checkpoint4" parent="travel_points" index="4" instance=ExtResource("5_2qyf0")]
 position = Vector2(-136, 32)
 
+[node name="door" parent="travel_points" index="5" instance=ExtResource("2_uqy2g")]
+position = Vector2(-484, 0)
+send_to_travel_point = "door"
+new_room_path = "res://scenes/levels/011_warzone.tscn"
+collider_size = Vector2(8, 48)
+
 [node name="death_pit" parent="interactive" index="0" instance=ExtResource("3_bjayj")]
 position = Vector2(272, 384)
 width = 160.0

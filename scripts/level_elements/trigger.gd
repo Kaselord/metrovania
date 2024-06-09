@@ -1,7 +1,7 @@
 @tool
 extends Area2D
 
-@export_enum("start_text", "save_game", "open_gate", "play_music") var function = "start_text"
+@export_enum("start_text", "save_game", "open_gate", "play_music", "activate_something") var function = "start_text"
 @export var params : Array = []
 @export var permanently_delete : bool = false
 @export var size : Vector2 = Vector2(48, 48)
@@ -54,3 +54,5 @@ func do_thing():
 			SaveManager.set_permanent_deletion(path_to_gate, level_file_path)
 		"play_music":
 			MusicManager.play_song(params[0])
+		"activate_something":
+			get_node(params[0]).active = params[1]

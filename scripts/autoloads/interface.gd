@@ -16,6 +16,7 @@ var display_save_prompt : bool = false
 var text_sound_cd : int = 0
 var max_text_sound_cd : int = 5
 var text_sound_pitch = 1.2
+var flash : float = 0.0
 
 
 func _ready():
@@ -66,6 +67,9 @@ func _physics_process(_delta):
 		$window_focus_info.show()
 	else:
 		$window_focus_info.hide()
+	
+	flash = lerp(flash, 0.0, 0.05)
+	$screen_flash.modulate.a = flash
 
 
 func start_text(text_identifier : String = "", pause_gameplay : bool = true):

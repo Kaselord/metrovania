@@ -325,6 +325,10 @@ label_settings = SubResource("LabelSettings_1pc1x")
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="screen_flash" type="ColorRect" parent="."]
+offset_right = 320.0
+offset_bottom = 180.0
+
 [node name="screen_image" type="Sprite2D" parent="."]
 position = Vector2(160, 90)
 

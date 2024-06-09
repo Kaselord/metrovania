@@ -1,0 +1,40 @@
+[gd_scene load_steps=7 format=3 uid="uid://b3rm5m2b8r6kb"]
+
+[ext_resource type="Script" path="res://scripts/projectiles/nuke.gd" id="1_46snu"]
+[ext_resource type="Texture2D" uid="uid://dlprx3ddyuxcy" path="res://textures/projectiles/nuke.png" id="2_auwmt"]
+[ext_resource type="PackedScene" uid="uid://b3012evdp0k0" path="res://scenes/components/fire_emitter.tscn" id="3_5n0pj"]
+[ext_resource type="PackedScene" uid="uid://6bfdrlmoe75y" path="res://scenes/components/hurtbox.tscn" id="4_uwjdu"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2xnt1"]
+radius = 29.0172
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_oyycm"]
+radius = 80.0
+
+[node name="nuke" type="Area2D"]
+script = ExtResource("1_46snu")
+
+[node name="sprite" type="Sprite2D" parent="."]
+z_index = -1
+texture = ExtResource("2_auwmt")
+
+[node name="fire_emitter" parent="sprite" instance=ExtResource("3_5n0pj")]
+position = Vector2(-24, 0)
+properties = {
+"dimensions": Vector2(16, -64),
+"emit_cd": 2
+}
+active = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_2xnt1")
+
+[node name="hurtbox" parent="." instance=ExtResource("4_uwjdu")]
+damage = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hurtbox"]
+shape = SubResource("CircleShape2D_oyycm")
+disabled = true
+debug_color = Color(0.980392, 0, 0.380392, 0.419608)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

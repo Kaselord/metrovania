@@ -12,7 +12,8 @@ var song_table = {
 	"ride_of_death" : [load("res://audio/music/ride_of_death.ogg"), 2.0, 5.0],
 	"it_doesnt_want_to_die" : [load("res://audio/music/it_doesnt_want_to_die.ogg"), 3.428, 82.29],
 	"darkness_is_approaching" : [load("res://audio/music/darkness_is_approaching.ogg"), 5.333, 37.33],
-	"the_sound_of_peace" : [load("res://audio/music/the_sound_of_peace.ogg"), 0.0, 152.37]
+	"the_sound_of_peace" : [load("res://audio/music/the_sound_of_peace.ogg"), 0.0, 152.37],
+	"the_sound_of_war" : [load("res://audio/music/the_sound_of_war.ogg"), 0.0, 54.86]
 }
 
 

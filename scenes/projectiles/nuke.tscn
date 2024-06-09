@@ -30,7 +30,7 @@ active = true
 shape = SubResource("CircleShape2D_2xnt1")
 
 [node name="hurtbox" parent="." instance=ExtResource("4_uwjdu")]
-damage = 7
+damage = 9
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hurtbox"]
 shape = SubResource("CircleShape2D_oyycm")

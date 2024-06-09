@@ -5,7 +5,7 @@ var target_pos : Vector2 = Vector2(0, 0)
 var override_dir : bool = false
 var stationary : bool = false
 var init : bool = false
-var time_until_explosion : int = 50
+var time_until_explosion : int = 20
 var time : int = 0
 var begone : bool = false
 
@@ -29,10 +29,11 @@ func _physics_process(delta):
 			velocity = Vector2(0, 0)
 			time_until_explosion -= 1
 		
-		$sprite.modulate = lerp(Color(1, 1, 1, 1), Color(1, 0, 0, 1), 1 - float(time_until_explosion) / 50.0)
-		$sprite.scale = lerp(Vector2(1, 1), Vector2(1.2, 1.4), 1 - float(time_until_explosion) / 50.0)
+		$sprite.modulate = lerp(Color(1, 1, 1, 1), Color(1, 0, 0, 1), 1 - float(time_until_explosion) / 20.0)
+		$sprite.scale = lerp(Vector2(1, 1), Vector2(1.2, 1.4), 1 - float(time_until_explosion) / 20.0)
 		
 		if time_until_explosion <= 0:
+			MusicManager.play_song("the_sound_of_war")
 			SoundPlayer.new_sound(Preloads.sfx_kaboom, 0.0, randf_range(0.9, 1.1))
 			$hurtbox/CollisionShape2D.disabled = false
 			Interface.flash = 1.0

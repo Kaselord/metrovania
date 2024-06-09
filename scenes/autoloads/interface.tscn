@@ -163,10 +163,6 @@ layer = 3
 script = ExtResource("1_nwj3h")
 sfx_text_continue = ExtResource("2_nb0ka")
 
-[node name="transition_rect" type="Polygon2D" parent="."]
-color = Color(0.137255, 0.129412, 0.2, 1)
-polygon = PackedVector2Array(0, 0, 320, 0, 320, 180, 0, 180)
-
 [node name="text_box" type="Node2D" parent="."]
 modulate = Color(1, 1, 1, 0)
 
@@ -183,6 +179,10 @@ text = "Dracula:
 What is a man? A miserable little pile of secrets. But enough talk... Have at you!"
 label_settings = SubResource("LabelSettings_cc7fg")
 autowrap_mode = 2
+
+[node name="transition_rect" type="Polygon2D" parent="."]
+color = Color(0.137255, 0.129412, 0.2, 1)
+polygon = PackedVector2Array(0, 0, 320, 0, 320, 180, 0, 180)
 
 [node name="save_prompt" type="Node2D" parent="."]
 modulate = Color(1, 1, 1, 0)

@@ -18,6 +18,7 @@ func _ready():
 	unload_current_level()
 	load_level(level_switch_data)
 	Globals.current_level_name = level_switch_data[1]
+	print(level_switch_data)
 
 
 func _process(_delta):

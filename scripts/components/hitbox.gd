@@ -24,7 +24,8 @@ func _physics_process(_delta):
 			trigger_internal_hit()
 		if is_player_hitbox && current_damager.void_out:
 			print_rich("[color=#ffeb00]voidout[/color]")
-			Globals.emit_signal("level_switch")
+			if get_node(entity).hp > 0:
+				Globals.emit_signal("level_switch")
 
 
 func trigger_internal_hit():

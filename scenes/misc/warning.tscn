@@ -3,6 +3,21 @@
 [ext_resource type="Script" path="res://scripts/misc/warning.gd" id="1_ge83d"]
 [ext_resource type="Texture2D" uid="uid://cdqrit2itri7v" path="res://textures/other/nuke_warning.png" id="2_2e6r8"]
 
+[sub_resource type="Animation" id="Animation_1yvw1"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
 [sub_resource type="Animation" id="Animation_wnus6"]
 resource_name = "blink"
 tracks/0/type = "value"
@@ -45,21 +60,6 @@ tracks/1/keys = {
 "args": [&"free"],
 "method": &"call_deferred"
 }]
-}
-
-[sub_resource type="Animation" id="Animation_1yvw1"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("sprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_r1d8g"]

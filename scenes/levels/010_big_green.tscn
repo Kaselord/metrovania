@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://fge1oqbk1vyq"]
+[gd_scene load_steps=10 format=3 uid="uid://fge1oqbk1vyq"]
 
 [ext_resource type="PackedScene" uid="uid://df25grdvss11u" path="res://scenes/level_base.tscn" id="1_pr5ib"]
 [ext_resource type="Texture2D" uid="uid://btxkk7k4i6mux" path="res://textures/decoration/cloud.png" id="2_6e3mk"]
@@ -7,6 +7,8 @@
 [ext_resource type="PackedScene" uid="uid://dp51oo1cx47an" path="res://scenes/level_elements/health_up.tscn" id="4_jt6wk"]
 [ext_resource type="PackedScene" uid="uid://be2647s2n0y4u" path="res://scenes/level_elements/temporary_checkpoint.tscn" id="5_2qyf0"]
 [ext_resource type="PackedScene" uid="uid://dtqtit4alw7gl" path="res://scenes/level_elements/grass.tscn" id="6_cmn3v"]
+[ext_resource type="PackedScene" uid="uid://dj0y3r1hogdsa" path="res://scenes/level_elements/candle.tscn" id="8_agc2k"]
+[ext_resource type="PackedScene" uid="uid://2c1dhsejyya7" path="res://scenes/level_elements/save_point.tscn" id="9_1g121"]
 
 [node name="010_big_green" instance=ExtResource("1_pr5ib")]
 top_left = Vector2i(-480, -80)
@@ -60,6 +62,9 @@ send_to_travel_point = "door"
 new_room_path = "res://scenes/levels/011_warzone.tscn"
 collider_size = Vector2(8, 48)
 
+[node name="save_point" parent="travel_points" index="6" instance=ExtResource("9_1g121")]
+position = Vector2(107, 97)
+
 [node name="death_pit" parent="interactive" index="0" instance=ExtResource("3_bjayj")]
 position = Vector2(272, 384)
 width = 160.0
@@ -73,3 +78,6 @@ position = Vector2(141, 328)
 
 [node name="grass" parent="interactive" index="3" instance=ExtResource("6_cmn3v")]
 position = Vector2(184, 161)
+
+[node name="candle" parent="interactive" index="4" instance=ExtResource("8_agc2k")]
+position = Vector2(-455, -20)

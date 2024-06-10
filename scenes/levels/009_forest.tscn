@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bbmcwotxysqfo"]
+[gd_scene load_steps=10 format=3 uid="uid://bbmcwotxysqfo"]
 
 [ext_resource type="PackedScene" uid="uid://df25grdvss11u" path="res://scenes/level_base.tscn" id="1_q361s"]
 [ext_resource type="Texture2D" uid="uid://btxkk7k4i6mux" path="res://textures/decoration/cloud.png" id="2_7k32a"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://dwg3e783i2w7o" path="res://textures/powerups/double_jump.png" id="3_umnwf"]
 [ext_resource type="PackedScene" uid="uid://dp51oo1cx47an" path="res://scenes/level_elements/health_up.tscn" id="5_sefij"]
 [ext_resource type="PackedScene" uid="uid://dtqtit4alw7gl" path="res://scenes/level_elements/grass.tscn" id="8_ic2j2"]
+[ext_resource type="PackedScene" uid="uid://dj0y3r1hogdsa" path="res://scenes/level_elements/candle.tscn" id="9_d7tdq"]
 
 [node name="009_forest" instance=ExtResource("1_q361s")]
 top_left = Vector2i(0, -240)
@@ -135,3 +136,12 @@ position = Vector2(543, -111)
 
 [node name="grass18" parent="interactive/grass" index="16" instance=ExtResource("8_ic2j2")]
 position = Vector2(559, -111)
+
+[node name="candle" parent="interactive" index="3" instance=ExtResource("9_d7tdq")]
+position = Vector2(368, -140)
+
+[node name="candle3" parent="interactive" index="4" instance=ExtResource("9_d7tdq")]
+position = Vector2(229, -36)
+
+[node name="candle2" parent="interactive" index="5" instance=ExtResource("9_d7tdq")]
+position = Vector2(432, -140)

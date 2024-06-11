@@ -20,7 +20,7 @@
 [ext_resource type="AudioStream" uid="uid://b7jiyv4cd4mv7" path="res://audio/sfx/death.ogg" id="13_4r1bo"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0c07l"]
-radius = 8.0
+radius = 7.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v30el"]
 size = Vector2(14, 12)

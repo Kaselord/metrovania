@@ -18,5 +18,8 @@
     "double_jump" : [
         ["none", "You found the repulsive boots!"],
         ["none", "Jump again in the air to activate a double jump."]
-    ]
+    ],
+	"spear" : [
+		["none", "You found the fancy spear! Your whip will now emit magic spears."]
+	]
 }

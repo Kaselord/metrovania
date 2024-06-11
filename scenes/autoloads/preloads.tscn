@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://dpnojh1gtug6k"]
+[gd_scene load_steps=9 format=3 uid="uid://dpnojh1gtug6k"]
 
 [ext_resource type="Script" path="res://scripts/autoloads/preloads.gd" id="1_3ddgk"]
 [ext_resource type="PackedScene" uid="uid://cii5wxp3b1h8y" path="res://scenes/particles/texture_particle.tscn" id="2_yr3ek"]
@@ -7,6 +7,7 @@
 [ext_resource type="AudioStream" uid="uid://xq7gtrj5to7o" path="res://audio/sfx/enemy_death.mp3" id="5_vxwqv"]
 [ext_resource type="AudioStream" uid="uid://bmt0w1baf8od0" path="res://audio/sfx/beep.ogg" id="6_72jj3"]
 [ext_resource type="AudioStream" uid="uid://b4nhk83c8nayp" path="res://audio/sfx/kaboom.ogg" id="7_m03m2"]
+[ext_resource type="AudioStream" uid="uid://epwvtceyfx00" path="res://audio/sfx/entity_hit.ogg" id="8_54jja"]
 
 [node name="Preloads" type="Node"]
 script = ExtResource("1_3ddgk")
@@ -16,3 +17,4 @@ sfx_fire = ExtResource("4_dqdbn")
 sfx_scream = ExtResource("5_vxwqv")
 sfx_beep = ExtResource("6_72jj3")
 sfx_kaboom = ExtResource("7_m03m2")
+sfx_entity_hit = ExtResource("8_54jja")

@@ -86,6 +86,8 @@ collider_size = Vector2(8, 80)
 [node name="door" parent="travel_points" index="8" instance=ExtResource("2_fcyum")]
 position = Vector2(720, 224)
 direction = "down"
+send_to_travel_point = "drop"
+new_room_path = "res://scenes/levels/013_bush_connection.tscn"
 collider_size = Vector2(128, 16)
 
 [node name="trigger" parent="interactive" index="0" instance=ExtResource("4_dti2k")]

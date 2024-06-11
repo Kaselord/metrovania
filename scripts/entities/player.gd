@@ -352,7 +352,7 @@ func refresh_health():
 func throw_spear():
 	if Globals.level_reference != null && SaveManager.get_powerup("spear"):
 		var spear = spear_scene.instantiate()
-		spear.position = global_position + Vector2($visuals.scale.x * 8, -24)
+		spear.position = global_position + Vector2($visuals.scale.x * 64, -24)
 		spear.velocity.x = $visuals.scale.x * 200
 		spear.velocity.y = -200
 		spear.tag_override = ["player"]
@@ -363,7 +363,7 @@ func throw_spear():
 		
 		var spear_b = spear_scene.instantiate()
 		spear_b.destroy_on_wall = false
-		spear_b.position = global_position + Vector2($visuals.scale.x * 8, -24)
+		spear_b.position = global_position + Vector2($visuals.scale.x * 64, -24)
 		spear_b.velocity.x = $visuals.scale.x * 200
 		spear_b.velocity.y = 200
 		spear_b.tag_override = ["player"]

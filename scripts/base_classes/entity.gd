@@ -32,6 +32,7 @@ func _process(_delta):
 
 
 func hit():
+	SoundPlayer.new_sound(Preloads.sfx_entity_hit, 0.0, randf_range(0.9, 1.1))
 	if hp <= 0:
 		death()
 

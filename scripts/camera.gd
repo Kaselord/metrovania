@@ -18,6 +18,13 @@ func _physics_process(_delta):
 		position = lerp(position, target_pos - Vector2(0, 20), interpolation)
 
 
+func set_borders(tl : Vector2i, br : Vector2i):
+	limit_left = tl.x
+	limit_top = tl.y
+	limit_right = br.x
+	limit_bottom = br.y
+
+
 func reset_borders():
 	limit_left = store_original_borders[0].x
 	limit_top = store_original_borders[0].y

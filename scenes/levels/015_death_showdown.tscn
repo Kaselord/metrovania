@@ -1,9 +1,15 @@
-[gd_scene load_steps=5 format=3 uid="uid://cjoygpeemfqm1"]
+[gd_scene load_steps=9 format=3 uid="uid://cjoygpeemfqm1"]
 
 [ext_resource type="PackedScene" uid="uid://df25grdvss11u" path="res://scenes/level_base.tscn" id="1_jjuhg"]
 [ext_resource type="PackedScene" uid="uid://i33jmy7bq5vr" path="res://scenes/level_elements/door.tscn" id="2_a6wnl"]
 [ext_resource type="Texture2D" uid="uid://btxkk7k4i6mux" path="res://textures/decoration/cloud.png" id="2_cljn8"]
 [ext_resource type="PackedScene" uid="uid://plkui0usubkd" path="res://scenes/level_elements/stone_gate.tscn" id="3_u0vng"]
+[ext_resource type="Texture2D" uid="uid://dc53hobaf4d7w" path="res://textures/other/cutscene_death.png" id="5_e562i"]
+[ext_resource type="PackedScene" uid="uid://bo01scwqs54nq" path="res://scenes/level_elements/trigger.tscn" id="5_rnqsf"]
+[ext_resource type="Script" path="res://scripts/misc/death_boss_start.gd" id="7_vqq4s"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gndg4"]
+size = Vector2(32, 64)
 
 [node name="015_death_showdown" instance=ExtResource("1_jjuhg")]
 top_left = Vector2i(-816, 0)
@@ -13,6 +19,7 @@ bg_colour = Color(0.607843, 0.0941176, 0.258824, 1)
 modulate = Color(1, 0.803922, 0.6, 0.811765)
 position = Vector2(19, 99)
 texture = ExtResource("2_cljn8")
+metadata/_edit_lock_ = true
 
 [node name="stone_gate" parent="behind_tiles" index="0" instance=ExtResource("3_u0vng")]
 position = Vector2(-24, 160)
@@ -42,3 +49,25 @@ direction = "right"
 send_to_travel_point = "boss"
 new_room_path = "res://scenes/levels/014_staircase.tscn"
 collider_size = Vector2(8, 48)
+
+[node name="death_trigger" type="Area2D" parent="interactive" index="0"]
+position = Vector2(-77, 160)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="interactive/death_trigger" index="0"]
+position = Vector2(0, -32)
+shape = SubResource("RectangleShape2D_gndg4")
+
+[node name="trigger" parent="interactive" index="1" instance=ExtResource("5_rnqsf")]
+position = Vector2(-85, 160)
+function = "open_gate"
+params = [NodePath("../../behind_tiles/stone_gate"), true]
+permanently_delete = true
+
+[node name="death_boss_start" type="Sprite2D" parent="other" index="0"]
+position = Vector2(-283, 125)
+texture = ExtResource("5_e562i")
+flip_h = true
+script = ExtResource("7_vqq4s")
+collider = NodePath("../../interactive/death_trigger/CollisionShape2D")
+
+[connection signal="body_entered" from="interactive/death_trigger" to="other/death_boss_start" method="_on_death_trigger_body_entered"]

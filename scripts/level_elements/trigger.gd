@@ -49,9 +49,10 @@ func do_thing():
 		"open_gate":
 			var gate = get_node(params[0])
 			gate.down = params[1]
-			var path_to_gate : String = String(Globals.level_reference.get_path_to(gate))
-			var level_file_path : String = Globals.level_reference.scene_file_path
-			SaveManager.set_permanent_deletion(path_to_gate, level_file_path)
+			if len(params) < 2:
+				var path_to_gate : String = String(Globals.level_reference.get_path_to(gate))
+				var level_file_path : String = Globals.level_reference.scene_file_path
+				SaveManager.set_permanent_deletion(path_to_gate, level_file_path)
 		"play_music":
 			MusicManager.play_song(params[0])
 		"activate_something":

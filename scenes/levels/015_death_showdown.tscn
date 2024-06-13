@@ -64,7 +64,7 @@ params = [NodePath("../../behind_tiles/stone_gate"), true]
 permanently_delete = true
 
 [node name="death_boss_start" type="Sprite2D" parent="other" index="0"]
-position = Vector2(-283, 125)
+position = Vector2(-277, 80)
 texture = ExtResource("5_e562i")
 flip_h = true
 script = ExtResource("7_vqq4s")

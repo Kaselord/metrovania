@@ -13,7 +13,6 @@ bg_colour = Color(0.168627, 0.333333, 0.258824, 1)
 modulate = Color(0.666667, 1, 0.537255, 0.490196)
 position = Vector2(159, 112)
 rotation = 0.26668
-scale = Vector2(1, 1)
 texture = ExtResource("2_aumv8")
 
 [node name="tiles" parent="." index="2"]

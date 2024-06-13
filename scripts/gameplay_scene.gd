@@ -39,6 +39,7 @@ func _process(_delta):
 				$camera.limit_top = active_level.top_left.y
 				$camera.limit_right = active_level.bottom_right.x
 				$camera.limit_bottom = active_level.bottom_right.y
+				$camera.store_original_borders = [active_level.top_left, active_level.bottom_right]
 				set_deferred("temporary_player_reference", null)
 	
 	if Input.is_action_just_pressed("pause") && !Globals.player_is_dead:
@@ -77,7 +78,7 @@ func unload_current_level():
 		child.call_deferred("free")
 
 
-func load_level(data = ["travel_point_name", "res://scenes/levels/000_entrance.tscn"]):
+func load_level(data = ["save_point", "res://scenes/levels/002_the_other_side.tscn"]):
 	var new_level = load(data[1]).instantiate()
 	$active_level.call_deferred("add_child", new_level)
 	level_switch_data = data

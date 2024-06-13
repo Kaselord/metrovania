@@ -66,6 +66,12 @@ send_to_travel_point = "connection"
 new_room_path = "res://scenes/levels/013_bush_connection.tscn"
 collider_size = Vector2(8, 48)
 
+[node name="skip" parent="travel_points" index="6" instance=ExtResource("2_mtlls")]
+position = Vector2(-4, -240)
+send_to_travel_point = "centre"
+new_room_path = "res://scenes/levels/014_staircase.tscn"
+collider_size = Vector2(8, 48)
+
 [node name="death_pit" parent="interactive" index="0" instance=ExtResource("4_6dvxg")]
 position = Vector2(328, 224)
 width = 80.0

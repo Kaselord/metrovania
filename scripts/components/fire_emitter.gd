@@ -12,6 +12,8 @@ var cooldown : int = 0
 
 
 func _physics_process(_delta):
+	if SaveManager.permanent_savings["default_settings"]["reduce_fire"]:
+		active = false
 	if active:
 		if cooldown < properties["emit_cd"]:
 			cooldown += 1

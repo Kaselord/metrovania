@@ -1,6 +1,6 @@
 extends InterfaceElement
 
-@export_enum("switch_scene", "quit", "do_nothing", "window_mode", "globals_activity", "delete_save", "set_property", "respawn") var on_action : String = "do_nothing"
+@export_enum("switch_scene", "quit", "do_nothing", "window_mode", "globals_activity", "delete_save", "set_property", "respawn", "fire") var on_action : String = "do_nothing"
 @export var parameters : Array = []
 @export var display_text : String = "BUTTON"
 @export var has_param : bool = false
@@ -78,6 +78,10 @@ func action():
 		"respawn":
 			Globals.level_switch_data = SaveManager.permanent_savings["current_load_data"]
 			Globals.emit_signal("level_switch")
+		"fire":
+			var reduce_fire : bool = SaveManager.permanent_savings["default_settings"]["reduce_fire"]
+			SaveManager.permanent_savings["default_settings"]["reduce_fire"] = !reduce_fire
+			update_param_display()
 
 
 func update_param_display():
@@ -95,3 +99,9 @@ func update_param_display():
 				$additional_param.text = "(ACTIVE)"
 			else:
 				$additional_param.text = "(NOT ACTIVE)"
+		"fire":
+			var reduce_fire : bool = SaveManager.permanent_savings["default_settings"]["reduce_fire"]
+			if reduce_fire:
+				$additional_param.text = "YES"
+			else:
+				$additional_param.text = "NO"

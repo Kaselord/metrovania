@@ -16,8 +16,9 @@ var permanent_savings : Dictionary = {
 	"current_load_data" : ["start", "res://scenes/levels/000_entrance.tscn"],
 	"default_settings" : {
 		"window_mode" : DisplayServer.WINDOW_MODE_WINDOWED,
-		"volume_sfx" : 0.5,
-		"volume_music" : 0.5
+		"volume_sfx" : 0.45,
+		"volume_music" : 0.5,
+		"reduce_fire" : false
 	}
 }
 
@@ -72,7 +73,8 @@ func reset_permanent():
 		"default_settings" : {
 			"window_mode" : permanent_savings["default_settings"]["window_mode"],
 			"volume_sfx" : permanent_savings["default_settings"]["volume_sfx"],
-			"volume_music" : permanent_savings["default_settings"]["volume_music"]
+			"volume_music" : permanent_savings["default_settings"]["volume_music"],
+			"reduce_fire" : false
 		}
 	}
 	permanent_savings = init_data

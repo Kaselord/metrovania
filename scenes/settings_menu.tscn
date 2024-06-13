@@ -35,3 +35,9 @@ affected_property = "volume_sfx"
 position = Vector2(160, 88)
 slider_label_text = "MUSIC VOLUME:"
 affected_property = "volume_music"
+
+[node name="button_fire" parent="interface_manager" instance=ExtResource("2_pcyuc")]
+position = Vector2(160, 104)
+on_action = "fire"
+display_text = "REMOVE FIRE EFFECT"
+has_param = true

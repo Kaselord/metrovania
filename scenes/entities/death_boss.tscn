@@ -1,0 +1,108 @@
+[gd_scene load_steps=9 format=3 uid="uid://byre1pivk7phd"]
+
+[ext_resource type="Script" path="res://scripts/entities/death_boss.gd" id="1_dvpfr"]
+[ext_resource type="Texture2D" uid="uid://dc53hobaf4d7w" path="res://textures/other/cutscene_death.png" id="2_bspwt"]
+[ext_resource type="PackedScene" uid="uid://cedguv3xo2gph" path="res://scenes/projectiles/scythe.tscn" id="2_xnw8x"]
+[ext_resource type="Texture2D" uid="uid://26mjfd1md88u" path="res://textures/entities/death/bone.png" id="3_jgqsi"]
+[ext_resource type="PackedScene" uid="uid://6bfdrlmoe75y" path="res://scenes/components/hurtbox.tscn" id="4_btpyp"]
+[ext_resource type="PackedScene" uid="uid://d4l174v4ofimd" path="res://scenes/components/hitbox.tscn" id="5_s7av4"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5c42x"]
+radius = 36.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_8a5iw"]
+radius = 30.0666
+
+[node name="death_boss" type="CharacterBody2D"]
+script = ExtResource("1_dvpfr")
+pos_left = Vector2(-280, 108)
+pos_right = Vector2(-88, 108)
+skull_scene = ExtResource("2_xnw8x")
+starting_hp = 55
+temporarily_save_death = false
+permanently_save_death = true
+
+[node name="sprite" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0)
+texture = ExtResource("2_bspwt")
+flip_h = true
+
+[node name="bone_circle" type="Node2D" parent="."]
+modulate = Color(1, 1, 1, 0)
+
+[node name="bone" type="Sprite2D" parent="bone_circle"]
+position = Vector2(36, 1)
+texture = ExtResource("3_jgqsi")
+
+[node name="bone2" type="Sprite2D" parent="bone_circle"]
+position = Vector2(32, -15)
+rotation = -0.523031
+scale = Vector2(1.5, 0.8)
+texture = ExtResource("3_jgqsi")
+
+[node name="bone3" type="Sprite2D" parent="bone_circle"]
+position = Vector2(21, -29)
+rotation = -1.08036
+texture = ExtResource("3_jgqsi")
+
+[node name="bone4" type="Sprite2D" parent="bone_circle"]
+position = Vector2(4, -38)
+rotation = -1.58639
+texture = ExtResource("3_jgqsi")
+flip_h = true
+
+[node name="bone5" type="Sprite2D" parent="bone_circle"]
+position = Vector2(-16, -33)
+rotation = -1.93849
+texture = ExtResource("3_jgqsi")
+
+[node name="bone6" type="Sprite2D" parent="bone_circle"]
+position = Vector2(-31, -20)
+rotation = -2.89802
+scale = Vector2(1.34938, 1)
+texture = ExtResource("3_jgqsi")
+flip_h = true
+
+[node name="bone7" type="Sprite2D" parent="bone_circle"]
+position = Vector2(-33, 0)
+rotation = -3.31267
+texture = ExtResource("3_jgqsi")
+
+[node name="bone8" type="Sprite2D" parent="bone_circle"]
+position = Vector2(-30, 19)
+rotation = -4.08793
+scale = Vector2(1.18564, 0.363847)
+texture = ExtResource("3_jgqsi")
+
+[node name="bone9" type="Sprite2D" parent="bone_circle"]
+position = Vector2(-11, 34)
+rotation = -4.5895
+texture = ExtResource("3_jgqsi")
+flip_h = true
+
+[node name="bone10" type="Sprite2D" parent="bone_circle"]
+position = Vector2(10, 34)
+rotation = -5.10731
+texture = ExtResource("3_jgqsi")
+
+[node name="bone11" type="Sprite2D" parent="bone_circle"]
+position = Vector2(27, 21)
+rotation = -5.63675
+scale = Vector2(1.36498, 0.684772)
+texture = ExtResource("3_jgqsi")
+flip_h = true
+
+[node name="hurtbox" parent="." instance=ExtResource("4_btpyp")]
+damage = 2
+ignore_in_detection = ["evil"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hurtbox"]
+shape = SubResource("CircleShape2D_5c42x")
+debug_color = Color(0.788235, 0, 0.447059, 0.419608)
+
+[node name="hitbox" parent="." instance=ExtResource("5_s7av4")]
+entity = NodePath("..")
+ignore_tag = "evil"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox"]
+shape = SubResource("CircleShape2D_8a5iw")

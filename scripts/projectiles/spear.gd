@@ -6,11 +6,15 @@ var gravity_dir : float = 1.0
 var damage : int = 3
 var destroy_on_wall : bool = true
 var lifetime : int = 0
+var max_particle_cd : int = 1
+var particle_cd : int = 0
 
 
 func _ready():
 	$hurtbox.ignore_in_detection = tag_override
 	$hurtbox.damage = damage
+	if SaveManager.permanent_savings["default_settings"]["reduce_fire"]:
+		max_particle_cd = 4
 
 
 func _physics_process(delta):
@@ -23,7 +27,11 @@ func _physics_process(delta):
 		
 		$hurtbox.rotation_degrees = $sprite.rotation_degrees
 		
-		spawn_trail_particle()
+		if particle_cd > 0:
+			particle_cd -= 1
+		else:
+			particle_cd = max_particle_cd
+			spawn_trail_particle()
 	
 	super(delta)
 	

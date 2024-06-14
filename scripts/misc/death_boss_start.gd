@@ -1,8 +1,11 @@
 extends Sprite2D
 
 @export var collider : NodePath
+@export var entities : NodePath
+@export var boss_scene : PackedScene
 var particle_cooldown : int = 0
 var actual_pos : Vector2
+var its_over : bool = false
 
 
 func _ready():
@@ -10,13 +13,23 @@ func _ready():
 
 
 func _physics_process(_delta):
-	if particle_cooldown > 0:
-		particle_cooldown -= 1
+	if !its_over:
+		if particle_cooldown > 0:
+			particle_cooldown -= 1
+		else:
+			particle_cooldown = 5
+			spawn_trail_particle()
+		position = actual_pos + Vector2(sin(Globals.time * 2), -cos(Globals.time * 2)) * 10 * modulate.a
+		show()
 	else:
-		particle_cooldown = 5
-		spawn_trail_particle()
+		hide()
 	
-	position = actual_pos + Vector2(sin(Globals.time * 2), -cos(Globals.time * 2)) * 10 * modulate.a
+	if Globals.ongoing_event == "start_death_fight":
+		Globals.ongoing_event = ""
+		its_over = true
+		var boss = boss_scene.instantiate()
+		boss.position = global_position
+		get_node(entities).call_deferred("add_child", boss)
 
 func _on_death_trigger_body_entered(body):
 	if body.is_in_group("player"):
@@ -31,13 +44,14 @@ func _on_death_trigger_body_entered(body):
 func spawn_trail_particle():
 	if Globals.level_reference != null:
 		var particle = Preloads.texture_particle.instantiate()
-		particle.init["scale"] = Vector2(1.0, 1.0)
+		particle.init["scale"] = Vector2(-1.0, 1.0)
 		particle.init["position"] = global_position
 		particle.init["modulate"] = Color(1.0, 0.8, 0.8, 0.8)
-		particle.final["scale"] = Vector2(1.0, 1.0)
+		particle.final["scale"] = Vector2(-1.0, 1.0)
 		particle.final["position"] = global_position
 		particle.final["modulate"] = Color(1.0, 0.0, 0.0, 0.0)
 		particle.texture = texture
+		
 		particle.lifetime = 32
 		particle.snap_weight = 0.05
 		Globals.level_reference.get_node("particles_back").call_deferred("add_child", particle)

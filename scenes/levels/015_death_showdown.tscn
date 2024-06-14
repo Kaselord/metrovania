@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://cjoygpeemfqm1"]
+[gd_scene load_steps=10 format=3 uid="uid://cjoygpeemfqm1"]
 
 [ext_resource type="PackedScene" uid="uid://df25grdvss11u" path="res://scenes/level_base.tscn" id="1_jjuhg"]
 [ext_resource type="PackedScene" uid="uid://i33jmy7bq5vr" path="res://scenes/level_elements/door.tscn" id="2_a6wnl"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://dc53hobaf4d7w" path="res://textures/other/cutscene_death.png" id="5_e562i"]
 [ext_resource type="PackedScene" uid="uid://bo01scwqs54nq" path="res://scenes/level_elements/trigger.tscn" id="5_rnqsf"]
 [ext_resource type="Script" path="res://scripts/misc/death_boss_start.gd" id="7_vqq4s"]
+[ext_resource type="PackedScene" uid="uid://byre1pivk7phd" path="res://scenes/entities/death_boss.tscn" id="8_hrvdw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gndg4"]
 size = Vector2(32, 64)
@@ -69,5 +70,7 @@ texture = ExtResource("5_e562i")
 flip_h = true
 script = ExtResource("7_vqq4s")
 collider = NodePath("../../interactive/death_trigger/CollisionShape2D")
+entities = NodePath("../../entities")
+boss_scene = ExtResource("8_hrvdw")
 
 [connection signal="body_entered" from="interactive/death_trigger" to="other/death_boss_start" method="_on_death_trigger_body_entered"]

@@ -14,7 +14,7 @@
         ["Death", "If you defeat me now, what will you do afterwards?"],
         ["You", "Stomp this grueling castle to the ground."],
         ["Death", "Precisely. All that will be left is a miserable little pile of corpses."],
-        ["Death", "And that is why I cannot let you live. Have at you!"]
+        ["Death", "And that is why I cannot let you live. Have at you!", "start_death_fight"]
 	],
 	"dash" : [
 		["none", "You found the hasty cloak!"],

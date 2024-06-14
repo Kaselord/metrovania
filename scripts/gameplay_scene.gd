@@ -13,6 +13,7 @@ var pause_menu_active : bool = false
 
 func _ready():
 	add_to_group("gameplay")
+	SaveManager.load_from_disk()
 	if load_from_save:
 		level_switch_data = SaveManager.permanent_savings["current_load_data"]
 	unload_current_level()

@@ -9,6 +9,7 @@ var level_switch_data = ["door_left", "res://scenes/levels/003_wandering_halls.t
 # only disable for testing!
 var load_from_save : bool = true
 var pause_menu_active : bool = false
+var show_ui : bool = true
 
 
 func _ready():
@@ -43,7 +44,7 @@ func _process(_delta):
 				$camera.store_original_borders = [active_level.top_left, active_level.bottom_right]
 				set_deferred("temporary_player_reference", null)
 	
-	if Input.is_action_just_pressed("pause") && !Globals.player_is_dead:
+	if Input.is_action_just_pressed("pause") && !Globals.player_is_dead && show_ui:
 		pause_menu_active = !pause_menu_active
 
 
@@ -56,6 +57,11 @@ func _physics_process(_delta):
 	else:
 		$interface/pause_menu.modulate.a = lerp($interface/pause_menu.modulate.a, 0.0, 0.3)
 		$interface/pause_menu/interface_manager.active = false
+	
+	if show_ui:
+		$interface/healthbar.modulate.a = lerp($interface/healthbar.modulate.a, 1.0, 0.1)
+	else:
+		$interface/healthbar.modulate.a = lerp($interface/healthbar.modulate.a, 0.0, 0.1)
 
 
 func unload_current_level():

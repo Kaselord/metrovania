@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://cjoygpeemfqm1"]
+[gd_scene load_steps=19 format=3 uid="uid://cjoygpeemfqm1"]
 
 [ext_resource type="PackedScene" uid="uid://df25grdvss11u" path="res://scenes/level_base.tscn" id="1_jjuhg"]
 [ext_resource type="PackedScene" uid="uid://i33jmy7bq5vr" path="res://scenes/level_elements/door.tscn" id="2_a6wnl"]
@@ -6,11 +6,112 @@
 [ext_resource type="PackedScene" uid="uid://plkui0usubkd" path="res://scenes/level_elements/stone_gate.tscn" id="3_u0vng"]
 [ext_resource type="Texture2D" uid="uid://dc53hobaf4d7w" path="res://textures/other/cutscene_death.png" id="5_e562i"]
 [ext_resource type="PackedScene" uid="uid://bo01scwqs54nq" path="res://scenes/level_elements/trigger.tscn" id="5_rnqsf"]
+[ext_resource type="Script" path="res://scripts/misc/jam_game_ending.gd" id="6_sqja8"]
+[ext_resource type="FontFile" uid="uid://bkdup4giffeyl" path="res://resources/fonts/sandfont.ttf" id="7_s6x5g"]
 [ext_resource type="Script" path="res://scripts/misc/death_boss_start.gd" id="7_vqq4s"]
+[ext_resource type="FontFile" uid="uid://buhockuvonca8" path="res://resources/fonts/cheesefont.ttf" id="8_av1ql"]
 [ext_resource type="PackedScene" uid="uid://byre1pivk7phd" path="res://scenes/entities/death_boss.tscn" id="8_hrvdw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gndg4"]
 size = Vector2(32, 64)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i1w7h"]
+size = Vector2(288, 68)
+
+[sub_resource type="Animation" id="Animation_dh1xh"]
+resource_name = "end"
+length = 6.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("end_text/the_end:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2, 4),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("end_text/thx:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1, 2, 2.9, 4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("end_text/quit:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 4.9, 6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_c487k"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("end_text/the_end:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("end_text/thx:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("end_text/quit:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_38fj2"]
+_data = {
+"RESET": SubResource("Animation_c487k"),
+"end": SubResource("Animation_dh1xh")
+}
+
+[sub_resource type="LabelSettings" id="LabelSettings_p75db"]
+font = ExtResource("7_s6x5g")
+font_size = 8
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_t2ny0"]
+font = ExtResource("8_av1ql")
+font_size = 8
+font_color = Color(0, 0, 0, 1)
 
 [node name="015_death_showdown" instance=ExtResource("1_jjuhg")]
 top_left = Vector2i(-816, 0)
@@ -65,6 +166,45 @@ params = [NodePath("../../behind_tiles/stone_gate"), true]
 permanently_delete = true
 
 [node name="jam_game_ending" type="Area2D" parent="interactive" index="2"]
+script = ExtResource("6_sqja8")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="interactive/jam_game_ending" index="0"]
+position = Vector2(-672, 286)
+shape = SubResource("RectangleShape2D_i1w7h")
+
+[node name="anim" type="AnimationPlayer" parent="interactive/jam_game_ending" index="1"]
+libraries = {
+"": SubResource("AnimationLibrary_38fj2")
+}
+
+[node name="end_text" type="Node2D" parent="interactive/jam_game_ending" index="2"]
+
+[node name="the_end" type="Label" parent="interactive/jam_game_ending/end_text" index="0"]
+modulate = Color(1, 1, 1, 0)
+offset_left = -791.0
+offset_top = 24.0
+offset_right = -723.0
+offset_bottom = 47.0
+text = "THE END"
+label_settings = SubResource("LabelSettings_p75db")
+
+[node name="thx" type="Label" parent="interactive/jam_game_ending/end_text" index="1"]
+modulate = Color(1, 1, 1, 0)
+offset_left = -790.0
+offset_top = 48.0
+offset_right = -597.0
+offset_bottom = 71.0
+text = "THANKS FOR PLAYING!!"
+label_settings = SubResource("LabelSettings_t2ny0")
+
+[node name="quit" type="Label" parent="interactive/jam_game_ending/end_text" index="2"]
+modulate = Color(1, 1, 1, 0)
+offset_left = -790.0
+offset_top = 64.0
+offset_right = -597.0
+offset_bottom = 87.0
+text = "(ESC TO GO TO MENU)"
+label_settings = SubResource("LabelSettings_t2ny0")
 
 [node name="death_boss_start" type="Sprite2D" parent="other" index="0"]
 position = Vector2(-277, 80)
@@ -77,6 +217,8 @@ boss_path = NodePath("../../entities/death_boss")
 
 [node name="death_boss" parent="entities" index="0" instance=ExtResource("8_hrvdw")]
 position = Vector2(-284, 120)
+permanently_save_death = false
 open_gates_on_death = [NodePath("../../behind_tiles/stone_gate2")]
 
 [connection signal="body_entered" from="interactive/death_trigger" to="other/death_boss_start" method="_on_death_trigger_body_entered"]
+[connection signal="body_entered" from="interactive/jam_game_ending" to="interactive/jam_game_ending" method="_on_body_entered"]

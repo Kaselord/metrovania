@@ -1,0 +1,105 @@
+[gd_scene load_steps=7 format=3 uid="uid://wniu7h7ir8yq"]
+
+[ext_resource type="Texture2D" uid="uid://bshuklxxpq7v4" path="res://textures/other/spike.png" id="1_a8f6w"]
+[ext_resource type="PackedScene" uid="uid://6bfdrlmoe75y" path="res://scenes/components/hurtbox.tscn" id="2_iwi6v"]
+
+[sub_resource type="Animation" id="Animation_p1ocy"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 80)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("hurtbox/collider:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_23rem"]
+resource_name = "stab"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.6, 0.9, 1.5),
+"transitions": PackedFloat32Array(0.4, 0.5, 3, 1),
+"update": 0,
+"values": [Vector2(0, 80), Vector2(0, 71), Vector2(0, 0), Vector2(0, 80)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("hurtbox/collider:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.6, 0.7, 1.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [true, true, false, true]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(1.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [&"free"],
+"method": &"call_deferred"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_f0mfd"]
+_data = {
+"RESET": SubResource("Animation_p1ocy"),
+"stab": SubResource("Animation_23rem")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_s2qrv"]
+size = Vector2(4, 80)
+
+[node name="spike" type="Area2D"]
+
+[node name="sprite" type="Sprite2D" parent="."]
+position = Vector2(0, 80)
+texture = ExtResource("1_a8f6w")
+offset = Vector2(0, -40)
+
+[node name="anim" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_f0mfd")
+}
+autoplay = "stab"
+
+[node name="hurtbox" parent="." instance=ExtResource("2_iwi6v")]
+damage = 2
+ignore_in_detection = ["evil"]
+
+[node name="collider" type="CollisionShape2D" parent="hurtbox"]
+position = Vector2(0, -40)
+shape = SubResource("RectangleShape2D_s2qrv")
+disabled = true
+debug_color = Color(0.945098, 0, 0.592157, 0.419608)

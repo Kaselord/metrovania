@@ -2,7 +2,7 @@ extends Sprite2D
 
 @export var collider : NodePath
 @export var entities : NodePath
-@export var boss_scene : PackedScene
+@export var boss_path : NodePath
 var particle_cooldown : int = 0
 var actual_pos : Vector2
 var its_over : bool = false
@@ -27,9 +27,7 @@ func _physics_process(_delta):
 	if Globals.ongoing_event == "start_death_fight":
 		Globals.ongoing_event = ""
 		its_over = true
-		var boss = boss_scene.instantiate()
-		boss.position = global_position
-		get_node(entities).call_deferred("add_child", boss)
+		get_node(boss_path).start = true
 
 func _on_death_trigger_body_entered(body):
 	if body.is_in_group("player"):

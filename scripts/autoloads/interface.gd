@@ -86,6 +86,12 @@ func start_text(text_identifier : String = "", pause_gameplay : bool = true):
 
 
 func continue_active_text():
+	# trigger event if one is present
+	if current_text_index > 0:
+		if len(text_table[current_text_identifier][current_text_index - 1]) > 2:
+			Globals.ongoing_event = text_table[current_text_identifier][current_text_index - 1][2]
+			print(Globals.ongoing_event)
+	
 	# confirm that index hasn't surpassed amount of dialogues
 	if current_text_index < length_of_current_text:
 		typewriter_effect_speed = 0.4
@@ -106,9 +112,6 @@ func continue_active_text():
 			$text_box/display_dialogue.text = paragraph
 		# Display "Name of speaker:" instantly
 		$text_box/display_dialogue.visible_characters = len(name_of_speaker) + 1
-		
-		if len(text_table[current_text_identifier][current_text_index]) > 2:
-			Globals.ongoing_event = text_table[current_text_identifier][current_text_index][2]
 		
 		current_text_index += 1
 	else:

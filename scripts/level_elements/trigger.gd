@@ -44,15 +44,14 @@ func do_thing():
 		"start_text":
 			Interface.start_text(params[0], true)
 		"save_game":
-			SaveManager.permanent_savings["current_load_data"][0] = "wake_up"
+			SaveManager.permanent_savings["current_load_data"] = ["wake_up", "res://scenes/levels/002_the_other_side.tscn"]
 			SaveManager.save_to_disk()
 		"open_gate":
 			var gate = get_node(params[0])
 			gate.down = params[1]
-			if len(params) < 2:
-				var path_to_gate : String = String(Globals.level_reference.get_path_to(gate))
-				var level_file_path : String = Globals.level_reference.scene_file_path
-				SaveManager.set_permanent_deletion(path_to_gate, level_file_path)
+			var path_to_gate : String = String(Globals.level_reference.get_path_to(gate))
+			var level_file_path : String = Globals.level_reference.scene_file_path
+			SaveManager.set_permanent_deletion(path_to_gate, level_file_path)
 		"play_music":
 			MusicManager.play_song(params[0])
 		"activate_something":

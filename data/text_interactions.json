@@ -2,13 +2,19 @@
 	"death_train" : [
 		["Death", "Ah! There comes the vampire huntress."],
 		["You", "Death itself stands in my way? If you do not let me pass, I shall strike you down like all other monsters!"],
-		["Death", "...A ruthless genocide - I cannot allow that. Your powers will be removed."],
-		["Death", "Let's see if you have the courage to keep going. Farewell, Aggy Saintsworn.", "powerup_stealing"]
+		["Death", "...A ruthless genocide - I cannot allow that. Your powers will be removed.", "powerup_stealing"],
+		["Death", "Let's see if you have the courage to keep going. Farewell, Aggy Saintsworn."]
 	],
 	"death_boss" : [
 		["Death", "Greetings."],
 		["You", "Die, monster!"],
-		["Death", "Not so fast cowboy, I need to hold my monologue first."]
+		["Death", "Not so fast cowboy, I need to hold my monologue first."],
+        ["Death", "I took everything from you, left you stranded with nothing but a weak whip in a cold, dangerous castle."],
+        ["Death", "And yet, you've come to hunt me down, becoming stronger than ever."],
+        ["Death", "If you defeat me now, what will you do afterwards?"],
+        ["You", "Stomp this grueling castle to the ground."],
+        ["Death", "Precisely. All that will be left is a miserable little pile of corpses."],
+        ["Death", "And that is why I cannot let you live. Have at you!"]
 	],
 	"dash" : [
 		["none", "You found the hasty cloak!"],

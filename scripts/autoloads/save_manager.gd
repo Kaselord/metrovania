@@ -16,7 +16,7 @@ var permanent_savings : Dictionary = {
 	"current_load_data" : ["start", "res://scenes/levels/000_entrance.tscn"],
 	"default_settings" : {
 		"window_mode" : DisplayServer.WINDOW_MODE_WINDOWED,
-		"volume_sfx" : 0.45,
+		"volume_sfx" : 0.4,
 		"volume_music" : 0.5,
 		"reduce_fire" : false
 	}

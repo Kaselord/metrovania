@@ -150,7 +150,8 @@ func hit():
 	super()
 	$sprite.rotation_degrees = 360
 	rot_speed = -1.0
-	if hp < 0:
+	if hp < 1:
+		MusicManager.play_song("none")
 		if get_tree().current_scene.is_in_group("gameplay"):
 			get_tree().current_scene.get_node("camera").reset_borders()
 		$fire_emitter.active = true

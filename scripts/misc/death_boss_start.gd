@@ -27,7 +27,9 @@ func _physics_process(_delta):
 	if Globals.ongoing_event == "start_death_fight":
 		Globals.ongoing_event = ""
 		its_over = true
+		MusicManager.trigger_special_thing("death_fight")
 		get_node(boss_path).start = true
+
 
 func _on_death_trigger_body_entered(body):
 	if body.is_in_group("player"):

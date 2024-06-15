@@ -13,18 +13,21 @@ var song_table = {
 	"it_doesnt_want_to_die" : [load("res://audio/music/it_doesnt_want_to_die.ogg"), 3.428, 82.29],
 	"darkness_is_approaching" : [load("res://audio/music/darkness_is_approaching.ogg"), 5.333, 37.33],
 	"the_sound_of_peace" : [load("res://audio/music/the_sound_of_peace.ogg"), 0.0, 152.37],
-	"the_sound_of_war" : [load("res://audio/music/the_sound_of_war.ogg"), 0.0, 54.86]
+	"the_sound_of_war" : [load("res://audio/music/the_sound_of_war.ogg"), 0.0, 54.86],
+	"rain_of_skulls_light" : [load("res://audio/music/rain_of_skulls_light.ogg"), 0.0, 48.0],
+	"rain_of_skulls_heavy" : [load("res://audio/music/rain_of_skulls_heavy.ogg"), 0.0, 48.0],
+	"closing_the_book" : [load("res://audio/music/closing_the_book.ogg"), 0.0, 92.36]
 }
 
 
-func play_song(tag : String):
+func play_song(tag : String, start_pos : float = 0.0):
 	if current_song_name != tag && tag != "none" && !mute_music:
 		loop_start = song_table[tag][1]
 		loop_end = song_table[tag][2]
 		if current_song_name == "none":
 			current_song_name = tag
 			$player.volume_db = -6
-			trigger_song_play()
+			trigger_song_play(start_pos)
 		else:
 			$anim.play("transition")
 			current_song_name = tag
@@ -42,13 +45,17 @@ func _process(_delta):
 			print_rich("[color=#9400af]music loop[/color]")
 
 
-func trigger_song_play():
+func trigger_song_play(start_pos : float = 0.0):
 	if current_song_name != "none":
 		$player.stream = song_table[current_song_name][0]
-		$player.play(0.0)
+		$player.play(start_pos)
 	else:
 		$player.stream = null
 		$player.stop()
+
+
+func get_playback():
+	return $player.get_playback_position()
 
 
 func trigger_special_thing(tag : String = ""):
@@ -57,3 +64,6 @@ func trigger_special_thing(tag : String = ""):
 			$player.play(8.5)
 			loop_start = 18.86
 			loop_end = 54.85
+		"death_fight":
+			current_song_name = "rain_of_skulls_heavy"
+			trigger_song_play(get_playback())

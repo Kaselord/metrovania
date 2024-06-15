@@ -1,6 +1,7 @@
 extends Projectile
 
 var bounces_remaining : int = 2
+@export var sfx_impact : AudioStream
 
 
 func _physics_process(delta):
@@ -18,5 +19,6 @@ func _physics_process(delta):
 
 func _on_body_entered(body):
 	if body.get_class() == "TileMap":
+		SoundPlayer.new_sound(sfx_impact, 0.0, randf_range(0.9, 1.1))
 		velocity.y = -250
 		bounces_remaining -= 1

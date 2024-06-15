@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://cedguv3xo2gph"]
+[gd_scene load_steps=7 format=3 uid="uid://cedguv3xo2gph"]
 
 [ext_resource type="Script" path="res://scripts/projectiles/scythe.gd" id="1_8kinj"]
+[ext_resource type="AudioStream" uid="uid://cv42edbhxeajc" path="res://audio/sfx/skull_impact.ogg" id="2_7lv7h"]
 [ext_resource type="Texture2D" uid="uid://cuba78dp4kt8d" path="res://textures/entities/death/head.png" id="2_afm1q"]
 [ext_resource type="PackedScene" uid="uid://6bfdrlmoe75y" path="res://scenes/components/hurtbox.tscn" id="3_jv0e0"]
 
@@ -12,6 +13,7 @@ size = Vector2(14, 16)
 
 [node name="scythe" type="Area2D"]
 script = ExtResource("1_8kinj")
+sfx_impact = ExtResource("2_7lv7h")
 
 [node name="sprite" type="Sprite2D" parent="."]
 texture = ExtResource("2_afm1q")

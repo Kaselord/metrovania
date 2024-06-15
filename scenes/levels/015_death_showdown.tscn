@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://cjoygpeemfqm1"]
+[gd_scene load_steps=20 format=3 uid="uid://cjoygpeemfqm1"]
 
 [ext_resource type="PackedScene" uid="uid://df25grdvss11u" path="res://scenes/level_base.tscn" id="1_jjuhg"]
 [ext_resource type="PackedScene" uid="uid://i33jmy7bq5vr" path="res://scenes/level_elements/door.tscn" id="2_a6wnl"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" path="res://scripts/misc/death_boss_start.gd" id="7_vqq4s"]
 [ext_resource type="FontFile" uid="uid://buhockuvonca8" path="res://resources/fonts/cheesefont.ttf" id="8_av1ql"]
 [ext_resource type="PackedScene" uid="uid://byre1pivk7phd" path="res://scenes/entities/death_boss.tscn" id="8_hrvdw"]
+[ext_resource type="PackedScene" uid="uid://dj0y3r1hogdsa" path="res://scenes/level_elements/candle.tscn" id="12_qldir"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gndg4"]
 size = Vector2(32, 64)
@@ -206,6 +207,15 @@ offset_right = -597.0
 offset_bottom = 87.0
 text = "(ESC TO GO TO MENU)"
 label_settings = SubResource("LabelSettings_t2ny0")
+
+[node name="candle" parent="interactive" index="3" instance=ExtResource("12_qldir")]
+position = Vector2(112, 119)
+
+[node name="candle2" parent="interactive" index="4" instance=ExtResource("12_qldir")]
+position = Vector2(208, 119)
+
+[node name="candle3" parent="interactive" index="5" instance=ExtResource("12_qldir")]
+position = Vector2(-459, 95)
 
 [node name="death_boss_start" type="Sprite2D" parent="other" index="0"]
 position = Vector2(-277, 80)

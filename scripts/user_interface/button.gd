@@ -61,9 +61,9 @@ func action():
 			if mode == DisplayServer.WINDOW_MODE_FULLSCREEN:
 				DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
 			elif mode == DisplayServer.WINDOW_MODE_WINDOWED:
-				DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_MAXIMIZED)
-			elif mode == DisplayServer.WINDOW_MODE_MAXIMIZED:
 				DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
+			elif mode == DisplayServer.WINDOW_MODE_MAXIMIZED:
+				DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
 			update_param_display()
 			SaveManager.permanent_savings["default_settings"]["window_mode"] = DisplayServer.window_get_mode()
 		"delete_save":

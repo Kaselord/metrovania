@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://basgd0yupgvwr"]
+[gd_scene load_steps=7 format=3 uid="uid://basgd0yupgvwr"]
 
 [ext_resource type="PackedScene" uid="uid://df25grdvss11u" path="res://scenes/level_base.tscn" id="1_ag2bq"]
 [ext_resource type="PackedScene" uid="uid://i33jmy7bq5vr" path="res://scenes/level_elements/door.tscn" id="2_7vkl4"]
 [ext_resource type="Texture2D" uid="uid://btxkk7k4i6mux" path="res://textures/decoration/cloud.png" id="2_omrfm"]
 [ext_resource type="PackedScene" uid="uid://2c1dhsejyya7" path="res://scenes/level_elements/save_point.tscn" id="3_aok2h"]
+[ext_resource type="PackedScene" uid="uid://dj0y3r1hogdsa" path="res://scenes/level_elements/candle.tscn" id="5_idn6d"]
 
 [sub_resource type="Gradient" id="Gradient_v2anf"]
 colors = PackedColorArray(0, 0, 0, 0.807843, 8.9284e-05, 0.00672577, 0.10968, 0)
@@ -59,3 +60,12 @@ collider_size = Vector2(8, 48)
 
 [node name="save_point" parent="travel_points" index="3" instance=ExtResource("3_aok2h")]
 position = Vector2(247, 289)
+
+[node name="candle" parent="interactive" index="0" instance=ExtResource("5_idn6d")]
+position = Vector2(209, 91)
+
+[node name="candle2" parent="interactive" index="1" instance=ExtResource("5_idn6d")]
+position = Vector2(64, 40)
+
+[node name="candle3" parent="interactive" index="2" instance=ExtResource("5_idn6d")]
+position = Vector2(175, 262)

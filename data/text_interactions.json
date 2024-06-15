@@ -32,5 +32,11 @@
 	],
 	"spear" : [
 		["none", "You found the fancy spear! Your whip will now emit magic spears."]
+	],
+	"whip_upgrade" : [
+		["none", "You found the warrior's emblem! Your power has tripled."]
+	],
+	"super_secret_health_up" : [
+		["none", "congrats, how tf did you find this trinket?? - Silvye, 2024-06-15"]
 	]
 }

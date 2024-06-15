@@ -1,0 +1,3 @@
+[gd_scene format=3 uid="uid://bikgibyefkhht"]
+
+[node name="blade" type="Area2D"]

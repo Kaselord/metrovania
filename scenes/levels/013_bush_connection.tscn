@@ -11,6 +11,7 @@
 [node name="013_bush_connection" instance=ExtResource("1_lqwc4")]
 top_left = Vector2i(-368, -80)
 bottom_right = Vector2i(480, 180)
+music = "losing_my_train_of_thought"
 bg_colour = Color(0.137255, 0.235294, 0.278431, 1)
 
 [node name="clouds" type="Sprite2D" parent="parallax_bg/far_back" index="0"]

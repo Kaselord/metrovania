@@ -17,7 +17,7 @@ script = ExtResource("1_8kinj")
 texture = ExtResource("2_afm1q")
 
 [node name="hurtbox" parent="." instance=ExtResource("3_jv0e0")]
-damage = 1
+damage = 2
 ignore_in_detection = ["evil"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hurtbox"]

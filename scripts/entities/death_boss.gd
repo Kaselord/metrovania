@@ -5,6 +5,7 @@ extends Entity
 @export var floor_pos_y : float
 @export var skull_scene : PackedScene
 @export var spike_scene : PackedScene
+@export var blade_scene : PackedScene
 var start : bool = false
 var rot_speed : float = 1.0
 var particle_cd : int = 0
@@ -89,8 +90,11 @@ func choose_attack():
 	elif current_attack == 2:
 		state = "switch"
 		attack_time_remaining = 60
+	elif current_attack == 3:
+		state = "blade"
+		attack_time_remaining = 120
 	
-	if current_attack < 2:
+	if current_attack < 3:
 		current_attack += 1
 	else:
 		current_attack = 0
@@ -98,11 +102,11 @@ func choose_attack():
 
 func attack_mode():
 	if state == "skull":
-		if fmod(float(attack_time_remaining), 40) == 0.0:
+		if fmod(float(attack_time_remaining), 40.0) == 0.0:
 			$sprite.rotation = -TAU
 			summon_skull()
 	elif state == "spike":
-		if fmod(float(attack_time_remaining), 20) == 0.0:
+		if fmod(float(attack_time_remaining), 20.0) == 0.0:
 			summon_spike(5 - int(float(attack_time_remaining) / 20.0))
 	elif state == "switch":
 		var value : float = abs(float(attack_time_remaining - 30) / 30.0)
@@ -110,6 +114,9 @@ func attack_mode():
 		$bone_circle.modulate = Color(value, value, value, value)
 		if value == 0.0:
 			switch_sides()
+	elif state == "blade":
+		if fmod(float(attack_time_remaining), 30.0) == 0.0:
+			summon_blade()
 	
 	if attack_time_remaining > 0:
 		attack_time_remaining -= 1
@@ -144,6 +151,15 @@ func summon_spike(index : int = 0):
 		var spike_pos_x : float = position.x + sign(Globals.player_reference.position.x - position.x) * (36*(index+1))
 		spike.position = Vector2(spike_pos_x, floor_pos_y)
 		Globals.level_reference.get_node("behind_tiles").call_deferred("add_child", spike)
+
+
+func summon_blade():
+	if Globals.level_reference != null && Globals.player_reference != null:
+		var blade = blade_scene.instantiate()
+		blade.position.x = position.x + sign(Globals.player_reference.position.x - position.x) * 24
+		blade.dir = sign(Globals.player_reference.position.x - position.x)
+		blade.position.y = (floor_pos_y - 136) + attack_time_remaining
+		Globals.level_reference.get_node("projectiles").call_deferred("add_child", blade)
 
 
 func hit():

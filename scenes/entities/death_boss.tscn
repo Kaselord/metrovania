@@ -1,10 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://byre1pivk7phd"]
+[gd_scene load_steps=12 format=3 uid="uid://byre1pivk7phd"]
 
 [ext_resource type="Script" path="res://scripts/entities/death_boss.gd" id="1_dvpfr"]
 [ext_resource type="Texture2D" uid="uid://dc53hobaf4d7w" path="res://textures/other/cutscene_death.png" id="2_bspwt"]
 [ext_resource type="PackedScene" uid="uid://cedguv3xo2gph" path="res://scenes/projectiles/scythe.tscn" id="2_xnw8x"]
 [ext_resource type="PackedScene" uid="uid://wniu7h7ir8yq" path="res://scenes/projectiles/spike.tscn" id="3_36cev"]
 [ext_resource type="Texture2D" uid="uid://26mjfd1md88u" path="res://textures/entities/death/bone.png" id="3_jgqsi"]
+[ext_resource type="PackedScene" uid="uid://bikgibyefkhht" path="res://scenes/projectiles/blade.tscn" id="4_40mq2"]
 [ext_resource type="PackedScene" uid="uid://6bfdrlmoe75y" path="res://scenes/components/hurtbox.tscn" id="4_btpyp"]
 [ext_resource type="PackedScene" uid="uid://d4l174v4ofimd" path="res://scenes/components/hitbox.tscn" id="5_s7av4"]
 [ext_resource type="PackedScene" uid="uid://b3012evdp0k0" path="res://scenes/components/fire_emitter.tscn" id="8_mqug6"]
@@ -22,6 +23,7 @@ pos_right = Vector2(-88, 108)
 floor_pos_y = 160.0
 skull_scene = ExtResource("2_xnw8x")
 spike_scene = ExtResource("3_36cev")
+blade_scene = ExtResource("4_40mq2")
 starting_hp = 55
 temporarily_save_death = false
 permanently_save_death = true

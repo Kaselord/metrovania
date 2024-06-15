@@ -1,3 +1,39 @@
-[gd_scene format=3 uid="uid://bikgibyefkhht"]
+[gd_scene load_steps=7 format=3 uid="uid://bikgibyefkhht"]
+
+[ext_resource type="Texture2D" uid="uid://bvgvcie5mxhs6" path="res://textures/projectiles/blade.png" id="1_ft3oi"]
+[ext_resource type="Script" path="res://scripts/projectiles/blade.gd" id="1_yfawi"]
+[ext_resource type="PackedScene" uid="uid://6bfdrlmoe75y" path="res://scenes/components/hurtbox.tscn" id="3_c5g03"]
+[ext_resource type="PackedScene" uid="uid://b3eqw7cdji067" path="res://scenes/components/trail_particle_spawner.tscn" id="4_0triq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cp7bq"]
+size = Vector2(16, 16)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_mcvew"]
+radius = 12.0
 
 [node name="blade" type="Area2D"]
+script = ExtResource("1_yfawi")
+
+[node name="sprite" type="Sprite2D" parent="."]
+scale = Vector2(-1, 1)
+texture = ExtResource("1_ft3oi")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_cp7bq")
+
+[node name="hurtbox" parent="." instance=ExtResource("3_c5g03")]
+damage = 3
+ignore_in_detection = ["evil"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hurtbox"]
+shape = SubResource("CircleShape2D_mcvew")
+debug_color = Color(0.952941, 0, 0.568627, 0.419608)
+
+[node name="trail_particle_spawner" parent="." instance=ExtResource("4_0triq")]
+max_particle_cd = 3
+init_modulate = Color(1, 0, 0, 1)
+final_modulate = Color(1, 0, 0, 0.0627451)
+sprite_to_base_on = NodePath("../sprite")
+lifetime = 24
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

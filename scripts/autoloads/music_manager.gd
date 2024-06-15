@@ -16,7 +16,8 @@ var song_table = {
 	"the_sound_of_war" : [load("res://audio/music/the_sound_of_war.ogg"), 0.0, 54.86],
 	"rain_of_skulls_light" : [load("res://audio/music/rain_of_skulls_light.ogg"), 0.0, 48.0],
 	"rain_of_skulls_heavy" : [load("res://audio/music/rain_of_skulls_heavy.ogg"), 0.0, 48.0],
-	"closing_the_book" : [load("res://audio/music/closing_the_book.ogg"), 0.0, 92.36]
+	"closing_the_book" : [load("res://audio/music/closing_the_book.ogg"), 0.0, 92.36],
+	"howling_winds" : [load("res://audio/music/howling_winds.ogg"), 0.0, 22.34]
 }
 
 
@@ -62,8 +63,8 @@ func trigger_special_thing(tag : String = ""):
 	match tag:
 		"train_start":
 			$player.play(8.5)
-			loop_start = 18.86
-			loop_end = 54.85
+			loop_start = 17.142
+			loop_end = 51.43
 		"death_fight":
 			current_song_name = "rain_of_skulls_heavy"
 			trigger_song_play(get_playback())

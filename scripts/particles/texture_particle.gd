@@ -1,4 +1,5 @@
 extends Particle
+class_name TextureParticle
 
 @export var texture : Texture
 @export var frame_amount : int = 1

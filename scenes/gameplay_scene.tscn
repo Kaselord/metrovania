@@ -154,7 +154,7 @@ default_color = Color(0.482353, 0.568627, 0.705882, 1)
 
 [node name="map_node4" parent="interface/pause_menu/map" instance=ExtResource("10_c4763")]
 position = Vector2(174, 159)
-associated_level = "res://scenes/levels/005_train_tower.tscn"
+associated_level = "res://scenes/levels/004_dash_obtain.tscn"
 color = Color(0.596078, 0.803922, 0.968627, 1)
 
 [node name="map_node5" parent="interface/pause_menu/map" instance=ExtResource("10_c4763")]

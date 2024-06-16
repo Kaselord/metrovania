@@ -13,6 +13,7 @@ var eyes_remaining : int = 1
 var fire_cd : int = -1
 @export var eye_projectile_scene : PackedScene
 @export var fireball_scene : PackedScene
+var is_attacking : int = 0
 
 
 func _physics_process(_delta):
@@ -24,7 +25,7 @@ func _physics_process(_delta):
 			floor_y = to_local($floor_check.get_collision_point()).y
 		
 		$visuals/body.rotation_degrees = velocity.x * 0.1
-		if Globals.player_reference != null:
+		if Globals.player_reference != null && is_attacking <= 0:
 			var player_pos : Vector2 = Globals.player_reference.position
 			if abs(position.x - player_pos.x) < 96:
 				flee_amplify = lerp(flee_amplify, 2.5, 0.1)
@@ -33,7 +34,7 @@ func _physics_process(_delta):
 			var target_x : float = player_pos.x + sign(position.x - player_pos.x) * 96 * flee_amplify
 			velocity.x = lerp(velocity.x, target_x - position.x, 0.2)
 			$visuals/eye/iris.look_at(Globals.player_reference.position)
-		move_and_slide()
+			move_and_slide()
 		
 		var body_rot_radians : float = deg_to_rad($visuals/body.rotation_degrees)
 		$visuals/eye.position = $visuals/body.position + Vector2(sin(body_rot_radians), -cos(body_rot_radians)) * 48
@@ -53,14 +54,21 @@ func _physics_process(_delta):
 			$visuals/eye.scale = Vector2(0, 0)
 			attack_cd = choose_attack()
 		
+		if is_attacking > 0:
+			is_attacking -= 1
+		
 		if fire_cd > 0:
 			fire_cd -= 1
 			$visuals/eye/iris/fire_emitter.active = true
 		else:
+			$visuals/fire_paragraph.modulate.a = lerp($visuals/fire_paragraph.modulate.a, 0.0, 0.2)
 			$visuals/eye/iris/fire_emitter.active = false
 			if fire_cd == 0:
 				spawn_fireball()
 				fire_cd = -1
+		$visuals/fire_paragraph.points[0] = to_local($visuals/eye/iris.global_position)
+		if Globals.player_reference != null:
+			$visuals/fire_paragraph.points[1] = to_local(Globals.player_reference.position - Vector2(0, 24))
 		
 	elif hp <= 0:
 		$visuals.modulate -= Color(0.01, 0.01, 0.01, 0.01)
@@ -118,6 +126,8 @@ func choose_attack():
 		spawn_eye()
 	else:
 		fire_cd = 30
+		blink_laser()
+		is_attacking = 30
 		cooldown = 120
 		if rage < 8:
 			eyes_remaining = 2
@@ -142,6 +152,13 @@ func spawn_fireball():
 		var fireball = fireball_scene.instantiate()
 		fireball.position = $visuals/eye/iris/fire_emitter.global_position
 		Globals.level_reference.get_node("projectiles").call_deferred("add_child", fireball)
+
+
+func blink_laser():
+	$visuals/fire_paragraph.points[0] = to_local($visuals/eye/iris.global_position)
+	if Globals.player_reference != null:
+		$visuals/fire_paragraph.points[1] = to_local(Globals.player_reference.position)
+	$visuals/fire_paragraph.modulate.a = 1.0
 
 
 func hit():

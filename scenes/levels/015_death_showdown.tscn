@@ -165,7 +165,6 @@ shape = SubResource("RectangleShape2D_gndg4")
 position = Vector2(-85, 160)
 function = "open_gate"
 params = [NodePath("../../behind_tiles/stone_gate"), true]
-permanently_delete = true
 
 [node name="jam_game_ending" type="Area2D" parent="interactive" index="2"]
 script = ExtResource("6_sqja8")

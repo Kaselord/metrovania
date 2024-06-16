@@ -38,4 +38,5 @@ shape = SubResource("CircleShape2D_pv2id")
 debug_color = Color(0.878431, 0.188235, 0.694118, 0.419608)
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="has_hit" from="hurtbox" to="." method="_on_hurtbox_has_hit"]

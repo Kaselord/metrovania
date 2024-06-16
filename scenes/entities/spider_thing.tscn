@@ -86,6 +86,12 @@ properties = {
 }
 fire_size = 0.5
 
+[node name="fire_paragraph" type="Line2D" parent="visuals"]
+modulate = Color(1, 1, 1, 0)
+points = PackedVector2Array(8, -80, 92, 0)
+width = 1.0
+default_color = Color(1, 0, 0, 1)
+
 [node name="floor_check" type="RayCast2D" parent="."]
 position = Vector2(0, -50)
 target_position = Vector2(0, 128)

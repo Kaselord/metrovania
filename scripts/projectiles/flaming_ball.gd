@@ -1,22 +1,19 @@
 extends Projectile
 
-var speed : float = 100.0
+var speed : float = 200.0
+var vector : Vector2 = Vector2(1, 0)
 
 
 func _ready():
 	explode_spectacularly()
+	if Globals.player_reference != null:
+		vector = (Globals.player_reference.position - position).normalized()
 
 
 func _physics_process(delta):
 	if Globals.active:
-		if Globals.player_reference != null:
-			velocity = lerp(velocity, (Globals.player_reference.position - position).normalized() * speed, 0.1)
+		velocity = vector * speed
 		super(delta)
-		if speed > 10.0:
-			speed -= 0.5
-		else:
-			explode_spectacularly()
-			call_deferred("free")
 
 
 func explode_spectacularly():
@@ -32,5 +29,11 @@ func _on_hurtbox_has_hit():
 
 func _on_area_entered(area):
 	if area.is_in_group("kick"):
+		explode_spectacularly()
+		call_deferred("free")
+
+
+func _on_body_entered(body):
+	if body.get_class() == "TileMap":
 		explode_spectacularly()
 		call_deferred("free")

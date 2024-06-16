@@ -230,6 +230,7 @@ boss_path = NodePath("../../entities/death_boss")
 position = Vector2(-284, 120)
 permanently_save_death = false
 open_gates_on_death = [NodePath("../../behind_tiles/stone_gate2")]
+has_health_bar = true
 
 [connection signal="body_entered" from="interactive/death_trigger" to="other/death_boss_start" method="_on_death_trigger_body_entered"]
 [connection signal="body_entered" from="interactive/jam_game_ending" to="interactive/jam_game_ending" method="_on_body_entered"]

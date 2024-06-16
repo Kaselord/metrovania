@@ -1,10 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://cot0i7vjoju27"]
+[gd_scene load_steps=12 format=3 uid="uid://cot0i7vjoju27"]
 
 [ext_resource type="PackedScene" uid="uid://cno20wi12dln" path="res://scenes/entities/player.tscn" id="1_7d14y"]
 [ext_resource type="Script" path="res://scripts/gameplay_scene.gd" id="1_tc3iw"]
 [ext_resource type="Script" path="res://scripts/camera.gd" id="3_veka5"]
 [ext_resource type="Texture2D" uid="uid://d3da2c6gwe434" path="res://textures/interface/health_circle.png" id="4_7kaim"]
 [ext_resource type="PackedScene" uid="uid://c21tx281aortw" path="res://scenes/user_interface/interface_manager.tscn" id="4_f4d2b"]
+[ext_resource type="Texture2D" uid="uid://dm8b77pm0wncl" path="res://textures/interface/boss_health.png" id="4_n8m7k"]
 [ext_resource type="FontFile" uid="uid://buhockuvonca8" path="res://resources/fonts/cheesefont.ttf" id="5_f76wf"]
 [ext_resource type="PackedScene" uid="uid://cuehwo36unc5g" path="res://scenes/user_interface/button.tscn" id="5_g7000"]
 [ext_resource type="FontFile" uid="uid://bkdup4giffeyl" path="res://resources/fonts/sandfont.ttf" id="6_hhrny"]
@@ -32,7 +33,28 @@ script = ExtResource("3_veka5")
 
 [node name="interface" type="CanvasLayer" parent="."]
 
+[node name="boss_bar" type="Node2D" parent="interface"]
+modulate = Color(1, 1, 1, 0)
+
+[node name="bg" type="ColorRect" parent="interface/boss_bar"]
+offset_left = 100.0
+offset_top = 14.0
+offset_right = 220.0
+offset_bottom = 18.0
+color = Color(0.305882, 0.0745098, 0.247059, 1)
+
+[node name="health" type="Line2D" parent="interface/boss_bar"]
+position = Vector2(100, 16)
+points = PackedVector2Array(0, 0, 120, 0)
+width = 4.0
+default_color = Color(1, 1, 0.529412, 1)
+
+[node name="bar" type="Sprite2D" parent="interface/boss_bar"]
+position = Vector2(160, 16)
+texture = ExtResource("4_n8m7k")
+
 [node name="pause_menu" type="Node2D" parent="interface"]
+visible = false
 
 [node name="poly" type="Polygon2D" parent="interface/pause_menu"]
 color = Color(0, 0, 0, 0.890196)

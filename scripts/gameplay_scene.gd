@@ -10,6 +10,8 @@ var level_switch_data = ["door_left", "res://scenes/levels/003_wandering_halls.t
 var load_from_save : bool = true
 var pause_menu_active : bool = false
 var show_ui : bool = true
+var current_boss_hp : float = 0
+var current_boss_max_hp : float = 1
 
 
 func _ready():
@@ -60,6 +62,7 @@ func _physics_process(_delta):
 	
 	if show_ui:
 		$interface/healthbar.modulate.a = lerp($interface/healthbar.modulate.a, 1.0, 0.1)
+		boss_health_bar()
 	else:
 		$interface/healthbar.modulate.a = lerp($interface/healthbar.modulate.a, 0.0, 0.1)
 
@@ -95,6 +98,16 @@ func load_level(data = ["save_point", "res://scenes/levels/002_the_other_side.ts
 func instantiate_new_player():
 	var new_player = player_packed_scene.instantiate()
 	temporary_player_reference = new_player
+
+
+func boss_health_bar():
+	if current_boss_max_hp != 0.0: # to avoid dividing by 0
+		var health_pos : float = (clamp(current_boss_hp, 0.0, 9999.0) / current_boss_max_hp) * 120
+		$interface/boss_bar/health.points[1].x = lerp($interface/boss_bar/health.points[1].x, health_pos, 0.2)
+		if health_pos <= 0:
+			$interface/boss_bar.modulate.a = lerp($interface/boss_bar.modulate.a, 0.0, 0.1)
+		else:
+			$interface/boss_bar.modulate.a = lerp($interface/boss_bar.modulate.a, 1.0, 0.1)
 
 
 func find_travel_point_position(active_level : Node = null):

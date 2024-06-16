@@ -8,6 +8,7 @@ var has_loaded : bool = false
 @export var permanently_save_death : bool = false
 @export var set_ablaze : bool = true
 @export var open_gates_on_death : Array = []
+@export var has_health_bar : bool = false
 
 
 func _ready():
@@ -33,6 +34,11 @@ func _process(_delta):
 
 func hit():
 	SoundPlayer.new_sound(Preloads.sfx_entity_hit, 0.0, randf_range(0.9, 1.1))
+	if has_health_bar:
+		if get_tree().current_scene.is_in_group("gameplay"):
+			var gameplay_scene = get_tree().current_scene
+			gameplay_scene.current_boss_hp = float(hp)
+			gameplay_scene.current_boss_max_hp = float(starting_hp)
 	if hp <= 0:
 		death()
 

@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://bopdlg2voe1an"]
+
+[ext_resource type="Script" path="res://scripts/user_interface/map_node.gd" id="1_a0eje"]
+[ext_resource type="Texture2D" uid="uid://col5nyv4od4a4" path="res://textures/interface/map_node.png" id="2_an1ah"]
+
+[node name="map_node" type="Node2D"]
+script = ExtResource("1_a0eje")
+
+[node name="square" type="Sprite2D" parent="."]
+texture = ExtResource("2_an1ah")

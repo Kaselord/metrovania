@@ -19,7 +19,8 @@ var permanent_savings : Dictionary = {
 		"volume_sfx" : 0.4,
 		"volume_music" : 0.5,
 		"reduce_fire" : false
-	}
+	},
+	"unlocked_rooms" : []
 }
 
 
@@ -75,7 +76,8 @@ func reset_permanent():
 			"volume_sfx" : permanent_savings["default_settings"]["volume_sfx"],
 			"volume_music" : permanent_savings["default_settings"]["volume_music"],
 			"reduce_fire" : false
-		}
+		},
+		"unlocked_rooms" : []
 	}
 	permanent_savings = init_data
 

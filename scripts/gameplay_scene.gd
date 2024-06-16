@@ -12,6 +12,7 @@ var pause_menu_active : bool = false
 var show_ui : bool = true
 var current_boss_hp : float = 0
 var current_boss_max_hp : float = 1
+var level_name : String = "res://scenes/levels/000_entrance.tscn"
 
 
 func _ready():
@@ -93,6 +94,11 @@ func load_level(data = ["save_point", "res://scenes/levels/002_the_other_side.ts
 	$active_level.call_deferred("add_child", new_level)
 	level_switch_data = data
 	pause_menu_active = false
+	
+	if !SaveManager.permanent_savings["unlocked_rooms"].has(data[1]):
+		SaveManager.permanent_savings["unlocked_rooms"].append(data[1])
+	level_name = data[1]
+	update_map()
 
 
 func instantiate_new_player():
@@ -108,6 +114,19 @@ func boss_health_bar():
 			$interface/boss_bar.modulate.a = lerp($interface/boss_bar.modulate.a, 0.0, 0.1)
 		else:
 			$interface/boss_bar.modulate.a = lerp($interface/boss_bar.modulate.a, 1.0, 0.1)
+
+
+func update_map():
+	for map_node in $interface/pause_menu/map.get_children():
+		if SaveManager.permanent_savings["unlocked_rooms"].has(map_node.associated_level):
+			map_node.show()
+			if map_node.associated_level == level_name:
+				map_node.blink = true
+			else:
+				map_node.blink = false
+		else:
+			map_node.hide()
+			map_node.blink = false
 
 
 func find_travel_point_position(active_level : Node = null):

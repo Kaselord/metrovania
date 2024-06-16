@@ -54,7 +54,6 @@ position = Vector2(160, 16)
 texture = ExtResource("4_n8m7k")
 
 [node name="pause_menu" type="Node2D" parent="interface"]
-visible = false
 
 [node name="poly" type="Polygon2D" parent="interface/pause_menu"]
 color = Color(0, 0, 0, 0.890196)

@@ -1,10 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://c8vqjtxhsd1g2"]
+[gd_scene load_steps=13 format=3 uid="uid://c8vqjtxhsd1g2"]
 
 [ext_resource type="Texture2D" uid="uid://d30bu2vegfycj" path="res://textures/entities/spider/body.png" id="1_cl536"]
 [ext_resource type="Script" path="res://scripts/entities/spider_thing.gd" id="1_yt3ap"]
 [ext_resource type="PackedScene" uid="uid://bk2u168vhjm84" path="res://scenes/projectiles/spider_eye.tscn" id="2_kf5vc"]
 [ext_resource type="PackedScene" uid="uid://bnhpcx4y61u2l" path="res://scenes/projectiles/flaming_ball.tscn" id="3_34iwm"]
 [ext_resource type="Texture2D" uid="uid://blkb7031nv1ih" path="res://textures/entities/spider/eye.png" id="3_s7aqu"]
+[ext_resource type="AudioStream" uid="uid://dy1m2l6hhslls" path="res://audio/sfx/laser.ogg" id="4_3idwe"]
 [ext_resource type="Texture2D" uid="uid://b2evimrjanp2q" path="res://textures/entities/spider/iris.png" id="4_7ujnd"]
 [ext_resource type="PackedScene" uid="uid://d4l174v4ofimd" path="res://scenes/components/hitbox.tscn" id="5_86tu2"]
 [ext_resource type="PackedScene" uid="uid://b3012evdp0k0" path="res://scenes/components/fire_emitter.tscn" id="6_ji7uv"]
@@ -26,6 +27,7 @@ collision_mask = 2
 script = ExtResource("1_yt3ap")
 eye_projectile_scene = ExtResource("2_kf5vc")
 fireball_scene = ExtResource("3_34iwm")
+laser_sfx = ExtResource("4_3idwe")
 starting_hp = 15
 
 [node name="visuals" type="Node2D" parent="."]

@@ -13,6 +13,7 @@ var eyes_remaining : int = 1
 var fire_cd : int = -1
 @export var eye_projectile_scene : PackedScene
 @export var fireball_scene : PackedScene
+@export var laser_sfx : AudioStream
 var is_attacking : int = 0
 
 
@@ -155,6 +156,7 @@ func spawn_fireball():
 
 
 func blink_laser():
+	SoundPlayer.new_sound(laser_sfx, 0.0, randf_range(0.9, 1.1))
 	$visuals/fire_paragraph.points[0] = to_local($visuals/eye/iris.global_position)
 	if Globals.player_reference != null:
 		$visuals/fire_paragraph.points[1] = to_local(Globals.player_reference.position)
